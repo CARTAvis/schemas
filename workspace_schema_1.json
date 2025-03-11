@@ -3,11 +3,7 @@
   "title": "Workspace",
   "description": "Schema for CARTA Workspaces (Version 1)",
   "$id": "carta_workspace_1",
-  "required": [
-    "workspaceVersion",
-    "frontendVersion",
-    "files"
-  ],
+  "required": ["workspaceVersion", "frontendVersion", "files"],
   "definitions": {
     "render-config": {
       "properties": {
@@ -35,10 +31,7 @@
       }
     },
     "file": {
-      "required": [
-        "id",
-        "path"
-      ],
+      "required": ["id", "path"],
       "properties": {
         "id": {
           "description": "ID of the file",

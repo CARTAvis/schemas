@@ -1,493 +1,459 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "Preferences",
-    "description": "Schema for CARTA Preferences (Version 1)",
-    "$id": "carta_preferences_1",
-    "required": [
-        "version"
-    ],
-    "properties": {
-        "version": {
-            "type": "integer",
-            "minimum": 1,
-            "description": "Version number of the preference schema."
-        },
-        "username": {
-            "type": "string",
-            "minLength": 1
-        },
-        "theme": {
-            "type": "string",
-            "description": "Set the color theme of the graphical user interface of CARTA. Default refers to the color theme of the operating system if applicable, otherwise 'light' theme is applied.",
-            "default": "auto",
-            "enum": [
-                "auto",
-                "light",
-                "dark"
-            ]
-        },
-        "autoLaunch": {
-            "type": "boolean",
-            "description": "Launch a file browser when CARTA is initialized.",
-            "default": true,
-            "enum": [
-                true,
-                false
-            ]
-        },
-        "fileSortingString": {
-            "type": "string",
-            "pattern": "^([+\\-])(date|filename|type|size)$",
-            "description": "Set the default sorting policy of the file list in the file browser. The string should contain two parts with a plus '+' sign (ascending) or a minor '-' sign (descending) followed by one of the following strings: 'date', 'filename', 'type', or 'size'. For example, with '-date' (as default), the file list will be sorted by date in descending order.",
-            "default": "-date",
-            "enum": [
-                "-date",
-                "+date",
-                "-filename",
-                "+filename",
-                "-type",
-                "+type",
-                "-size",
-                "+size"
-            ]
-        },
-        "fileFilteringType": {
-            "type": "string",
-            "description": "Set the input syntax mode of the file filter in the file browser. 'fuzzy', as default, enables case-insentitive fuzzy string match. 'unix' accepts glob patterns in Unix or Unix-like operating systems. 'regex' allows defining a filter with regular expression.",
-            "default": "fuzzy",
-            "enum": [
-                "fuzzy",
-                "unix",
-                "regex"
-            ]
-        },
-        "layout": {
-            "type": "string",
-            "description": "Set a default layout when CARTA is initialized. A custom layout can be set as the default layout too.",
-            "default": "Default",
-            "examples": [
-                "Default",
-                "Cube View",
-                "Cube Analysis",
-                "Continuum Analysis"
-            ]
-        },
-        "cursorPosition": {
-            "type": "string",
-            "description": "Define the initial state of the cursor in the image viewer. 'fixed' will fix the cursor position at the image center with a cross marker to prevent updating of cursor information or spatial/spectral cursor profile. 'tracking' (default) means cursor information or spatial/spectral cursor profile will be updated along with the movement of the cursor in the image viewer.",
-            "default": "tracking",
-            "enum": [
-                "fixed",
-                "tracking"
-            ]
-        },
-        "zoomMode": {
-            "type": "string",
-            "description": "Set the initial image zoom state when an image is loaded in the image viewer. 'full' (as default) will set the zoom level so that entire image is rendered to fit the size of the image viewer. 'fit' will set the zoom level so that one image pixel will be rendered with just one screen pixel only.",
-            "default": "full",
-            "enum": [
-                "fit",
-                "full"
-            ]
-        },
-        "zoomPoint": {
-            "type": "string",
-            "description": "Set the policy of image zoom with scrolling wheel. 'cursor' (as default) enables 'focused-zoom' at the location of the cursor when scrolling. 'center' forces 'focused-zoom' to be always with respect to the center of the image viewer.",
-            "default": "cursor",
-            "enum": [
-                "cursor",
-                "center"
-            ]
-        },
-        "dragPanning": {
-            "type": "boolean",
-            "description": "Set the default mode of image pan. With true (boolean), an image can be panned by cursor drag-and-drop event. With false, an image is effectively panned via mouse click where the clicked position will be centered in the image viewer.",
-            "default": true,
-            "enum": [
-                true,
-                false
-            ]
-        },
-        "spectralMatchingType": {
-            "type": "string",
-            "description": "Set the coordinate reference for spectral matching. Options are 'VRAD' (radio velocity), 'VOPT' (optical velocity), 'FREQ' (frequency), 'WAVE' (vacuum wavelegth), 'AWAV' (air wavelength), and 'CHANNEL'.",
-            "default": "VRAD",
-            "enum": [
-                "VRAD",
-                "VOPT",
-                "FREQ",
-                "WAVE",
-                "AWAV",
-                "CHANNEL"
-            ]
-        },
-        "wcsMatchingType": {
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 3,
-            "description": "Set the image matching state and type when a new image is loaded in the append mode. The meaning of the allowed integers follows: {0: 'None', 1: 'Spatial only', 2: 'Spectral only', 3: 'Spatial and spectral'}.",
-            "default": 0
-        },
-        "scaling": {
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 7,
-            "description": "Set a default scaling function for raster image rendering. The meaning of the allowed integers follows: {0: 'Linear', 1: 'Log', 2: 'Square root', 3: 'Squared', 4: 'Gamma', 5: 'Power'}.",
-            "default": 0
-        },
-        "colormap": {
-            "type": "string",
-            "description": "Set a default colormap for raster image rendering.",
-            "default": "inferno",
-            "enum": [
-                "afmhot", "Blues", "coolwarm", "cubehelix", "gist_heat",
-                "gist_stern", "gnuplot", "gnuplot2", "gray", "greens",
-                "greys", "hot", "inferno", "jet", "magma",
-                "nipy_spectral", "plasma", "rainbow", "RdBu", "RdGy",
-                "reds", "seismic", "spectral", "tab10", "viridis"
-            ]
-        },
-        "percentile": {
-            "type": "number",
-            "maximum": 100,
-            "exclusiveMinimum": 0,
-            "description": "Set a color clip level for raster image rendering.",
-            "default": 99.9,
-            "examples": [
-                100,
-                99.99,
-                99.95,
-                99.9,
-                99.5,
-                99,
-                95,
-                90
-            ]
-        },
-        "scalingAlpha": {
-            "type": "number",
-            "minimum": 1,
-            "maximum": 1000000,
-            "description": "Set a default control parameter for 'Log' or 'Power' scaling function.",
-            "default": 1000
-        },
-        "scalingGamma": {
-            "type": "number",
-            "minimum": 0,
-            "maximum": 2,
-            "multipleOf": 0.1,
-            "description": "Set a default control parameter for 'Gamma' scaling function.",
-            "default": 1
-        },
-        "nanColorHex": {
-            "type": "string",
-            "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$",
-            "description": "Set a default color hex code to render NaN pixels in a raster image. To adjust the transparency, please use 'nanAlpha'.",
-            "default": "#137CBD",
-            "examples": [
-                "#137CBD",
-                "#000000",
-                "#8A9BA8",
-                "#FFFFFF"
-            ]
-        },
-        "nanAlpha": {
-            "type": "number",
-            "minimum": 0,
-            "maximum": 1,
-            "description": "Set the transparency (alpha value) of NaN pixels in a raster image. To set the color for NaN pixels, please use 'nanColorHex' with a color hex code.",
-            "default": 1
-        },
-        "contourGeneratorType": {
-            "type": "string",
-            "description": "Set a default generator of contour levels. Use 'contourNumLevels' to define how many levels to be generared.",
-            "default": "start-step-multiplier",
-            "enum": [
-                "start-step-multiplier",
-                "min-max-scaling",
-                "percentages-ref.value",
-                "mean-sigma-list"
-            ]
-        },
-        "contourSmoothingMode": {
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 2,
-            "description": "Set the image smoothing mode before computing contour vertices. Options are: {0: 'None', 1: 'Block', 2: 'Gaussian' (as default)}. Use 'contourSmoothingFactor' to define a kernel size for smoothing.",
-            "default": 2
-        },
-        "contourSmoothingFactor": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 33,
-            "description": "Set a kernel size (n x n pixel) for the chosen contour smoothing mode ('contourSmoothingMode').",
-            "default": 4
-        },
-        "contourNumLevels": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 20,
-            "description": "Define the number of levels to be generated by the contour level generator ('contourGeneratorType').",
-            "default": 5
-        },
-        "contourThickness": {
-            "type": "number",
-            "exclusiveMinimum": 0,
-            "maximum": 10,
-            "multipleOf": 0.5,
-            "description": "Set a default line width for contour rendering.",
-            "default": 1
-        },
-        "contourColormapEnabled": {
-            "type": "boolean",
-            "description": "A boolean flag to enable/disable contour rendering with variable colors for different levels.",
-            "default": false,
-            "enum": [
-                true,
-                false
-            ]
-        },
-        "contourColor": {
-            "type": "string",
-            "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$",
-            "description": "Define a default color hex code for contour rendering.",
-            "default": "#0F9960",
-            "examples": [
-                "#0F9960",
-                "#000000",
-                "#FFFFFF",
-                "#FF0000",
-                "#00FF00",
-                "#0000FF",
-                "#FFFF00",
-                "#00FFFF",
-                "#FF00FF"
-            ]
-        },
-        "contourColormap": {
-            "type": "string",
-            "description": "Set a colormap for contour rendering with variable colors for different levels.",
-            "default": "viridis",
-            "enum": [
-                "afmhot", "Blues", "coolwarm", "cubehelix", "gist_heat",
-                "gist_stern", "gnuplot", "gnuplot2", "gray", "greens",
-                "greys", "hot", "inferno", "jet", "magma",
-                "nipy_spectral", "plasma", "rainbow", "RdBu", "RdGy",
-                "reds", "seismic", "spectral", "tab10", "viridis"
-            ]
-        },
-        "astColor": {
-            "type": "integer",
-            "description": "TODO: revisit once unified color selector is in place.\n\n Set a default color theme to render the coordinate layer in the image viewer.",
-            "minimum": 0
-        },
-        "astGridVisible": {
-            "type": "boolean",
-            "description": "A boolean flag to enable/disable coordinate grid lines in the image viewer.",
-            "default": false,
-            "enum": [
-                false,
-                true
-            ]
-        },
-        "astLabelsVisible": {
-            "type": "boolean",
-            "description": "A boolean flag to enable/disable x and y labels in the image viewer.",
-            "default": true,
-            "enum": [
-                true,
-                false
-            ]
-        },
-        "wcsType": {
-            "type": "string",
-            "description": "Set the default format to display world coordinates in the image viewer.",
-            "default": "automatic",
-            "enum": [
-                "automatic",
-                "degrees",
-                "sexagesimal"
-            ]
-        },
-        "beamVisible": {
-            "type": "boolean",
-            "description": "A boolean flag to enable/disable the display of a beam element in the image viewer.",
-            "default": true,
-            "enum": [
-                true,
-                false
-            ]
-        },
-        "beamColor": {
-            "type": "string",
-            "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$",
-            "description": "Define a default color hex code for beam element rendering in the image viewer.",
-            "default": "#8A9BA8",
-            "examples": [
-                "#8A9BA8",
-                "#000000",
-                "#FFFFFF",
-                "#FF0000",
-                "#00FF00",
-                "#0000FF",
-                "#FFFF00",
-                "#00FFFF",
-                "#FF00FF"
-            ]
-        },
-        "beamType": {
-            "type": "string",
-            "description": "Set a style for beam element rendering in the image viewer.",
-            "default": "open",
-            "enum": [
-                "open",
-                "solid"
-            ]
-        },
-        "beamWidth": {
-            "type": "number",
-            "exclusiveMinimum": 0,
-            "maximum": 10,
-            "multipleOf": 0.5,
-            "description": "Set a default line width to render the beam element in the image viewer.",
-            "default": 1
-        },
-        "regionColor": {
-            "type": "string",
-            "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$",
-            "description": "Set a default color hex code for region rendering in the image viewer.",
-            "default": "#2EE6D6",
-            "examples": [
-                "#2EE6D6",
-                "#000000",
-                "#FFFFFF",
-                "#FF0000",
-                "#00FF00",
-                "#0000FF",
-                "#FFFF00",
-                "#00FFFF",
-                "#FF00FF"
-            ]
-        },
-        "regionLineWidth": {
-            "type": "number",
-            "exclusiveMinimum": 0,
-            "maximum": 10,
-            "multipleOf": 0.5,
-            "description": "Set a default line width to render a region in the image viewer.",
-            "default": 2
-        },
-        "regionDashLength": {
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 50,
-            "description": "Set the default style of region rendering with dashed line in the image viewer.",
-            "default": 0
-        },
-        "regionType": {
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 6,
-            "description": "Set the default region type of the region creation button in the image viewer. Options are: {0: 'Point', 1: 'Line' (NOT IMPLEMENTED YET), 2: 'Polyline' (NOT IMPLEMENTED YET), 3: 'Rectangle' (as default), 4: 'Ellipse', 5: 'Annulus' (NOT IMPLEMENTED YET), 6: 'Polygon'}.",
-            "default": 3
-        },
-        "regionCreationMode": {
-            "type": "string",
-            "description": "Specify the default cursor creation mode for regions with rotational symmetry such as 'Rectangle' or 'Ellipse'.",
-            "default": "center",
-            "enum": [
-                "center",
-                "corner"
-            ]
-        },
-        "regionSize": {
-            "type": "integer",
-            "description": "Set the default size of 'Rectangle' or 'Ellipse' region when created with a single click. The size is defined in number of screen pixel.",
-            "minimum": 1,
-            "default": 30
-        },
-        "imageCompressionQuality": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 32,
-            "description": "ADJUST WITH CAUTION. Set the compression quality factor for image tile data compression with zfp.",
-            "default": 11
-        },
-        "animationCompressionQuality": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 32,
-            "description": "ADJUST WITH CAUTION. Set the compression quality factor for image tile data compression with zfp during animation playback.",
-            "default": 9
-        },
-        "GPUTileCache": {
-            "type": "integer",
-            "multipleOf": 128,
-            "minimum": 512,
-            "description": "ADJUST WITH CAUTION. Set the cache size in number of image tiles in GPU memory.",
-            "default": 512
-        },
-        "systemTileCache": {
-            "type": "integer",
-            "multipleOf": 128,
-            "minimum": 1024,
-            "description": "ADJUST WITH CAUTION. Set the cache size in number of image tiles in system memory.",
-            "default": 4096
-        },
-        "contourDecimation": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 32,
-            "description": "ADJUST WITH CAUTION. Set the decimation factor for contour vertices generation. Default is 4, meaning the distance between adjacent contour vertices is rounded to 1/4 image pixel size. Contours are more smooth if a larger decimation factor is applied.",
-            "default": 4
-        },
-        "contourCompressionLevel": {
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 19,
-            "description": "ADJUST WITH CAUTION. Set the compression quality factor for contour data compression with zstd.",
-            "default": 8
-        },
-        "contourChunkSize": {
-            "type": "integer",
-            "multipleOf": 25000,
-            "minimum": 25000,
-            "maximum": 1000000,
-            "description": "ADJUST WITH CAUTION. Set the chuck size for contour data streaming.",
-            "default": 100000
-        },
-        "contourControlMapWidth": {
-            "type": "integer",
-            "multipleOf": 128,
-            "minimum": 128,
-            "maximum": 1024,
-            "description": "ADJUST WITH CAUTION. Set the width of the contour control map for image matching. An integer between 128 and 1024 should be provided. The value needs to be multiple of 128. Default is 256.",
-            "default": 256
-        },
-        "streamContoursWhileZooming": {
-            "type": "boolean",
-            "description": "ADJUST WITH CAUTION. A boolean flag to enable/disable image tile stream for intermediate zoom levels when image zooming is in action.",
-            "default": false,
-            "enum": [
-                false,
-                true
-            ]
-        },
-        "lowBandwidthMode": {
-            "type": "boolean",
-            "description": "A boolean flag to enable/disable the low bandwidth mode. With the low bandwidth mode, required image resolution is reduced by a factor of two and cursor responding time is reduced from 200 ms to 400 ms.",
-            "default": false,
-            "enum": [
-                false,
-                true
-            ]
-        },
-        "stopAnimationPlayback": {
-            "type": "integer",
-            "minimum": 5,
-            "maximum": 30,
-            "description": "Set a timer (in minutes) to stop animation playback automatically to save computing resources.",
-            "default": 5
-        }
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Preferences",
+  "description": "Schema for CARTA Preferences (Version 1)",
+  "$id": "carta_preferences_1",
+  "required": ["version"],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Version number of the preference schema."
+    },
+    "username": {
+      "type": "string",
+      "minLength": 1
+    },
+    "theme": {
+      "type": "string",
+      "description": "Set the color theme of the graphical user interface of CARTA. Default refers to the color theme of the operating system if applicable, otherwise 'light' theme is applied.",
+      "default": "auto",
+      "enum": ["auto", "light", "dark"]
+    },
+    "autoLaunch": {
+      "type": "boolean",
+      "description": "Launch a file browser when CARTA is initialized.",
+      "default": true,
+      "enum": [true, false]
+    },
+    "fileSortingString": {
+      "type": "string",
+      "pattern": "^([+\\-])(date|filename|type|size)$",
+      "description": "Set the default sorting policy of the file list in the file browser. The string should contain two parts with a plus '+' sign (ascending) or a minor '-' sign (descending) followed by one of the following strings: 'date', 'filename', 'type', or 'size'. For example, with '-date' (as default), the file list will be sorted by date in descending order.",
+      "default": "-date",
+      "enum": [
+        "-date",
+        "+date",
+        "-filename",
+        "+filename",
+        "-type",
+        "+type",
+        "-size",
+        "+size"
+      ]
+    },
+    "fileFilteringType": {
+      "type": "string",
+      "description": "Set the input syntax mode of the file filter in the file browser. 'fuzzy', as default, enables case-insentitive fuzzy string match. 'unix' accepts glob patterns in Unix or Unix-like operating systems. 'regex' allows defining a filter with regular expression.",
+      "default": "fuzzy",
+      "enum": ["fuzzy", "unix", "regex"]
+    },
+    "layout": {
+      "type": "string",
+      "description": "Set a default layout when CARTA is initialized. A custom layout can be set as the default layout too.",
+      "default": "Default",
+      "examples": [
+        "Default",
+        "Cube View",
+        "Cube Analysis",
+        "Continuum Analysis"
+      ]
+    },
+    "cursorPosition": {
+      "type": "string",
+      "description": "Define the initial state of the cursor in the image viewer. 'fixed' will fix the cursor position at the image center with a cross marker to prevent updating of cursor information or spatial/spectral cursor profile. 'tracking' (default) means cursor information or spatial/spectral cursor profile will be updated along with the movement of the cursor in the image viewer.",
+      "default": "tracking",
+      "enum": ["fixed", "tracking"]
+    },
+    "zoomMode": {
+      "type": "string",
+      "description": "Set the initial image zoom state when an image is loaded in the image viewer. 'full' (as default) will set the zoom level so that entire image is rendered to fit the size of the image viewer. 'fit' will set the zoom level so that one image pixel will be rendered with just one screen pixel only.",
+      "default": "full",
+      "enum": ["fit", "full"]
+    },
+    "zoomPoint": {
+      "type": "string",
+      "description": "Set the policy of image zoom with scrolling wheel. 'cursor' (as default) enables 'focused-zoom' at the location of the cursor when scrolling. 'center' forces 'focused-zoom' to be always with respect to the center of the image viewer.",
+      "default": "cursor",
+      "enum": ["cursor", "center"]
+    },
+    "dragPanning": {
+      "type": "boolean",
+      "description": "Set the default mode of image pan. With true (boolean), an image can be panned by cursor drag-and-drop event. With false, an image is effectively panned via mouse click where the clicked position will be centered in the image viewer.",
+      "default": true,
+      "enum": [true, false]
+    },
+    "spectralMatchingType": {
+      "type": "string",
+      "description": "Set the coordinate reference for spectral matching. Options are 'VRAD' (radio velocity), 'VOPT' (optical velocity), 'FREQ' (frequency), 'WAVE' (vacuum wavelegth), 'AWAV' (air wavelength), and 'CHANNEL'.",
+      "default": "VRAD",
+      "enum": ["VRAD", "VOPT", "FREQ", "WAVE", "AWAV", "CHANNEL"]
+    },
+    "wcsMatchingType": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "Set the image matching state and type when a new image is loaded in the append mode. The meaning of the allowed integers follows: {0: 'None', 1: 'Spatial only', 2: 'Spectral only', 3: 'Spatial and spectral'}.",
+      "default": 0
+    },
+    "scaling": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 7,
+      "description": "Set a default scaling function for raster image rendering. The meaning of the allowed integers follows: {0: 'Linear', 1: 'Log', 2: 'Square root', 3: 'Squared', 4: 'Gamma', 5: 'Power'}.",
+      "default": 0
+    },
+    "colormap": {
+      "type": "string",
+      "description": "Set a default colormap for raster image rendering.",
+      "default": "inferno",
+      "enum": [
+        "afmhot",
+        "Blues",
+        "coolwarm",
+        "cubehelix",
+        "gist_heat",
+        "gist_stern",
+        "gnuplot",
+        "gnuplot2",
+        "gray",
+        "greens",
+        "greys",
+        "hot",
+        "inferno",
+        "jet",
+        "magma",
+        "nipy_spectral",
+        "plasma",
+        "rainbow",
+        "RdBu",
+        "RdGy",
+        "reds",
+        "seismic",
+        "spectral",
+        "tab10",
+        "viridis"
+      ]
+    },
+    "percentile": {
+      "type": "number",
+      "maximum": 100,
+      "exclusiveMinimum": 0,
+      "description": "Set a color clip level for raster image rendering.",
+      "default": 99.9,
+      "examples": [100, 99.99, 99.95, 99.9, 99.5, 99, 95, 90]
+    },
+    "scalingAlpha": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 1000000,
+      "description": "Set a default control parameter for 'Log' or 'Power' scaling function.",
+      "default": 1000
+    },
+    "scalingGamma": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 2,
+      "multipleOf": 0.1,
+      "description": "Set a default control parameter for 'Gamma' scaling function.",
+      "default": 1
+    },
+    "nanColorHex": {
+      "type": "string",
+      "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$",
+      "description": "Set a default color hex code to render NaN pixels in a raster image. To adjust the transparency, please use 'nanAlpha'.",
+      "default": "#137CBD",
+      "examples": ["#137CBD", "#000000", "#8A9BA8", "#FFFFFF"]
+    },
+    "nanAlpha": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Set the transparency (alpha value) of NaN pixels in a raster image. To set the color for NaN pixels, please use 'nanColorHex' with a color hex code.",
+      "default": 1
+    },
+    "contourGeneratorType": {
+      "type": "string",
+      "description": "Set a default generator of contour levels. Use 'contourNumLevels' to define how many levels to be generared.",
+      "default": "start-step-multiplier",
+      "enum": [
+        "start-step-multiplier",
+        "min-max-scaling",
+        "percentages-ref.value",
+        "mean-sigma-list"
+      ]
+    },
+    "contourSmoothingMode": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2,
+      "description": "Set the image smoothing mode before computing contour vertices. Options are: {0: 'None', 1: 'Block', 2: 'Gaussian' (as default)}. Use 'contourSmoothingFactor' to define a kernel size for smoothing.",
+      "default": 2
+    },
+    "contourSmoothingFactor": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 33,
+      "description": "Set a kernel size (n x n pixel) for the chosen contour smoothing mode ('contourSmoothingMode').",
+      "default": 4
+    },
+    "contourNumLevels": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 20,
+      "description": "Define the number of levels to be generated by the contour level generator ('contourGeneratorType').",
+      "default": 5
+    },
+    "contourThickness": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 10,
+      "multipleOf": 0.5,
+      "description": "Set a default line width for contour rendering.",
+      "default": 1
+    },
+    "contourColormapEnabled": {
+      "type": "boolean",
+      "description": "A boolean flag to enable/disable contour rendering with variable colors for different levels.",
+      "default": false,
+      "enum": [true, false]
+    },
+    "contourColor": {
+      "type": "string",
+      "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$",
+      "description": "Define a default color hex code for contour rendering.",
+      "default": "#0F9960",
+      "examples": [
+        "#0F9960",
+        "#000000",
+        "#FFFFFF",
+        "#FF0000",
+        "#00FF00",
+        "#0000FF",
+        "#FFFF00",
+        "#00FFFF",
+        "#FF00FF"
+      ]
+    },
+    "contourColormap": {
+      "type": "string",
+      "description": "Set a colormap for contour rendering with variable colors for different levels.",
+      "default": "viridis",
+      "enum": [
+        "afmhot",
+        "Blues",
+        "coolwarm",
+        "cubehelix",
+        "gist_heat",
+        "gist_stern",
+        "gnuplot",
+        "gnuplot2",
+        "gray",
+        "greens",
+        "greys",
+        "hot",
+        "inferno",
+        "jet",
+        "magma",
+        "nipy_spectral",
+        "plasma",
+        "rainbow",
+        "RdBu",
+        "RdGy",
+        "reds",
+        "seismic",
+        "spectral",
+        "tab10",
+        "viridis"
+      ]
+    },
+    "astColor": {
+      "type": "integer",
+      "description": "TODO: revisit once unified color selector is in place.\n\n Set a default color theme to render the coordinate layer in the image viewer.",
+      "minimum": 0
+    },
+    "astGridVisible": {
+      "type": "boolean",
+      "description": "A boolean flag to enable/disable coordinate grid lines in the image viewer.",
+      "default": false,
+      "enum": [false, true]
+    },
+    "astLabelsVisible": {
+      "type": "boolean",
+      "description": "A boolean flag to enable/disable x and y labels in the image viewer.",
+      "default": true,
+      "enum": [true, false]
+    },
+    "wcsType": {
+      "type": "string",
+      "description": "Set the default format to display world coordinates in the image viewer.",
+      "default": "automatic",
+      "enum": ["automatic", "degrees", "sexagesimal"]
+    },
+    "beamVisible": {
+      "type": "boolean",
+      "description": "A boolean flag to enable/disable the display of a beam element in the image viewer.",
+      "default": true,
+      "enum": [true, false]
+    },
+    "beamColor": {
+      "type": "string",
+      "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$",
+      "description": "Define a default color hex code for beam element rendering in the image viewer.",
+      "default": "#8A9BA8",
+      "examples": [
+        "#8A9BA8",
+        "#000000",
+        "#FFFFFF",
+        "#FF0000",
+        "#00FF00",
+        "#0000FF",
+        "#FFFF00",
+        "#00FFFF",
+        "#FF00FF"
+      ]
+    },
+    "beamType": {
+      "type": "string",
+      "description": "Set a style for beam element rendering in the image viewer.",
+      "default": "open",
+      "enum": ["open", "solid"]
+    },
+    "beamWidth": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 10,
+      "multipleOf": 0.5,
+      "description": "Set a default line width to render the beam element in the image viewer.",
+      "default": 1
+    },
+    "regionColor": {
+      "type": "string",
+      "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$",
+      "description": "Set a default color hex code for region rendering in the image viewer.",
+      "default": "#2EE6D6",
+      "examples": [
+        "#2EE6D6",
+        "#000000",
+        "#FFFFFF",
+        "#FF0000",
+        "#00FF00",
+        "#0000FF",
+        "#FFFF00",
+        "#00FFFF",
+        "#FF00FF"
+      ]
+    },
+    "regionLineWidth": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 10,
+      "multipleOf": 0.5,
+      "description": "Set a default line width to render a region in the image viewer.",
+      "default": 2
+    },
+    "regionDashLength": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 50,
+      "description": "Set the default style of region rendering with dashed line in the image viewer.",
+      "default": 0
+    },
+    "regionType": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 6,
+      "description": "Set the default region type of the region creation button in the image viewer. Options are: {0: 'Point', 1: 'Line' (NOT IMPLEMENTED YET), 2: 'Polyline' (NOT IMPLEMENTED YET), 3: 'Rectangle' (as default), 4: 'Ellipse', 5: 'Annulus' (NOT IMPLEMENTED YET), 6: 'Polygon'}.",
+      "default": 3
+    },
+    "regionCreationMode": {
+      "type": "string",
+      "description": "Specify the default cursor creation mode for regions with rotational symmetry such as 'Rectangle' or 'Ellipse'.",
+      "default": "center",
+      "enum": ["center", "corner"]
+    },
+    "regionSize": {
+      "type": "integer",
+      "description": "Set the default size of 'Rectangle' or 'Ellipse' region when created with a single click. The size is defined in number of screen pixel.",
+      "minimum": 1,
+      "default": 30
+    },
+    "imageCompressionQuality": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 32,
+      "description": "ADJUST WITH CAUTION. Set the compression quality factor for image tile data compression with zfp.",
+      "default": 11
+    },
+    "animationCompressionQuality": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 32,
+      "description": "ADJUST WITH CAUTION. Set the compression quality factor for image tile data compression with zfp during animation playback.",
+      "default": 9
+    },
+    "GPUTileCache": {
+      "type": "integer",
+      "multipleOf": 128,
+      "minimum": 512,
+      "description": "ADJUST WITH CAUTION. Set the cache size in number of image tiles in GPU memory.",
+      "default": 512
+    },
+    "systemTileCache": {
+      "type": "integer",
+      "multipleOf": 128,
+      "minimum": 1024,
+      "description": "ADJUST WITH CAUTION. Set the cache size in number of image tiles in system memory.",
+      "default": 4096
+    },
+    "contourDecimation": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 32,
+      "description": "ADJUST WITH CAUTION. Set the decimation factor for contour vertices generation. Default is 4, meaning the distance between adjacent contour vertices is rounded to 1/4 image pixel size. Contours are more smooth if a larger decimation factor is applied.",
+      "default": 4
+    },
+    "contourCompressionLevel": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 19,
+      "description": "ADJUST WITH CAUTION. Set the compression quality factor for contour data compression with zstd.",
+      "default": 8
+    },
+    "contourChunkSize": {
+      "type": "integer",
+      "multipleOf": 25000,
+      "minimum": 25000,
+      "maximum": 1000000,
+      "description": "ADJUST WITH CAUTION. Set the chuck size for contour data streaming.",
+      "default": 100000
+    },
+    "contourControlMapWidth": {
+      "type": "integer",
+      "multipleOf": 128,
+      "minimum": 128,
+      "maximum": 1024,
+      "description": "ADJUST WITH CAUTION. Set the width of the contour control map for image matching. An integer between 128 and 1024 should be provided. The value needs to be multiple of 128. Default is 256.",
+      "default": 256
+    },
+    "streamContoursWhileZooming": {
+      "type": "boolean",
+      "description": "ADJUST WITH CAUTION. A boolean flag to enable/disable image tile stream for intermediate zoom levels when image zooming is in action.",
+      "default": false,
+      "enum": [false, true]
+    },
+    "lowBandwidthMode": {
+      "type": "boolean",
+      "description": "A boolean flag to enable/disable the low bandwidth mode. With the low bandwidth mode, required image resolution is reduced by a factor of two and cursor responding time is reduced from 200 ms to 400 ms.",
+      "default": false,
+      "enum": [false, true]
+    },
+    "stopAnimationPlayback": {
+      "type": "integer",
+      "minimum": 5,
+      "maximum": 30,
+      "description": "Set a timer (in minutes) to stop animation playback automatically to save computing resources.",
+      "default": 5
     }
+  }
 }
