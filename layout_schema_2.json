@@ -52,6 +52,7 @@
         "id": {
           "type": "string",
           "enum": [
+            "floating-settings",
             "layer-list",
             "log",
             "animator",
@@ -59,6 +60,7 @@
             "image-view",
             "stats",
             "spectral-line-query",
+            "cursor-info",
             "catalog-overlay",
             "catalog-plot"
           ]
@@ -386,6 +388,10 @@
         },
         "height": {
           "$ref": "#/definitions/percentage-value"
+        },
+        "activeItemIndex": {
+          "type": "integer",
+          "minimum": 0
         }
       }
     }
