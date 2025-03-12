@@ -3,6 +3,7 @@
   "title": "Preferences",
   "description": "Schema for CARTA Preferences (Version 2)",
   "$id": "carta_preferences_2",
+  "type": "object",
   "required": ["version"],
   "properties": {
     "version": {
@@ -128,6 +129,31 @@
     },
     "contourColormap": {
       "type": "string"
+    },
+    "vectorOverlayPixelAveraging": {
+      "type": "number",
+      "minimum": 2,
+      "default": 4
+    },
+    "vectorOverlayFractionalIntensity": {
+      "type": "boolean",
+      "default": false
+    },
+    "vectorOverlayThickness": {
+      "type": "number",
+      "minimum": 0
+    },
+    "vectorOverlayColormapEnabled": {
+      "type": "boolean"
+    },
+    "vectorOverlayColor": {
+      "type": "string",
+      "description": "TODO: validate color string",
+      "default": "#ffffff"
+    },
+    "vectorOverlayColormap": {
+      "type": "string",
+      "default": "viridis"
     },
     "astColor": {
       "type": "string",
@@ -311,6 +337,22 @@
       "type": "integer",
       "minimum": 0,
       "default": 0
+    },
+    "telemetryUuid": {
+      "type": "string"
+    },
+    "telemetryMode": {
+      "type": "string",
+      "enum": ["none", "minimal", "usage"],
+      "default": "usage"
+    },
+    "telemetryConsentShown": {
+      "type": "boolean",
+      "default": false
+    },
+    "telemetryLogging": {
+      "type": "boolean",
+      "default": false
     },
     "fileFilterMode": {
       "type": "string",
