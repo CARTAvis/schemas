@@ -5,6 +5,11 @@
   "$id": "carta_backend_preferences_2",
   "required": [],
   "properties": {
+    "backendConfigVersion": {
+      "description": "The version of this backend configuration",
+      "type": "string",
+      "default": "2.0"
+    },
     "verbosity": {
       "type": "integer",
       "enum": [0, 1, 2, 3, 4, 5],

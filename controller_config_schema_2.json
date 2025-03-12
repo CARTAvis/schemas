@@ -444,6 +444,11 @@
       "description": "Reference to configuration schema file",
       "type": "string"
     },
+    "controllerConfigVersion": {
+      "description": "The version of this controller configuration",
+      "type": "string",
+      "default": "2.0"
+    },
     "authProviders": {
       "title": "AuthProviders",
       "description": "Configuration option for authentication providers",
