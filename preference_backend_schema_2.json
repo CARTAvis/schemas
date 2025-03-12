@@ -93,6 +93,11 @@
     "enable_scripting": {
       "type": "boolean",
       "default": false
+    },
+    "http_url_prefix": {
+      "type": "string",
+      "minLength": 1,
+      "default": ""
     }
   }
 }
