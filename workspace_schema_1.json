@@ -3,77 +3,226 @@
   "title": "Workspace",
   "description": "Schema for CARTA Workspaces (Version 1)",
   "$id": "carta_workspace_1",
-  "required": ["workspaceVersion", "frontendVersion", "files"],
   "definitions": {
     "render-config": {
+      "type": "object",
       "properties": {
         "scaling": {
           "type": "integer",
           "minimum": 0,
           "maximum": 7
         },
-        "colormap": {
+        "colorMap": {
           "type": "string"
         },
-        "percentile": {
-          "type": "number",
-          "exclusiveMaximum": 100,
-          "exclusiveMinimum": 0
+        "bias": {
+          "type": "number"
         },
-        "scalingAlpha": {
-          "type": "number",
-          "minimum": 1
+        "contrast": {
+          "type": "number"
         },
-        "scalingGamma": {
-          "type": "number",
-          "exclusiveMinimum": 0
+        "gamma": {
+          "type": "number"
+        },
+        "alpha": {
+          "type": "number"
+        },
+        "inverted": {
+          "type": "boolean"
+        },
+        "scaleMin": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "scaleMax": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "selectedPercentile": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "maximum": 100,
+            "minimum": -1
+          }
+        }
+      }
+    },
+    "contour-config": {
+      "type": "object",
+      "properties": {
+        "scaling": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 7
+        },
+        "colorMap": {
+          "type": "string"
+        },
+        "bias": {
+          "type": "number"
+        },
+        "contrast": {
+          "type": "number"
+        },
+        "gamma": {
+          "type": "number"
+        },
+        "alpha": {
+          "type": "number"
+        },
+        "inverted": {
+          "type": "boolean"
+        },
+        "scaleMin": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "scaleMax": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "selectedPercentile": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "maximum": 100,
+            "minimum": -1
+          }
+        }
+      }
+    },
+    "vector-overlay-config": {
+      "type": "object",
+      "properties": {
+        "scaling": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 7
+        },
+        "colorMap": {
+          "type": "string"
+        },
+        "bias": {
+          "type": "number"
+        },
+        "contrast": {
+          "type": "number"
+        },
+        "gamma": {
+          "type": "number"
+        },
+        "alpha": {
+          "type": "number"
+        },
+        "inverted": {
+          "type": "boolean"
+        },
+        "scaleMin": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "scaleMax": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "selectedPercentile": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "maximum": 100,
+            "minimum": -1
+          }
+        }
+      }
+    },
+    "references": {
+      "type": "object",
+      "properties": {
+        "spatial": {
+          "description": "ID of the spatial reference file",
+          "type": "integer",
+          "minimum": 0
+        },
+        "spectral": {
+          "description": "ID of the spectral reference file",
+          "type": "integer",
+          "minimum": 0
+        },
+        "raster": {
+          "description": "ID of the raster reference file",
+          "type": "integer",
+          "minimum": 0
         }
       }
     },
     "file": {
-      "required": ["id", "path"],
+      "type": "object",
+      "required": ["id", "directory", "filename"],
       "properties": {
         "id": {
           "description": "ID of the file",
           "type": "integer",
           "minimum": 0
         },
-        "path": {
-          "description": "Path of the file, relative to the top-level folder",
+        "directory": {
+          "description": "Directory of the file, relative to the top-level folder",
+          "type": "string"
+        },
+        "filename": {
+          "description": "Name of the file",
           "type": "string"
         },
         "hdu": {
           "description": "HDU to load. If none is specified, the first image HDU will be used",
           "type": "string"
         },
-        "spatialMatching": {
-          "description": "Whether to enable spatial matching for this file",
-          "type": "boolean"
-        },
-        "spectralMatching": {
-          "description": "Whether to enable spatial matching for this file",
-          "type": "boolean"
-        },
         "renderConfig": {
           "$ref": "#/definitions/render-config"
+        },
+        "contourConfig": {
+          "$ref": "#/definitions/contour-config"
+        },
+        "vectorOverlayConfig": {
+          "$ref": "#/definitions/vector-overlay-config"
         }
       }
     }
   },
+  "required": ["workspaceVersion", "frontendVersion", "files"],
   "properties": {
     "workspaceVersion": {
       "description": "The version of the workspace contained",
       "type": "integer",
-      "minimum": 1,
-      "maximum": 1
+      "minimum": 0
     },
     "frontendVersion": {
       "description": "The version of the frontend targeted by this workspace",
       "type": "string"
     },
     "description": {
-      "description": "Workspace description",
+      "description": "Optional workspace description",
       "type": "string"
+    },
+    "name": {
+      "description": "Optional workspace name. Filename will be used if this is missing",
+      "type": "string"
+    },
+    "shared": {
+      "description": "Whether workspace is shared across multiple users",
+      "type": "boolean"
     },
     "files": {
       "type": "array",
@@ -81,15 +230,18 @@
         "$ref": "#/definitions/file"
       }
     },
-    "spatialReference": {
-      "description": "ID of the file to be used as the spatial reference",
-      "type": "integer",
-      "minimum": 0
+    "selectedFile": {
+      "description": "ID of the currently active file",
+      "type": "number"
     },
-    "spectralReference": {
-      "description": "ID of the file to be used as the spectral reference",
-      "type": "integer",
-      "minimum": 0
+    "thumbnail": {
+      "description": "A base64-encoded JPEG",
+      "type": "string",
+      "contentEncoding": "base64",
+      "contentMediaType": "image/jpeg"
+    },
+    "references": {
+      "$ref": "#/definitions/references"
     }
   }
 }
