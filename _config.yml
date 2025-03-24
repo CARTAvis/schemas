@@ -1,0 +1,3 @@
+exclude:
+  - CMakeLists.txt
+  - link_schemas.sh
