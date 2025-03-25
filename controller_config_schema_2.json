@@ -1,5 +1,5 @@
 {
-    "$id": "carta_controller_config_2",
+    "$id": "https://cartavis.org/schemas/controller_config_schema_2.json",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "CARTA controller configuration schema",
     "description": "Schema defining configuration options for the CARTA controller (Version 2)",

@@ -2,7 +2,7 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "Preferences",
     "description": "Schema for CARTA Preferences (Version 2)",
-    "$id": "carta_preferences_2",
+    "$id": "https://cartavis.org/schemas/preferences_schema_2.json",
     "type": "object",
     "required": ["version"],
     "properties": {

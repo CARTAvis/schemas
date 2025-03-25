@@ -2,7 +2,7 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "Workspace",
     "description": "Schema for CARTA Workspaces (Version 1)",
-    "$id": "carta_workspace_1",
+    "$id": "https://cartavis.org/schemas/workspace_schema_1.json",
     "definitions": {
         "render-config": {
             "type": "object",
