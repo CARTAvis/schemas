@@ -190,6 +190,7 @@ int main(int argc, char **argv) {
 
 exit:
     free(ident);
+    free(headername);
     free(buffer);
     return ret;
 
