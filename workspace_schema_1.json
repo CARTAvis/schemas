@@ -324,7 +324,7 @@
                     }
                 },
                 "rotation": {
-                    "type": "number",
+                    "type": "number"
                 },
                 "type": {
                     "type": "integer",
@@ -430,7 +430,7 @@
             "type": "object",
             "properties": {
                 "imageListIndex": {
-                    "type": "number",
+                    "type": "number"
                 },
                 "selectedFrameId": {
                     "type": "array",
