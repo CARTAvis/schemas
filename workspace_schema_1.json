@@ -3,6 +3,7 @@
     "title": "Workspace",
     "description": "Schema for CARTA Workspaces (Version 1)",
     "$id": "https://cartavis.org/schemas/workspace_schema_1.json",
+    "type": "object",
     "definitions": {
         "point-2d": {
             "type": "object",
@@ -241,7 +242,7 @@
                 }
             }
         },
-        "annotation-style": {
+        "annotation-style-point": {
             "type": "object",
             "properties": {
                 "pointShape": {
@@ -249,8 +250,13 @@
                 },
                 "pointWidth": {
                     "type": "number"
-                },
-                "font": {
+                }
+            }
+        },
+        "annotation-style-text": {
+            "type": "object",
+            "properties": {
+                "textLabel0": {
                     "type": "string"
                 },
                 "fontSize": {
@@ -259,20 +265,33 @@
                 "fontStyle": {
                     "type": "string"
                 },
-                "textLabel0": {
-                    "type": "string"
-                },
-                "textLabel1": {
+                "font": {
                     "type": "string"
                 },
                 "textPosition": {
                     "type": "number"
-                },
+                }
+            }
+        },
+        "annotation-style-vector": {
+            "type": "object",
+            "properties": {
                 "pointerWidth": {
                     "type": "number"
                 },
                 "pointerLength": {
                     "type": "number"
+                }
+            }
+        },
+        "annotation-style-compass": {
+            "type": "object",
+            "properties": {
+                "textLabel0": {
+                    "type": "string"
+                },
+                "textLabel1": {
+                    "type": "string"
                 },
                 "isNorthArrow": {
                     "type": "boolean"
@@ -280,20 +299,49 @@
                 "isEastArrow": {
                     "type": "boolean"
                 },
+                "fontSize": {
+                    "type": "number"
+                },
+                "fontStyle": {
+                    "type": "string"
+                },
+                "font": {
+                    "type": "string"
+                },
                 "northTextOffset": {
                     "$ref": "#/definitions/point-2d"
                 },
                 "eastTextOffset": {
                     "$ref": "#/definitions/point-2d"
                 },
-                "length": {
+                "pointerWidth": {
                     "type": "number"
                 },
-                "auxiliaryLineDashLength": {
+                "pointerLength": {
                     "type": "number"
+                },
+                "length": {
+                    "type": "number"
+                }
+            }
+        },
+        "annotation-style-ruler": {
+            "type": "object",
+            "properties": {
+                "fontSize": {
+                    "type": "number"
+                },
+                "fontStyle": {
+                    "type": "string"
+                },
+                "font": {
+                    "type": "string"
                 },
                 "auxiliaryLineVisible": {
                     "type": "boolean"
+                },
+                "auxiliaryLineDashLength": {
+                    "type": "number"
                 },
                 "auxiliaryTextVisible": {
                     "type": "boolean"
@@ -308,6 +356,26 @@
                     "$ref": "#/definitions/point-2d"
                 }
             }
+        },
+        "annotation-style": {
+            "type": "object",
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/annotation-style-point"
+                },
+                {
+                    "$ref": "#/definitions/annotation-style-text"
+                },
+                {
+                    "$ref": "#/definitions/annotation-style-vector"
+                },
+                {
+                    "$ref": "#/definitions/annotation-style-compass"
+                },
+                {
+                    "$ref": "#/definitions/annotation-style-ruler"
+                }
+            ]
         },
         "region": {
             "type": "object",
@@ -351,10 +419,7 @@
                     "type": "boolean"
                 },
                 "annotationStyles": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/annotation-style"
-                    }
+                    "$ref": "#/definitions/annotation-style"
                 }
             }
         },
