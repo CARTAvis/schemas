@@ -3,6 +3,7 @@
     "title": "Layout",
     "description": "Schema for CARTA Layout (Version 2)",
     "$id": "https://cartavis.org/schemas/layout_schema_2.json",
+    "type": "object",
     "definitions": {
         "percentage-value": {
             "description": "Describes a percentage value from 0 to 100",
@@ -43,6 +44,7 @@
             "enum": ["z", "Iz", "Qz", "Uz", "Vz"]
         },
         "basic-widget": {
+            "type": "object",
             "description": "Widgets that have no associated settings",
             "required": ["type", "id"],
             "properties": {
@@ -62,6 +64,7 @@
             }
         },
         "spectral-profiler": {
+            "type": "object",
             "description": "Spectral profiler widgets",
             "required": ["type", "id"],
             "properties": {
@@ -72,6 +75,7 @@
                     "const": "spectral-profiler"
                 },
                 "widgetSettings": {
+                    "type": "object",
                     "properties": {
                         "coordinate": {
                             "$ref": "#/definitions/spectral-coord"
@@ -114,6 +118,7 @@
             }
         },
         "spatial-profiler": {
+            "type": "object",
             "description": "Spatial profiler widgets",
             "required": ["type", "id"],
             "properties": {
@@ -124,6 +129,7 @@
                     "const": "spatial-profiler"
                 },
                 "widgetSettings": {
+                    "type": "object",
                     "properties": {
                         "coordinate": {
                             "$ref": "#/definitions/spatial-coord"
@@ -173,6 +179,7 @@
             }
         },
         "render-config": {
+            "type": "object",
             "description": "Render config widgets",
             "required": ["type", "id"],
             "properties": {
@@ -183,6 +190,7 @@
                     "const": "render-config"
                 },
                 "widgetSettings": {
+                    "type": "object",
                     "properties": {
                         "primaryLineColor": {
                             "type": "string"
@@ -228,6 +236,7 @@
             }
         },
         "histogram": {
+            "type": "object",
             "description": "Histogram widgets",
             "required": ["type", "id"],
             "properties": {
@@ -238,6 +247,7 @@
                     "const": "histogram"
                 },
                 "widgetSettings": {
+                    "type": "object",
                     "properties": {
                         "primaryLineColor": {
                             "type": "string"
@@ -277,6 +287,7 @@
             }
         },
         "stokes": {
+            "type": "object",
             "description": "Stokes analysis widgets",
             "required": ["type", "id"],
             "properties": {
@@ -287,6 +298,7 @@
                     "const": "stokes"
                 },
                 "widgetSettings": {
+                    "type": "object",
                     "properties": {
                         "primaryLineColor": {
                             "type": "string"
@@ -405,6 +417,7 @@
                         "$ref": "#/definitions/carta-widget"
                     },
                     {
+                        "type": "object",
                         "properties": {
                             "defaultX": {
                                 "type": "number"

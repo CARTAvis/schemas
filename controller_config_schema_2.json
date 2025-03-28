@@ -470,11 +470,18 @@
         },
         "serverPort": {
             "description": "Port to listen on. It is advised to listen on a port other than 80 or 443, behind an SSL proxy",
-            "type": ["integer", "string"],
+            "anyOf": [
+                {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 65535
+                },
+                {
+                    "type": "string",
+                    "minLength": 2
+                }
+            ],
             "default": 8000,
-            "minimum": 0,
-            "maximum": 65535,
-            "minLength": 2,
             "examples": [8000, 8080, "/run/carta-controller", "var/run/carta"]
         },
         "serverInterface": {

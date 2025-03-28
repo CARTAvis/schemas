@@ -3,6 +3,7 @@
     "title": "Snippet",
     "description": "Schema for CARTA Snippet (Version 1)",
     "$id": "https://cartavis.org/schemas/snippet_schema_1.json",
+    "type": "object",
     "required": ["snippetVersion", "frontendVersion", "code"],
     "properties": {
         "snippetVersion": {

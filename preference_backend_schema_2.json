@@ -3,6 +3,7 @@
     "title": "Backend preferences",
     "description": "Schema for CARTA backend preferences (Version 2)",
     "$id": "https://cartavis.org/schemas/preference_backend_schema_2.json",
+    "type": "object",
     "required": [],
     "properties": {
         "backendConfigVersion": {
@@ -53,7 +54,17 @@
             "default": "0.0.0.0"
         },
         "port": {
-            "type": ["integer", "array"],
+            "anyOf": [
+                {
+                    "type": "integer"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            ],
             "default": 3002
         },
         "omp_threads": {
