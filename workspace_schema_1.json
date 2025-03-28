@@ -379,7 +379,7 @@
         },
         "region": {
             "type": "object",
-            "required" : ["id", "points", "rotation", "type"],
+            "required": ["id", "points", "rotation", "type"],
             "properties": {
                 "id": {
                     "type": "integer",
@@ -514,7 +514,7 @@
     },
     "required": ["workspaceVersion", "frontendVersion", "files"],
     "properties": {
-        "id" : {
+        "id": {
             "type": "string"
         },
         "name": {
