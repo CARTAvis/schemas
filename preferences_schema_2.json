@@ -13,6 +13,7 @@
             "maximum": 2
         },
         "username": {
+            "description": "Deprecated option",
             "type": "string",
             "minLength": 1
         },
@@ -54,6 +55,7 @@
             "enum": ["VRAD", "VOPT", "FREQ", "WAVE", "AWAV", "CHANNEL"]
         },
         "wcsMatchingType": {
+            "description": "Deprecated option",
             "type": "integer",
             "minimum": 0,
             "maximum": 3
@@ -353,6 +355,80 @@
             "type": "string",
             "enum": ["content", "extension", "all"],
             "default": "content"
+        },
+        "pvAxesOrderReverse": {
+            "type": "boolean"
+        },
+        "autoWCSMatching": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 7
+        },
+        "colormapHex": {
+            "type": "string"
+        },
+        "colormapHexStart": {
+            "type": "string"
+        },
+        "dynamicLayoutEnable": {
+            "type": "boolean"
+        },
+        "isHighDimPriority": {
+            "type": "boolean"
+        },
+        "dynamicLayout": {
+            "type": "object"
+        },
+        "annotationColor": {
+            "type": "string"
+        },
+        "annotationLineWidth": {
+            "type": "number"
+        },
+        "annotationDashLength": {
+            "type": "number"
+        },
+        "pointAnnotationShape": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 7
+        },
+        "pointAnnotationWidth": {
+            "type": "number"
+        },
+        "textAnnotationLineWidth": {
+            "type": "number"
+        },
+        "stopAnimationPlaybackMinutes": {
+            "type": "number"
+        },
+        "pvPreviewCubeSizeLimit": {
+            "type": "number"
+        },
+        "pvPreviewCubeSizeLimitUnit": {
+            "type": "string",
+            "enum": ["TB", "GB", "MB", "kB", "B"]
+        },
+        "logEventList": {
+            "type": "array",
+            "items": {
+                "type": "number"
+            }
+        },
+        "catalogDisplayedColumnSize": {
+            "type": "number"
+        },
+        "catalogTableSeparatorPosition": {
+            "type": "string"
+        },
+        "checkNewRelease": {
+            "type": "boolean"
+        },
+        "latestRelease": {
+            "type": "string"
+        },
+        "compatibilityAipsBeamSupport": {
+            "type": "boolean"
         }
     }
 }
