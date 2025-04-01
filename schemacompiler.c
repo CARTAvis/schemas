@@ -166,7 +166,7 @@ int main(int argc, char **argv) {
         goto fail;
     }
 
-    if (fprintf(outf, "\nstd::string_view %s(reinterpret_cast<%schar*>(%s_char), %s_len);\n",
+    if (fprintf(outf, "\ninline std::string_view %s(reinterpret_cast<%schar*>(%s_char), %s_len);\n",
                ident, conststr, ident, ident) < 0) {
         perror("write string");
         goto fail;
