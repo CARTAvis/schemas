@@ -558,10 +558,8 @@
             "type": "integer"
         },
         "thumbnail": {
-            "description": "A base64-encoded JPEG",
-            "type": "string",
-            "contentEncoding": "base64",
-            "contentMediaType": "image/jpeg"
+            "description": "A data URL containing a base64-encoded JPEG",
+            "type": "string"
         },
         "date": {
             "description": "The modification date as a unix timestamp",
