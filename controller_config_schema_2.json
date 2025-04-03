@@ -291,7 +291,7 @@
             "description": "OpenID Connect authentication configuration",
             "type": "object",
             "additionalProperties": false,
-            "required": ["idpUrl", "uniqueField", "clientId", "scope", "localPublicKeyLocation", "localPrivateKeyLocation", "keyAlgorithm", "issuer", "symmetricKeyLocation"],
+            "required": ["idpUrl", "uniqueField", "clientId", "scope", "localPublicKeyLocation", "localPrivateKeyLocation", "issuer", "symmetricKeyLocation"],
             "properties": {
                 "idpUrl": {
                     "description": "Base URL for identity provider endpoint",
