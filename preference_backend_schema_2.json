@@ -4,7 +4,6 @@
     "description": "Schema for CARTA backend preferences (Version 2)",
     "$id": "https://cartavis.org/schemas/preference_backend_schema_2.json",
     "type": "object",
-    "required": [],
     "properties": {
         "backendConfigVersion": {
             "description": "The version of this backend configuration",

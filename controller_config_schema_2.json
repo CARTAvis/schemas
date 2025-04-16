@@ -291,7 +291,7 @@
             "description": "OpenID Connect authentication configuration",
             "type": "object",
             "additionalProperties": false,
-            "required": ["idpUrl", "uniqueField", "clientId", "scope", "localPublicKeyLocation", "localPrivateKeyLocation", "issuer", "symmetricKeyLocation"],
+            "required": ["idpUrl", "clientId", "localPublicKeyLocation", "localPrivateKeyLocation", "issuer", "symmetricKeyLocation"],
             "properties": {
                 "idpUrl": {
                     "description": "Base URL for identity provider endpoint",
@@ -448,7 +448,6 @@
             "description": "Database configuration",
             "type": "object",
             "additionalProperties": false,
-            "required": ["uri"],
             "properties": {
                 "uri": {
                     "description": "MongoDB connection URI used to connect to a MongoDB deployment",
