@@ -564,10 +564,48 @@
             "examples": ["/home/{username}/CARTA", "/data", "/"]
         },
         "logFileTemplate": {
-            "description": "Location of log file. The `{username}`, `{pid}` and `{datetime}` placeholders will be replaced with the username, process ID. and dat/time formatted as `YYYYMMDD.h_mm_ss` respectively",
+            "description": "(Deprecated) Location of log file for backends. This has been renamed to `backendLogFileTemplate` and will be removed in a future version. The `{username}`, `{pid}` and `{datetime}` placeholders will be replaced with the username, process ID. and dat/time formatted as `YYYYMMDD.h_mm_ss` respectively",
+            "type": "string"
+        },
+        "backendLogFileTemplate": {
+            "description": "Location of log file for backends. The `{username}`, `{pid}` and `{datetime}` placeholders will be replaced with the username, process ID. and dat/time formatted as `YYYYMMDD.h_mm_ss` respectively",
             "type": "string",
             "default": "/var/log/carta/{username}_{datetime}_{pid}.log",
             "examples": ["/var/log/carta/{username}_{pid}.log", "/home/{username}/CARTA/log/{datatime}_{pid}.log"]
+        },
+        "logLevelConsole": {
+            "description": "Level of messages to log to console.",
+            "type": "string",
+            "enum": ["none", "emerg", "alert", "crit", "error", "warning", "notice", "info", "debug"],
+            "default": "info"
+        },
+        "logTypeConsole": {
+            "description": "Output format to console",
+            "type": "string",
+            "enum": ["text", "json"],
+            "default": "text"
+        },
+        "logLevelFile": {
+            "description": "Level of messages to log to file.",
+            "type": "string",
+            "enum": ["none", "emerg", "alert", "crit", "error", "warning", "notice", "info", "debug"],
+            "default": "info"
+        },
+        "logTypeFile": {
+            "description": "Output format to file",
+            "type": "string",
+            "enum": ["text", "json"],
+            "default": "json"
+        },
+        "logFile": {
+            "description": "Name of file to send log messages to.",
+            "type": "string",
+            "examples": ["/var/log/carta-controller.log", "/var/spool/carta/controller.log"]
+        },
+        "timezone": {
+            "description": "Timezone to use in logs. If not specified, the local timezone is used.",
+            "type": "string",
+            "examples": ["Africa/Johannesburg", "America/New_York", "Asia/Tokyo", "Europe/London"]
         },
         "additionalArgs": {
             "description": "Additional arguments to be passed to the backend process, defined as an array of strings. See backend documentation for details.",
