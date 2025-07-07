@@ -164,7 +164,7 @@
         },
         "wcsType": {
             "type": "string",
-            "enum": ["Automatic", "Degrees", "Sexagesimal"]
+            "enum": ["automatic", "degrees", "sexagesimal"]
         },
         "colorbarVisible": {
             "type": "boolean"
