@@ -18,7 +18,6 @@
             "minLength": 1
         },
         "theme": {
-            "type": "string",
             "enum": ["auto", "light", "dark"]
         },
         "autoLaunch": {
@@ -29,29 +28,24 @@
             "pattern": "^([+\\-])(date|filename|type|size)$"
         },
         "fileFilteringType": {
-            "type": "string",
             "enum": ["fuzzy", "unix", "regex"]
         },
         "layout": {
             "type": "string"
         },
         "cursorPosition": {
-            "type": "string",
             "enum": ["fixed", "tracking"]
         },
         "zoomMode": {
-            "type": "string",
             "enum": ["fit", "full"]
         },
         "zoomPoint": {
-            "type": "string",
             "enum": ["cursor", "center"]
         },
         "dragPanning": {
             "type": "boolean"
         },
         "spectralMatchingType": {
-            "type": "string",
             "enum": ["VRAD", "VOPT", "FREQ", "WAVE", "AWAV", "CHANNEL"]
         },
         "wcsMatchingType": {
@@ -72,17 +66,17 @@
             "type": "string"
         },
         "percentile": {
-            "type": "number",
-            "maximum": 100,
-            "minimum": 0
+            "enum": [90, 95, 99, 99.5, 99.9, 99.95, 99.99, 100]
         },
         "scalingAlpha": {
             "type": "number",
-            "minimum": 1
+            "minimum": 0.1,
+            "maximum": 1000000
         },
         "scalingGamma": {
             "type": "number",
-            "exclusiveMinimum": 0
+            "minimum": 0.1,
+            "maximum": 2
         },
         "nanColorHex": {
             "type": "string",
@@ -97,7 +91,6 @@
             "type": "boolean"
         },
         "contourGeneratorType": {
-            "type": "string",
             "enum": ["start-step-multiplier", "min-max-scaling", "percentages-ref.value", "mean-sigma-list"]
         },
         "contourSmoothingMode": {
@@ -107,15 +100,18 @@
         },
         "contourSmoothingFactor": {
             "type": "integer",
-            "minimum": 0
+            "minimum": 1,
+            "maximum": 33
         },
         "contourNumLevels": {
             "type": "integer",
-            "minimum": 1
+            "minimum": 1,
+            "maximum": 15
         },
         "contourThickness": {
             "type": "number",
-            "minimum": 0
+            "minimum": 0.5,
+            "maximum": 10
         },
         "contourColormapEnabled": {
             "type": "boolean"
@@ -129,7 +125,8 @@
         },
         "vectorOverlayPixelAveraging": {
             "type": "number",
-            "minimum": 2,
+            "minimum": 0,
+            "maximum": 64,
             "default": 4
         },
         "vectorOverlayFractionalIntensity": {
@@ -138,7 +135,8 @@
         },
         "vectorOverlayThickness": {
             "type": "number",
-            "minimum": 0
+            "minimum": 0.5,
+            "maximum": 10
         },
         "vectorOverlayColormapEnabled": {
             "type": "boolean"
@@ -163,7 +161,6 @@
             "type": "boolean"
         },
         "wcsType": {
-            "type": "string",
             "enum": ["automatic", "degrees", "sexagesimal"]
         },
         "colorbarVisible": {
@@ -173,7 +170,6 @@
             "type": "boolean"
         },
         "colorbarPosition": {
-            "type": "string",
             "enum": ["right", "top", "bottom"]
         },
         "colorbarWidth": {
@@ -196,12 +192,12 @@
             "type": "string"
         },
         "beamType": {
-            "type": "string",
             "enum": ["open", "solid"]
         },
         "beamWidth": {
             "type": "number",
-            "minimum": 0
+            "minimum": 0.5,
+            "maximum": 10
         },
         "regionColor": {
             "type": "string",
@@ -209,19 +205,18 @@
         },
         "regionLineWidth": {
             "type": "number",
-            "minimum": 0
+            "minimum": 0.5,
+            "maximum": 10
         },
         "regionDashLength": {
             "type": "integer",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 50
         },
         "regionType": {
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 6
+            "enum": [0, 1, 2, 3, 4, 6]
         },
         "regionCreationMode": {
-            "type": "string",
             "enum": ["center", "corner"]
         },
         "regionSize": {
@@ -230,23 +225,25 @@
         },
         "imageCompressionQuality": {
             "type": "integer",
-            "minimum": 4,
+            "minimum": 1,
             "maximum": 32
         },
         "animationCompressionQuality": {
             "type": "integer",
-            "minimum": 4,
+            "minimum": 1,
             "maximum": 32
         },
         "GPUTileCache": {
             "type": "integer",
             "multipleOf": 256,
-            "minimum": 1024
+            "minimum": 1024,
+            "maximum": 8192
         },
         "systemTileCache": {
             "type": "integer",
-            "multipleOf": 128,
-            "minimum": 1024
+            "multipleOf": 256,
+            "minimum": 1024,
+            "maximum": 16384
         },
         "contourDecimation": {
             "type": "integer",
@@ -259,16 +256,10 @@
             "maximum": 19
         },
         "contourChunkSize": {
-            "type": "integer",
-            "multipleOf": 25000,
-            "minimum": 25000,
-            "maximum": 1000000
+            "enum": [25000, 50000, 100000, 250000, 500000, 1000000]
         },
         "contourControlMapWidth": {
-            "type": "integer",
-            "multipleOf": 128,
-            "minimum": 128,
-            "maximum": 1024
+            "enum": [128, 256, 512, 1024]
         },
         "streamContoursWhileZooming": {
             "type": "boolean"
@@ -276,10 +267,8 @@
         "lowBandwidthMode": {
             "type": "boolean"
         },
-        "stopAnimationPlayback": {
-            "type": "integer",
-            "minimum": 5,
-            "maximum": 30
+        "stopAnimationPlaybackMinutes": {
+            "enum": [5, 10, 15, 20, 30]
         },
         "pixelGridVisible": {
             "type": "boolean"
@@ -295,7 +284,6 @@
             "default": true
         },
         "cursorInfoVisible": {
-            "type": "string",
             "enum": ["always", "activeImage", "hideTiled", "never"],
             "default": "activeImage"
         },
@@ -312,7 +300,6 @@
             "default": false
         },
         "imagePanelMode": {
-            "type": "string",
             "enum": ["dynamic", "fixed"],
             "default": "dynamic"
         },
@@ -339,7 +326,6 @@
             "type": "string"
         },
         "telemetryMode": {
-            "type": "string",
             "enum": ["none", "minimal", "usage"],
             "default": "usage"
         },
@@ -352,7 +338,6 @@
             "default": false
         },
         "fileFilterMode": {
-            "type": "string",
             "enum": ["content", "extension", "all"],
             "default": "content"
         },
@@ -383,10 +368,13 @@
             "type": "string"
         },
         "annotationLineWidth": {
-            "type": "number"
+            "type": "number",
+            "minimum": 0.5,
+            "maximum": 10
         },
         "annotationDashLength": {
-            "type": "number"
+            "type": "number",
+            "maximum": 50
         },
         "pointAnnotationShape": {
             "type": "integer",
@@ -394,20 +382,33 @@
             "maximum": 7
         },
         "pointAnnotationWidth": {
-            "type": "number"
+            "type": "number",
+            "minimum": 1
         },
         "textAnnotationLineWidth": {
             "type": "number"
         },
-        "stopAnimationPlaybackMinutes": {
-            "type": "number"
-        },
         "pvPreviewCubeSizeLimit": {
-            "type": "number"
+            "type": "number",
+            "minimum": 1e-12
         },
         "pvPreviewCubeSizeLimitUnit": {
-            "type": "string",
-            "enum": ["TB", "GB", "MB", "kB", "B"]
+            "enum": ["GB", "MB"]
+        },
+        "if": {
+            "properties": {
+                "pvPreviewCubeSizeLimitUnit": {"const": "GB"}
+            }
+        },
+        "then": {
+            "properties": {
+                "pvPreviewCubeSizeLimit": {"maximum": 1}
+            }
+        },
+        "else": {
+            "properties": {
+                "pvPreviewCubeSizeLimit": {"maximum": 1000}
+            }
         },
         "logEventList": {
             "type": "array",
@@ -416,7 +417,8 @@
             }
         },
         "catalogDisplayedColumnSize": {
-            "type": "number"
+            "type": "number",
+            "minimum": 1
         },
         "catalogTableSeparatorPosition": {
             "type": "string"
