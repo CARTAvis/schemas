@@ -73,8 +73,8 @@
         },
         "percentile": {
             "type": "number",
-            "exclusiveMaximum": 100,
-            "exclusiveMinimum": 0
+            "maximum": 100,
+            "minimum": 0
         },
         "scalingAlpha": {
             "type": "number",
@@ -164,7 +164,7 @@
         },
         "wcsType": {
             "type": "string",
-            "enum": ["automatic", "degrees", "sexagesimal"]
+            "enum": ["Automatic", "Degrees", "Sexagesimal"]
         },
         "colorbarVisible": {
             "type": "boolean"
