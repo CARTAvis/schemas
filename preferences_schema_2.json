@@ -396,18 +396,21 @@
             "enum": ["GB", "MB"]
         },
         "if": {
+            "type": "object",
             "properties": {
                 "pvPreviewCubeSizeLimitUnit": {"const": "GB"}
             }
         },
         "then": {
+            "type": "object",
             "properties": {
-                "pvPreviewCubeSizeLimit": {"maximum": 1}
+                "pvPreviewCubeSizeLimit": {"type": "number", "maximum": 1}
             }
         },
         "else": {
+            "type": "object",
             "properties": {
-                "pvPreviewCubeSizeLimit": {"maximum": 1000}
+                "pvPreviewCubeSizeLimit": {"type": "number", "maximum": 1000}
             }
         },
         "logEventList": {
