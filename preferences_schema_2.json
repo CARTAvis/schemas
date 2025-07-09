@@ -221,7 +221,8 @@
         },
         "regionSize": {
             "type": "number",
-            "minimum": 1
+            "minimum": 10,
+            "maximum": 100
         },
         "imageCompressionQuality": {
             "type": "integer",
@@ -383,7 +384,8 @@
         },
         "pointAnnotationWidth": {
             "type": "number",
-            "minimum": 1
+            "minimum": 1,
+            "maximum": 100
         },
         "textAnnotationLineWidth": {
             "type": "number"
