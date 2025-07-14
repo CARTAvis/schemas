@@ -12,11 +12,6 @@
             "minimum": 1,
             "maximum": 2
         },
-        "username": {
-            "description": "Deprecated option",
-            "type": "string",
-            "minLength": 1
-        },
         "theme": {
             "enum": ["auto", "light", "dark"]
         },
@@ -48,12 +43,6 @@
         "spectralMatchingType": {
             "enum": ["VRAD", "VOPT", "FREQ", "WAVE", "AWAV", "CHANNEL"]
         },
-        "wcsMatchingType": {
-            "description": "Deprecated option",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 3
-        },
         "transparentImageBackground": {
             "type": "boolean"
         },
@@ -66,7 +55,9 @@
             "type": "string"
         },
         "percentile": {
-            "enum": [90, 95, 99, 99.5, 99.9, 99.95, 99.99, 100]
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
         },
         "scalingAlpha": {
             "type": "number",
@@ -237,14 +228,12 @@
         "GPUTileCache": {
             "type": "integer",
             "multipleOf": 256,
-            "minimum": 1024,
-            "maximum": 8192
+            "minimum": 1024
         },
         "systemTileCache": {
             "type": "integer",
             "multipleOf": 256,
-            "minimum": 1024,
-            "maximum": 16384
+            "minimum": 1024
         },
         "contourDecimation": {
             "type": "integer",
@@ -257,10 +246,16 @@
             "maximum": 19
         },
         "contourChunkSize": {
-            "enum": [25000, 50000, 100000, 250000, 500000, 1000000]
+            "type": "integer",
+            "multipleOf": 25000,
+            "minimum": 25000,
+            "maximum": 1000000
         },
         "contourControlMapWidth": {
-            "enum": [128, 256, 512, 1024]
+            "type": "integer",
+            "multipleOf": 128,
+            "minimum": 128,
+            "maximum": 1024
         },
         "streamContoursWhileZooming": {
             "type": "boolean"
@@ -269,7 +264,9 @@
             "type": "boolean"
         },
         "stopAnimationPlaybackMinutes": {
-            "enum": [5, 10, 15, 20, 30]
+            "type": "number",
+            "minimum": 5,
+            "maximum": 30
         },
         "pixelGridVisible": {
             "type": "boolean"
@@ -389,32 +386,16 @@
             "maximum": 100
         },
         "textAnnotationLineWidth": {
-            "type": "number"
+            "type": "number",
+            "minimum": 0.5,
+            "maximum": 10
         },
         "pvPreviewCubeSizeLimit": {
             "type": "number",
-            "minimum": 1e-12
+            "exclusiveMinimum": 0
         },
         "pvPreviewCubeSizeLimitUnit": {
-            "enum": ["GB", "MB"]
-        },
-        "if": {
-            "type": "object",
-            "properties": {
-                "pvPreviewCubeSizeLimitUnit": {"const": "GB"}
-            }
-        },
-        "then": {
-            "type": "object",
-            "properties": {
-                "pvPreviewCubeSizeLimit": {"type": "number", "maximum": 1}
-            }
-        },
-        "else": {
-            "type": "object",
-            "properties": {
-                "pvPreviewCubeSizeLimit": {"type": "number", "maximum": 1000}
-            }
+            "enum": ["TB", "GB", "MB", "kB", "B"]
         },
         "logEventList": {
             "type": "array",
