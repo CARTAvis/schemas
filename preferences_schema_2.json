@@ -247,7 +247,7 @@
         },
         "contourChunkSize": {
             "type": "integer",
-            "minimum": 25000
+            "minimum": 1000
         },
         "contourControlMapWidth": {
             "type": "integer",
@@ -262,7 +262,7 @@
         },
         "stopAnimationPlaybackMinutes": {
             "type": "number",
-            "exclusiveMinimum": 0
+            "minimum": 0
         },
         "pixelGridVisible": {
             "type": "boolean"
@@ -388,7 +388,7 @@
         },
         "pvPreviewCubeSizeLimit": {
             "type": "number",
-            "exclusiveMinimum": 0
+            "minimum": 0
         },
         "pvPreviewCubeSizeLimitUnit": {
             "enum": ["TB", "GB", "MB", "kB", "B"]
