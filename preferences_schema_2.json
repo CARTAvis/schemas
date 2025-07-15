@@ -228,12 +228,12 @@
         "GPUTileCache": {
             "type": "integer",
             "multipleOf": 256,
-            "minimum": 1024
+            "minimum": 256
         },
         "systemTileCache": {
             "type": "integer",
             "multipleOf": 256,
-            "minimum": 1024
+            "minimum": 256
         },
         "contourDecimation": {
             "type": "integer",
@@ -248,14 +248,12 @@
         "contourChunkSize": {
             "type": "integer",
             "multipleOf": 25000,
-            "minimum": 25000,
-            "maximum": 1000000
+            "minimum": 25000
         },
         "contourControlMapWidth": {
             "type": "integer",
             "multipleOf": 128,
-            "minimum": 128,
-            "maximum": 1024
+            "minimum": 128
         },
         "streamContoursWhileZooming": {
             "type": "boolean"
@@ -265,8 +263,7 @@
         },
         "stopAnimationPlaybackMinutes": {
             "type": "number",
-            "minimum": 5,
-            "maximum": 30
+            "exclusiveMinimum": 0
         },
         "pixelGridVisible": {
             "type": "boolean"
