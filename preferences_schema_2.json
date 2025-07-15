@@ -247,7 +247,6 @@
         },
         "contourChunkSize": {
             "type": "integer",
-            "multipleOf": 25000,
             "minimum": 25000
         },
         "contourControlMapWidth": {
