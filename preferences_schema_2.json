@@ -388,10 +388,12 @@
         },
         "pvPreviewCubeSizeLimit": {
             "type": "number",
-            "minimum": 0
+            "minimum": 0.1,
+            "description": "PV preview cube size limit, in GB."
         },
         "pvPreviewCubeSizeLimitUnit": {
-            "enum": ["TB", "GB", "MB", "kB", "B"]
+            "enum": ["TB", "GB", "MB", "kB", "B"],
+            "description": "This is a deprecated preference."
         },
         "logEventList": {
             "type": "array",
