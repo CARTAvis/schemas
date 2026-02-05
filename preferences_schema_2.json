@@ -408,6 +408,18 @@
         "catalogTableSeparatorPosition": {
             "type": "string"
         },
+        "catalogQuerySimbadMirrors": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "catalogQueryVizierMirrors": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
         "checkNewRelease": {
             "type": "boolean"
         },
