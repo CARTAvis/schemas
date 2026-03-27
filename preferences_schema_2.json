@@ -49,7 +49,7 @@
         "scaling": {
             "type": "integer",
             "minimum": 0,
-            "maximum": 7
+            "maximum": 9
         },
         "colormap": {
             "type": "string"
