@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "match": { "type": "string" },
+          "action": { "type": "string", "enum": ["normal", "throttle", "none"] },
+          "first_n": { "type": "integer", "minimum": 0 },
+          "every_m": { "type": "integer", "minimum": 1 }
+        },
+        "required": ["match", "action"]
+      }
+    }
+  },
+  "required": ["rules"]
+}
