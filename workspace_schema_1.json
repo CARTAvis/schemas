@@ -70,7 +70,16 @@
                 "gamma": {
                     "type": "number"
                 },
-                "alpha": {
+                "alphaLog": {
+                    "type": "number"
+                },
+                "alphaPower": {
+                    "type": "number"
+                },
+                "alphaSinh": {
+                    "type": "number"
+                },
+                "alphaAsinh": {
                     "type": "number"
                 },
                 "inverted": {

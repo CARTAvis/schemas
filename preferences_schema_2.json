@@ -59,9 +59,24 @@
             "minimum": 0,
             "maximum": 100
         },
-        "scalingAlpha": {
+        "scalingAlphaLog": {
             "type": "number",
-            "minimum": 0.1,
+            "minimum": 0.000001,
+            "maximum": 1000000
+        },
+        "scalingAlphaPower": {
+            "type": "number",
+            "minimum": 0.000001,
+            "maximum": 1000000
+        },
+        "scalingAlphaSinh": {
+            "type": "number",
+            "minimum": 0.000001,
+            "maximum": 1000000
+        },
+        "scalingAlphaAsinh": {
+            "type": "number",
+            "minimum": 0.000001,
             "maximum": 1000000
         },
         "scalingGamma": {
