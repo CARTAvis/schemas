@@ -67,19 +67,24 @@
                     "type": "number"
                 },
                 "gamma": {
-                    "type": "number"
+                    "type": "number",
+                    "exclusiveMinimum": 0
                 },
                 "alphaLog": {
-                    "type": "number"
+                    "type": "number",
+                    "exclusiveMinimum": 0
                 },
                 "alphaPower": {
-                    "type": "number"
+                    "type": "number",
+                    "exclusiveMinimum": 0
                 },
                 "alphaSinh": {
-                    "type": "number"
+                    "type": "number",
+                    "exclusiveMinimum": 0
                 },
                 "alphaAsinh": {
-                    "type": "number"
+                    "type": "number",
+                    "exclusiveMinimum": 0
                 },
                 "inverted": {
                     "type": "boolean"
