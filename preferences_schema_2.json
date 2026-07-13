@@ -76,6 +76,16 @@
         "useSmoothedBiasContrast": {
             "type": "boolean"
         },
+        "renderConfigBias": {
+            "type": "number",
+            "minimum": -1,
+            "maximum": 1
+        },
+        "renderConfigContrast": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 2
+        },
         "contourGeneratorType": {
             "enum": ["start-step-multiplier", "min-max-scaling", "percentages-ref.value", "mean-sigma-list"]
         },
@@ -193,6 +203,11 @@
         "regionDashLength": {
             "type": "integer",
             "minimum": 0,
+            "maximum": 50
+        },
+        "regionLabelOffset": {
+            "type": "number",
+            "minimum": -50,
             "maximum": 50
         },
         "regionType": {
