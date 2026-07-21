@@ -68,23 +68,28 @@
                 },
                 "gamma": {
                     "type": "number",
-                    "exclusiveMinimum": 0
+                    "minimum": 0.1,
+                    "maximum": 2
                 },
                 "alphaLog": {
                     "type": "number",
-                    "exclusiveMinimum": 0
+                    "minimum": 0.1,
+                    "maximum": 10000
                 },
                 "alphaPower": {
                     "type": "number",
-                    "exclusiveMinimum": 0
+                    "minimum": 0.001,
+                    "maximum": 1000
                 },
                 "alphaSinh": {
                     "type": "number",
-                    "exclusiveMinimum": 0
+                    "minimum": 0.1,
+                    "maximum": 3
                 },
                 "alphaAsinh": {
                     "type": "number",
-                    "exclusiveMinimum": 0
+                    "minimum": 0.01,
+                    "maximum": 3
                 },
                 "inverted": {
                     "type": "boolean"
