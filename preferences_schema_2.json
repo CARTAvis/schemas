@@ -60,28 +60,23 @@
         },
         "scalingAlphaLog": {
             "type": "number",
-            "minimum": 0.1,
-            "maximum": 10000
+            "exclusiveMinimum": 0
         },
         "scalingAlphaPower": {
             "type": "number",
-            "minimum": 0.001,
-            "maximum": 1000
+            "exclusiveMinimum": 0
         },
         "scalingAlphaSinh": {
             "type": "number",
-            "minimum": 0.1,
-            "maximum": 3
+            "exclusiveMinimum": 0
         },
         "scalingAlphaAsinh": {
             "type": "number",
-            "minimum": 0.01,
-            "maximum": 3
+            "exclusiveMinimum": 0
         },
         "scalingGamma": {
             "type": "number",
-            "minimum": 0.1,
-            "maximum": 2
+            "exclusiveMinimum": 0
         },
         "nanColorHex": {
             "type": "string",
