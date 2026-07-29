@@ -444,6 +444,10 @@
                     "description": "HDU to load. If none is specified, the first image HDU will be used",
                     "type": "string"
                 },
+                "timeSeriesMember": {
+                    "description": "Whether the file is a member of the time series",
+                    "type": "boolean"
+                },
                 "references": {
                     "$ref": "#/definitions/references"
                 },
