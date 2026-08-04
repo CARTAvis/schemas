@@ -48,8 +48,7 @@
         },
         "scaling": {
             "type": "integer",
-            "minimum": 0,
-            "maximum": 7
+            "minimum": 0
         },
         "colormap": {
             "type": "string"
@@ -59,15 +58,25 @@
             "minimum": 0,
             "maximum": 100
         },
-        "scalingAlpha": {
+        "scalingAlphaLog": {
             "type": "number",
-            "minimum": 0.1,
-            "maximum": 1000000
+            "exclusiveMinimum": 0
+        },
+        "scalingAlphaPower": {
+            "type": "number",
+            "exclusiveMinimum": 0
+        },
+        "scalingAlphaSinh": {
+            "type": "number",
+            "exclusiveMinimum": 0
+        },
+        "scalingAlphaAsinh": {
+            "type": "number",
+            "exclusiveMinimum": 0
         },
         "scalingGamma": {
             "type": "number",
-            "minimum": 0.1,
-            "maximum": 2
+            "exclusiveMinimum": 0
         },
         "nanColorHex": {
             "type": "string",
