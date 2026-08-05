@@ -48,8 +48,7 @@
         },
         "scaling": {
             "type": "integer",
-            "minimum": 0,
-            "maximum": 7
+            "minimum": 0
         },
         "colormap": {
             "type": "string"
@@ -59,27 +58,42 @@
             "minimum": 0,
             "maximum": 100
         },
-        "scalingAlpha": {
+        "scalingAlphaLog": {
             "type": "number",
-            "minimum": 0.1,
-            "maximum": 1000000
+            "exclusiveMinimum": 0
+        },
+        "scalingAlphaPower": {
+            "type": "number",
+            "exclusiveMinimum": 0
+        },
+        "scalingAlphaSinh": {
+            "type": "number",
+            "exclusiveMinimum": 0
+        },
+        "scalingAlphaAsinh": {
+            "type": "number",
+            "exclusiveMinimum": 0
         },
         "scalingGamma": {
             "type": "number",
-            "minimum": 0.1,
-            "maximum": 2
+            "exclusiveMinimum": 0
         },
         "nanColorHex": {
             "type": "string",
             "description": "TODO: validate color string"
         },
-        "nanAlpha": {
-            "type": "number",
-            "minimum": 0,
-            "maximum": 1
-        },
         "useSmoothedBiasContrast": {
             "type": "boolean"
+        },
+        "renderConfigBias": {
+            "type": "number",
+            "minimum": -1,
+            "maximum": 1
+        },
+        "renderConfigContrast": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 2
         },
         "contourGeneratorType": {
             "enum": ["start-step-multiplier", "min-max-scaling", "percentages-ref.value", "mean-sigma-list"]
@@ -117,12 +131,10 @@
         "vectorOverlayPixelAveraging": {
             "type": "number",
             "minimum": 0,
-            "maximum": 64,
-            "default": 4
+            "maximum": 64
         },
         "vectorOverlayFractionalIntensity": {
-            "type": "boolean",
-            "default": false
+            "type": "boolean"
         },
         "vectorOverlayThickness": {
             "type": "number",
@@ -134,12 +146,10 @@
         },
         "vectorOverlayColor": {
             "type": "string",
-            "description": "TODO: validate color string",
-            "default": "#ffffff"
+            "description": "TODO: validate color string"
         },
         "vectorOverlayColormap": {
-            "type": "string",
-            "default": "viridis"
+            "type": "string"
         },
         "astColor": {
             "type": "string",
@@ -202,6 +212,11 @@
         "regionDashLength": {
             "type": "integer",
             "minimum": 0,
+            "maximum": 50
+        },
+        "regionLabelOffset": {
+            "type": "number",
+            "minimum": -50,
             "maximum": 50
         },
         "regionType": {
@@ -274,66 +289,52 @@
             "type": "boolean"
         },
         "limitOverlayRedraw": {
-            "type": "boolean",
-            "default": true
+            "type": "boolean"
         },
         "cursorInfoVisible": {
-            "enum": ["always", "activeImage", "hideTiled", "never"],
-            "default": "activeImage"
+            "enum": ["always", "activeImage", "hideTiled", "never"]
         },
         "keepLastUsedFolder": {
-            "type": "boolean",
-            "default": false
+            "type": "boolean"
         },
         "lastUsedFolder": {
-            "type": "string",
-            "default": ""
+            "type": "string"
         },
         "imageMultiPanelEnabled": {
-            "type": "boolean",
-            "default": false
+            "type": "boolean"
         },
         "imagePanelMode": {
-            "enum": ["dynamic", "fixed"],
-            "default": "dynamic"
+            "enum": ["dynamic", "fixed"]
         },
         "imagePanelColumns": {
             "type": "number",
-            "minimum": 1,
-            "default": 2
+            "minimum": 1
         },
         "imagePanelRows": {
             "type": "number",
-            "minimum": 1,
-            "default": 2
+            "minimum": 1
         },
         "statsPanelEnabled": {
-            "type": "boolean",
-            "default": false
+            "type": "boolean"
         },
         "statsPanelMode": {
             "type": "integer",
-            "minimum": 0,
-            "default": 0
+            "minimum": 0
         },
         "telemetryUuid": {
             "type": "string"
         },
         "telemetryMode": {
-            "enum": ["none", "minimal", "usage"],
-            "default": "usage"
+            "enum": ["none", "minimal", "usage"]
         },
         "telemetryConsentShown": {
-            "type": "boolean",
-            "default": false
+            "type": "boolean"
         },
         "telemetryLogging": {
-            "type": "boolean",
-            "default": false
+            "type": "boolean"
         },
         "fileFilterMode": {
-            "enum": ["content", "extension", "all"],
-            "default": "content"
+            "enum": ["content", "extension", "all"]
         },
         "pvAxesOrderReverse": {
             "type": "boolean"
@@ -390,10 +391,6 @@
             "type": "number",
             "minimum": 0.1,
             "description": "PV preview cube size limit, in GB."
-        },
-        "pvPreviewCubeSizeLimitUnit": {
-            "enum": ["TB", "GB", "MB", "kB", "B"],
-            "description": "This is a deprecated preference."
         },
         "logEventList": {
             "type": "array",
