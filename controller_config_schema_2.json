@@ -397,7 +397,21 @@
                     "examples": ["https://my-organisation.com/"]
                 }
             }
+},
+        "forwardAuthProvider": {
+            "title": "Forward AuthProvider",
+            "description": "Use upstream proxy-provided authentication via a request header",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "headerKey": {
+                    "description": "Header containing the authenticated username",
+                    "type": "string",
+                    "default": "carta-auth-token"
+                }
+            }
         }
+
     },
     "additionalProperties": false,
     "properties": {
@@ -434,6 +448,10 @@
                 "oidc": {
                     "description": "OpenID Connect AuthProvider",
                     "$ref": "#/definitions/oidcAuthProvider"
+                },
+                "forwardAuth": {
+                    "description": "ForwardAuth Provider",
+                    "$ref": "#/definitions/forwardAuthProvider"
                 }
             },
             "default": {
