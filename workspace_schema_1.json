@@ -49,8 +49,7 @@
             "properties": {
                 "scaling": {
                     "type": "integer",
-                    "minimum": 0,
-                    "maximum": 7
+                    "minimum": 0
                 },
                 "colorMap": {
                     "type": "string"
@@ -68,10 +67,24 @@
                     "type": "number"
                 },
                 "gamma": {
-                    "type": "number"
+                    "type": "number",
+                    "exclusiveMinimum": 0
                 },
-                "alpha": {
-                    "type": "number"
+                "alphaLog": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                },
+                "alphaPower": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                },
+                "alphaSinh": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                },
+                "alphaAsinh": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
                 },
                 "inverted": {
                     "type": "boolean"
