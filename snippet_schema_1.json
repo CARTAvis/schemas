@@ -27,6 +27,10 @@
                 "type": "string"
             }
         },
+        "siteScoped": {
+            "description": "Whether this snippet is site-scoped and shared across users",
+            "type": "boolean"
+        },
         "categories": {
             "description": "List of categories under which to place this snippet",
             "type": "array",
