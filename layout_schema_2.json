@@ -45,7 +45,7 @@
         },
         "basic-widget": {
             "type": "object",
-            "description": "Widgets that have no associated settings",
+            "description": "Widgets with optional panel settings",
             "required": ["type", "id"],
             "properties": {
                 "type": {
@@ -53,7 +53,104 @@
                 },
                 "id": {
                     "type": "string",
-                    "enum": ["floating-settings", "layer-list", "log", "animator", "region-list", "image-view", "stats", "spectral-line-query", "cursor-info", "catalog-overlay", "catalog-plot"]
+                    "enum": ["floating-settings", "layer-list", "log", "animator", "region-list", "image-view", "stats", "spectral-line-query", "cursor-info", "catalog-overlay"]
+                },
+                "widgetSettings": {
+                    "type": "object",
+                    "description": "Catalog panel settings. catalogFileId is retained for legacy layouts.",
+                    "properties": {
+                        "panelId": {
+                            "type": "string",
+                            "minLength": 1
+                        },
+                        "catalogFileId": {
+                            "type": "integer",
+                            "minimum": 1
+                        },
+                        "tableSeparatorPosition": {
+                            "type": "string"
+                        },
+                        "settingsTabId": {
+                            "type": "integer",
+                            "minimum": 0
+                        }
+                    }
+                },
+                "width": {
+                    "$ref": "#/definitions/percentage-value"
+                },
+                "height": {
+                    "$ref": "#/definitions/percentage-value"
+                }
+            }
+        },
+        "catalog-plot": {
+            "type": "object",
+            "description": "Catalog plot widgets",
+            "required": ["type", "id"],
+            "properties": {
+                "type": {
+                    "const": "component"
+                },
+                "id": {
+                    "const": "catalog-plot"
+                },
+                "widgetSettings": {
+                    "type": "object",
+                    "properties": {
+                        "catalogId": {
+                            "description": "Stable workspace ID of the catalog this plot shows, not the session's catalog file ID",
+                            "type": "integer",
+                            "minimum": 1
+                        },
+                        "plotType": {
+                            "type": "string",
+                            "enum": ["Image overlay", "Histogram", "2D scatter"]
+                        },
+                        "xColumnName": {
+                            "type": "string"
+                        },
+                        "yColumnName": {
+                            "type": "string"
+                        },
+                        "statisticColumnName": {
+                            "type": "string"
+                        },
+                        "isLogScaleY": {
+                            "type": "boolean"
+                        },
+                        "nBinX": {
+                            "type": "integer",
+                            "minimum": 1
+                        },
+                        "dragMode": {
+                            "anyOf": [
+                                {"type": "boolean", "const": false},
+                                {"type": "string", "enum": ["zoom", "pan", "select", "lasso", "orbit", "turntable"]}
+                            ]
+                        },
+                        "scatterBorder": {
+                            "$ref": "#/definitions/catalog-scatter-border"
+                        },
+                        "histogramBorder": {
+                            "$ref": "#/definitions/catalog-histogram-border"
+                        },
+                        "isFittingEnabled": {
+                            "type": "boolean"
+                        },
+                        "fittingRange": {
+                            "type": "object",
+                            "required": ["minVal", "maxVal"],
+                            "properties": {
+                                "minVal": {
+                                    "type": "number"
+                                },
+                                "maxVal": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    }
                 },
                 "width": {
                     "$ref": "#/definitions/percentage-value"
@@ -337,6 +434,24 @@
                 }
             }
         },
+        "catalog-scatter-border": {
+            "type": "object",
+            "required": ["xMin", "xMax", "yMin", "yMax"],
+            "properties": {
+                "xMin": {"type": "number"},
+                "xMax": {"type": "number"},
+                "yMin": {"type": "number"},
+                "yMax": {"type": "number"}
+            }
+        },
+        "catalog-histogram-border": {
+            "type": "object",
+            "required": ["xMin", "xMax"],
+            "properties": {
+                "xMin": {"type": "number"},
+                "xMax": {"type": "number"}
+            }
+        },
         "carta-widget": {
             "description": "A CARTA widget",
             "oneOf": [
@@ -357,6 +472,9 @@
                 },
                 {
                     "$ref": "#/definitions/stokes"
+                },
+                {
+                    "$ref": "#/definitions/catalog-plot"
                 }
             ]
         },

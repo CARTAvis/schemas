@@ -1,0 +1,1063 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Workspace",
+    "description": "Schema for CARTA Workspaces (Version 2)",
+    "$id": "https://cartavis.org/schemas/workspace_schema_2.json",
+    "type": "object",
+    "definitions": {
+        "point-2d": {
+            "type": "object",
+            "required": ["x", "y"],
+            "properties": {
+                "x": {
+                    "type": "number"
+                },
+                "y": {
+                    "type": "number"
+                }
+            }
+        },
+        "color-rgb": {
+            "type": "object",
+            "required": ["r", "g", "b"],
+            "properties": {
+                "r": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 255
+                },
+                "g": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 255
+                },
+                "b": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 255
+                },
+                "a": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1,
+                    "default": 1
+                }
+            }
+        },
+        "render-config": {
+            "type": "object",
+            "properties": {
+                "scaling": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "colorMap": {
+                    "type": "string"
+                },
+                "customColormapHexEnd": {
+                    "type": "string"
+                },
+                "customColormapHexStart": {
+                    "type": "string"
+                },
+                "bias": {
+                    "type": "number"
+                },
+                "contrast": {
+                    "type": "number"
+                },
+                "gamma": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                },
+                "alphaLog": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                },
+                "alphaPower": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                },
+                "alphaSinh": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                },
+                "alphaAsinh": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                },
+                "inverted": {
+                    "type": "boolean"
+                },
+                "useCubeHistogram": {
+                    "type": "boolean"
+                },
+                "useCubeHistogramContours": {
+                    "type": "boolean"
+                },
+                "scaleMin": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "scaleMax": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "selectedPercentile": {
+                    "type": "array",
+                    "items": {
+                        "type": "number",
+                        "maximum": 100,
+                        "minimum": -1
+                    }
+                },
+                "visible": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "contour-config": {
+            "type": "object",
+            "properties": {
+                "levels": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "smoothingMode": {
+                    "type": "number",
+                    "enum": [0, 1, 2]
+                },
+                "smoothingFactor": {
+                    "type": "number"
+                },
+                "color": {
+                    "$ref": "#/definitions/color-rgb"
+                },
+                "colormapEnabled": {
+                    "type": "boolean"
+                },
+                "colormap": {
+                    "type": "string"
+                },
+                "colormapContrast": {
+                    "type": "number"
+                },
+                "colormapBias": {
+                    "type": "number"
+                },
+                "dashMode": {
+                    "type": "string",
+                    "enum": ["None", "Dashed", "Negative only"]
+                },
+                "thickness": {
+                    "type": "number"
+                },
+                "visible": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "vector-overlay-config": {
+            "type": "object",
+            "properties": {
+                "angularSource": {
+                    "type": "integer",
+                    "enum": [-1, 0, 1]
+                },
+                "intensitySource": {
+                    "type": "integer"
+                },
+                "fractionalIntensity": {
+                    "type": "boolean"
+                },
+                "pixelAveragingEnabled": {
+                    "type": "boolean"
+                },
+                "pixelAveraging": {
+                    "type": "number"
+                },
+                "thresholdEnabled": {
+                    "type": "boolean"
+                },
+                "threshold": {
+                    "type": "number"
+                },
+                "debiasing": {
+                    "type": "boolean"
+                },
+                "qError": {
+                    "type": "number"
+                },
+                "uError": {
+                    "type": "number"
+                },
+                "visible": {
+                    "type": "boolean"
+                },
+                "thickness": {
+                    "type": "number"
+                },
+                "colormapEnabled": {
+                    "type": "boolean"
+                },
+                "color": {
+                    "$ref": "#/definitions/color-rgb"
+                },
+                "colormap": {
+                    "type": "string"
+                },
+                "colormapContrast": {
+                    "type": "number"
+                },
+                "colormapBias": {
+                    "type": "number"
+                },
+                "lengthMin": {
+                    "type": "number"
+                },
+                "lengthMax": {
+                    "type": "number"
+                },
+                "intensityMin": {
+                    "type": "number"
+                },
+                "intensityMax": {
+                    "type": "number"
+                },
+                "rotationOffset": {
+                    "type": "number"
+                }
+            }
+        },
+        "references": {
+            "type": "object",
+            "properties": {
+                "spatial": {
+                    "description": "ID of the spatial reference file",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "spectral": {
+                    "description": "ID of the spectral reference file",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "raster": {
+                    "description": "ID of the raster reference file",
+                    "type": "integer",
+                    "minimum": 0
+                }
+            }
+        },
+        "annotation-style-point": {
+            "type": "object",
+            "properties": {
+                "pointShape": {
+                    "type": "number"
+                },
+                "pointWidth": {
+                    "type": "number"
+                }
+            }
+        },
+        "annotation-style-text": {
+            "type": "object",
+            "properties": {
+                "textLabel0": {
+                    "type": "string"
+                },
+                "fontSize": {
+                    "type": "number"
+                },
+                "fontStyle": {
+                    "type": "string"
+                },
+                "font": {
+                    "type": "string"
+                },
+                "textPosition": {
+                    "type": "number"
+                }
+            }
+        },
+        "annotation-style-vector": {
+            "type": "object",
+            "properties": {
+                "pointerWidth": {
+                    "type": "number"
+                },
+                "pointerLength": {
+                    "type": "number"
+                }
+            }
+        },
+        "annotation-style-compass": {
+            "type": "object",
+            "properties": {
+                "textLabel0": {
+                    "type": "string"
+                },
+                "textLabel1": {
+                    "type": "string"
+                },
+                "isNorthArrow": {
+                    "type": "boolean"
+                },
+                "isEastArrow": {
+                    "type": "boolean"
+                },
+                "fontSize": {
+                    "type": "number"
+                },
+                "fontStyle": {
+                    "type": "string"
+                },
+                "font": {
+                    "type": "string"
+                },
+                "northTextOffset": {
+                    "$ref": "#/definitions/point-2d"
+                },
+                "eastTextOffset": {
+                    "$ref": "#/definitions/point-2d"
+                },
+                "pointerWidth": {
+                    "type": "number"
+                },
+                "pointerLength": {
+                    "type": "number"
+                },
+                "length": {
+                    "type": "number"
+                }
+            }
+        },
+        "annotation-style-ruler": {
+            "type": "object",
+            "properties": {
+                "fontSize": {
+                    "type": "number"
+                },
+                "fontStyle": {
+                    "type": "string"
+                },
+                "font": {
+                    "type": "string"
+                },
+                "auxiliaryLineVisible": {
+                    "type": "boolean"
+                },
+                "auxiliaryLineDashLength": {
+                    "type": "number"
+                },
+                "auxiliaryTextVisible": {
+                    "type": "boolean"
+                },
+                "textOffset": {
+                    "$ref": "#/definitions/point-2d"
+                },
+                "xTextOffset": {
+                    "$ref": "#/definitions/point-2d"
+                },
+                "yTextOffset": {
+                    "$ref": "#/definitions/point-2d"
+                }
+            }
+        },
+        "annotation-style": {
+            "type": "object",
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/annotation-style-point"
+                },
+                {
+                    "$ref": "#/definitions/annotation-style-text"
+                },
+                {
+                    "$ref": "#/definitions/annotation-style-vector"
+                },
+                {
+                    "$ref": "#/definitions/annotation-style-compass"
+                },
+                {
+                    "$ref": "#/definitions/annotation-style-ruler"
+                }
+            ]
+        },
+        "region": {
+            "type": "object",
+            "required": ["id", "points", "rotation", "type"],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "points": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/point-2d"
+                    }
+                },
+                "rotation": {
+                    "type": "number"
+                },
+                "type": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "name": {
+                    "type": "string"
+                },
+                "color": {
+                    "type": "string"
+                },
+                "lineWidth": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "dashes": {
+                    "type": "array",
+                    "items": {
+                        "type": "number",
+                        "minimum": 0
+                    }
+                },
+                "locked": {
+                    "type": "boolean"
+                },
+                "annotationStyles": {
+                    "$ref": "#/definitions/annotation-style"
+                }
+            }
+        },
+        "file": {
+            "type": "object",
+            "required": ["id", "source"],
+            "properties": {
+                "id": {
+                    "description": "ID of the file",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "source": {
+                    "$ref": "#/definitions/image-source"
+                },
+                "references": {
+                    "$ref": "#/definitions/references"
+                },
+                "center": {
+                    "description": "The centre coordinates of the viewport",
+                    "$ref": "#/definitions/point-2d"
+                },
+                "zoomLevel": {
+                    "description": "The zoom level of the viewport",
+                    "type": "number",
+                    "minimum": 0
+                },
+                "channel": {
+                    "description": "The selected channel",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "stokes": {
+                    "description": "The selected polarization",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "renderConfig": {
+                    "$ref": "#/definitions/render-config"
+                },
+                "contourConfig": {
+                    "$ref": "#/definitions/contour-config"
+                },
+                "vectorOverlayConfig": {
+                    "$ref": "#/definitions/vector-overlay-config"
+                },
+                "regionsSet": {
+                    "type": "object",
+                    "properties": {
+                        "selectedRegion": {
+                            "type": "integer"
+                        },
+                        "regions": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/region"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "color-blending": {
+            "type": "object",
+            "properties": {
+                "imageListIndex": {
+                    "type": "number"
+                },
+                "selectedFrameId": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "alpha": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        "stokes-file": {
+            "type": "object",
+            "required": ["filename"],
+            "properties": {
+                "directory": {
+                    "type": "string"
+                },
+                "filename": {
+                    "type": "string"
+                },
+                "hdu": {
+                    "type": "string"
+                },
+                "polarizationType": {
+                    "type": "integer"
+                }
+            }
+        },
+        "image-source": {
+            "description": "How the image is opened again",
+            "type": "object",
+            "required": ["type"],
+            "oneOf": [
+                {
+                    "required": ["type", "filename"],
+                    "properties": {
+                        "type": {
+                            "const": "file"
+                        },
+                        "directory": {
+                            "type": "string"
+                        },
+                        "filename": {
+                            "type": "string"
+                        },
+                        "hdu": {
+                            "type": "string"
+                        }
+                    }
+                },
+                {
+                    "required": ["type", "expression"],
+                    "properties": {
+                        "type": {
+                            "const": "lel"
+                        },
+                        "directory": {
+                            "type": "string"
+                        },
+                        "expression": {
+                            "description": "An image arithmetic (CASA lattice) expression",
+                            "type": "string"
+                        }
+                    }
+                },
+                {
+                    "required": ["type", "stokesFiles"],
+                    "properties": {
+                        "type": {
+                            "const": "hypercube"
+                        },
+                        "directory": {
+                            "type": "string"
+                        },
+                        "hdu": {
+                            "type": "string"
+                        },
+                        "stokesFiles": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/stokes-file"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "scaling-parameters": {
+            "type": "object",
+            "properties": {
+                "log": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                },
+                "gamma": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                },
+                "power": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                },
+                "sinh": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                },
+                "asinh": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                }
+            }
+        },
+        "catalog-size-axis": {
+            "type": "object",
+            "properties": {
+                "mapColumn": {
+                    "type": "string"
+                },
+                "columnMinClip": {
+                    "type": "number"
+                },
+                "columnMaxClip": {
+                    "type": "number"
+                },
+                "scalingType": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "scalingParameters": {
+                    "$ref": "#/definitions/scaling-parameters"
+                },
+                "min": {
+                    "type": "object",
+                    "required": ["area", "diameter"],
+                    "properties": {
+                        "area": {
+                            "type": "number"
+                        },
+                        "diameter": {
+                            "type": "number"
+                        }
+                    }
+                },
+                "max": {
+                    "type": "object",
+                    "required": ["area", "diameter"],
+                    "properties": {
+                        "area": {
+                            "type": "number"
+                        },
+                        "diameter": {
+                            "type": "number"
+                        }
+                    }
+                },
+                "areaMode": {
+                    "type": "boolean"
+                },
+                "columnMinLocked": {
+                    "type": "boolean"
+                },
+                "columnMaxLocked": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "catalog-color-axis": {
+            "type": "object",
+            "properties": {
+                "mapColumn": {
+                    "type": "string"
+                },
+                "columnMinClip": {
+                    "type": "number"
+                },
+                "columnMaxClip": {
+                    "type": "number"
+                },
+                "scalingType": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "scalingParameters": {
+                    "$ref": "#/definitions/scaling-parameters"
+                },
+                "colorMap": {
+                    "type": "string"
+                },
+                "inverted": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "catalog-orientation-axis": {
+            "type": "object",
+            "properties": {
+                "mapColumn": {
+                    "type": "string"
+                },
+                "columnMinClip": {
+                    "type": "number"
+                },
+                "columnMaxClip": {
+                    "type": "number"
+                },
+                "scalingType": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "scalingParameters": {
+                    "$ref": "#/definitions/scaling-parameters"
+                },
+                "angleMin": {
+                    "type": "number"
+                },
+                "angleMax": {
+                    "type": "number"
+                }
+            }
+        },
+        "catalog-table-config": {
+            "description": "Which rows and columns a catalog holds, and how its table shows them",
+            "type": "object",
+            "properties": {
+                "displayedColumns": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "maxRows": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "columnSettings": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                            "filter": {
+                                "type": "string"
+                            },
+                            "width": {
+                                "type": "number",
+                                "minimum": 0
+                            }
+                        }
+                    }
+                },
+                "sorting": {
+                    "type": "object",
+                    "required": ["columnName", "sortingType"],
+                    "properties": {
+                        "columnName": {
+                            "type": "string"
+                        },
+                        "sortingType": {
+                            "type": "integer"
+                        }
+                    }
+                }
+            }
+        },
+        "catalog-display-config": {
+            "description": "How a catalog is drawn",
+            "type": "object",
+            "properties": {
+                "color": {
+                    "type": "string"
+                },
+                "highlightColor": {
+                    "type": "string"
+                },
+                "shape": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "size": {
+                    "type": "number"
+                },
+                "thickness": {
+                    "type": "number"
+                },
+                "displayMode": {
+                    "type": "string",
+                    "enum": ["Custom", "Angular size"]
+                },
+                "canvasSizeUnit": {
+                    "type": "string"
+                },
+                "worldSizeUnit": {
+                    "type": "string"
+                },
+                "plotType": {
+                    "type": "string"
+                },
+                "xAxis": {
+                    "type": "string"
+                },
+                "yAxis": {
+                    "type": "string"
+                },
+                "headerTableColumnWidths": {
+                    "type": "array",
+                    "items": {
+                        "type": "number",
+                        "minimum": 0
+                    }
+                },
+                "imageOverlay": {
+                    "description": "The overlay drawn over the image, independent of the current plot and coordinate controls",
+                    "type": "object",
+                    "required": ["xAxis", "yAxis", "system"],
+                    "properties": {
+                        "xAxis": {
+                            "type": "string"
+                        },
+                        "yAxis": {
+                            "type": "string"
+                        },
+                        "system": {
+                            "description": "The system the overlay's positions were read in when it was drawn",
+                            "type": "string"
+                        },
+                        "maxRows": {
+                            "type": "integer",
+                            "minimum": 0
+                        }
+                    }
+                },
+                "sizeAxis": {
+                    "$ref": "#/definitions/catalog-size-axis"
+                },
+                "sizeMinorAxis": {
+                    "$ref": "#/definitions/catalog-size-axis"
+                },
+                "colorAxis": {
+                    "$ref": "#/definitions/catalog-color-axis"
+                },
+                "orientationAxis": {
+                    "$ref": "#/definitions/catalog-orientation-axis"
+                }
+            }
+        },
+        "catalog-source": {
+            "description": "How the catalog is loaded again",
+            "type": "object",
+            "required": ["type"],
+            "oneOf": [
+                {
+                    "required": ["type", "filename"],
+                    "properties": {
+                        "type": {
+                            "const": "file"
+                        },
+                        "directory": {
+                            "type": "string"
+                        },
+                        "filename": {
+                            "type": "string"
+                        }
+                    }
+                },
+                {
+                    "required": ["type", "center", "radius", "radiusUnits", "maxObjects"],
+                    "properties": {
+                        "type": {
+                            "enum": ["simbad", "vizier"]
+                        },
+                        "center": {
+                            "description": "The query centre in degrees",
+                            "$ref": "#/definitions/point-2d"
+                        },
+                        "system": {
+                            "type": "string"
+                        },
+                        "radius": {
+                            "type": "number",
+                            "minimum": 0
+                        },
+                        "radiusUnits": {
+                            "type": "string"
+                        },
+                        "maxObjects": {
+                            "type": "integer",
+                            "minimum": 1
+                        },
+                        "table": {
+                            "description": "VizieR only: the table the catalog came from",
+                            "type": "string"
+                        },
+                        "keywords": {
+                            "description": "VizieR only: the keywords the table search was narrowed by",
+                            "type": "string"
+                        }
+                    }
+                }
+            ]
+        },
+        "catalog-selection": {
+            "type": "object",
+            "required": ["columns", "rowHashes"],
+            "properties": {
+                "columns": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "rowHashes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "searchRows": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "isShowingSelectedData": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "catalog": {
+            "type": "object",
+            "required": ["id", "source"],
+            "properties": {
+                "id": {
+                    "description": "Stable ID of the catalog within this workspace",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "source": {
+                    "$ref": "#/definitions/catalog-source"
+                },
+                "coordinateSystem": {
+                    "description": "How the catalog's position columns are to be read",
+                    "type": "string"
+                },
+                "associatedImageId": {
+                    "description": "ID of the image the catalog is overlaid on",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "rowCount": {
+                    "description": "How many rows the catalog held when it was saved",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "contentHash": {
+                    "description": "Fingerprint of the rows an online catalog held when it was saved",
+                    "type": "string"
+                },
+                "tableConfig": {
+                    "$ref": "#/definitions/catalog-table-config"
+                },
+                "displayConfig": {
+                    "$ref": "#/definitions/catalog-display-config"
+                },
+                "selection": {
+                    "$ref": "#/definitions/catalog-selection"
+                }
+            }
+        }
+    },
+    "required": ["workspaceVersion", "frontendVersion", "files"],
+    "properties": {
+        "id": {
+            "type": "string"
+        },
+        "name": {
+            "description": "Optional workspace name. Filename will be used if this is missing",
+            "type": "string"
+        },
+        "editable": {
+            "description": "Whether the workspace is editable",
+            "type": "boolean"
+        },
+        "workspaceVersion": {
+            "description": "The version of the workspace",
+            "type": "integer",
+            "minimum": 0
+        },
+        "frontendVersion": {
+            "description": "The version of the frontend targeted by this workspace",
+            "type": "string"
+        },
+        "description": {
+            "description": "Optional workspace description",
+            "type": "string"
+        },
+        "files": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/file"
+            }
+        },
+        "catalogs": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/catalog"
+            }
+        },
+        "colorBlendingImages": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/color-blending"
+            }
+        },
+        "references": {
+            "$ref": "#/definitions/references"
+        },
+        "selectedFile": {
+            "description": "ID of the currently active file",
+            "type": "integer"
+        },
+        "selectedCatalogIds": {
+            "description": "Workspace catalog selected by each catalog panel, keyed by stable panel ID",
+            "type": "object",
+            "additionalProperties": {
+                "type": "integer",
+                "minimum": 0
+            }
+        },
+        "layout": {
+            "description": "The arrangement the workspace was saved in, in the form a saved layout takes",
+            "type": "object",
+            "required": ["docked"],
+            "properties": {
+                "layoutVersion": {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "docked": {
+                    "type": "object"
+                },
+                "floating": {
+                    "type": "array"
+                }
+            }
+        },
+        "thumbnail": {
+            "description": "A data URL containing a base64-encoded JPEG",
+            "type": "string"
+        },
+        "date": {
+            "description": "The modification date as a unix timestamp",
+            "type": "number"
+        },
+        "shared": {
+            "description": "Whether the workspace is shared between multiple users",
+            "type": "boolean"
+        }
+    }
+}
