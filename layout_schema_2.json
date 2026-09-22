@@ -261,6 +261,9 @@
                         "logScaleY": {
                             "type": "boolean"
                         },
+                        "meanRmsVisible": {
+                            "type": "boolean"
+                        },
                         "plotType": {
                             "$ref": "#/definitions/plot-type"
                         },
