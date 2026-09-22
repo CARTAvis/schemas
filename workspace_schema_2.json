@@ -807,13 +807,6 @@
                 "yAxis": {
                     "type": "string"
                 },
-                "headerTableColumnWidths": {
-                    "type": "array",
-                    "items": {
-                        "type": "number",
-                        "minimum": 0
-                    }
-                },
                 "imageOverlay": {
                     "description": "The overlay drawn over the image, independent of the current plot and coordinate controls",
                     "type": "object",
