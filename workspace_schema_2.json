@@ -1016,7 +1016,7 @@
             "type": "integer"
         },
         "selectedCatalogIds": {
-            "description": "Workspace catalog selected by each catalog panel, keyed by stable panel ID",
+            "description": "Workspace catalog selected by each catalog widget, keyed by the widget's own stable ID",
             "type": "object",
             "additionalProperties": {
                 "type": "integer",
