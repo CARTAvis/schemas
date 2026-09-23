@@ -98,8 +98,17 @@
                             }
                         },
                         "settingsTabId": {
+                            "description": "The settings section this widget was left on, for a layout saved on its own, which names no catalog",
                             "type": "integer",
                             "minimum": 0
+                        },
+                        "settingsTabIdByWorkspaceCatalog": {
+                            "description": "The settings section each catalog was left on, keyed by the workspace's own ID for that catalog. Only the layout a workspace carries alongside its catalogs may name them, so a layout saved on its own carries settingsTabId instead",
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "integer",
+                                "minimum": 0
+                            }
                         }
                     }
                 },
