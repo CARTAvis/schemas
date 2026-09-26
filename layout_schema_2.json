@@ -98,17 +98,9 @@
                             }
                         },
                         "settingsTabId": {
-                            "description": "The settings section this widget was left on, for a layout saved on its own, which names no catalog",
+                            "description": "The settings section this widget was left on, for whichever catalog it shows. A workspace keeps the section of each catalog in its catalogWidgets instead",
                             "type": "integer",
                             "minimum": 0
-                        },
-                        "settingsTabIdByWorkspaceCatalog": {
-                            "description": "The settings section each catalog was left on, keyed by the workspace's own ID for that catalog. Only the layout a workspace carries alongside its catalogs may name them, so a layout saved on its own carries settingsTabId instead",
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "integer",
-                                "minimum": 0
-                            }
                         }
                     }
                 },
@@ -133,31 +125,16 @@
                 },
                 "widgetSettings": {
                     "type": "object",
+                    "description": "What survives any catalog. The catalog a plot shows and what it is drawn from are kept by a workspace, in its catalogWidgets",
                     "properties": {
-                        "catalogId": {
-                            "description": "Stable workspace ID of the catalog this plot shows, not the session's catalog file ID",
-                            "type": "integer",
-                            "minimum": 1
+                        "widgetId": {
+                            "description": "Identifies this plot across the sessions a workspace spans",
+                            "type": "string",
+                            "minLength": 1
                         },
                         "plotType": {
                             "type": "string",
                             "enum": ["Image overlay", "Histogram", "2D scatter"]
-                        },
-                        "xColumnName": {
-                            "type": "string"
-                        },
-                        "yColumnName": {
-                            "type": "string"
-                        },
-                        "statisticColumnName": {
-                            "type": "string"
-                        },
-                        "isLogScaleY": {
-                            "type": "boolean"
-                        },
-                        "nBinX": {
-                            "type": "integer",
-                            "minimum": 1
                         },
                         "dragMode": {
                             "anyOf": [
@@ -170,21 +147,6 @@
                         },
                         "histogramBorder": {
                             "$ref": "#/definitions/catalog-histogram-border"
-                        },
-                        "isFittingEnabled": {
-                            "type": "boolean"
-                        },
-                        "fittingRange": {
-                            "type": "object",
-                            "required": ["minVal", "maxVal"],
-                            "properties": {
-                                "minVal": {
-                                    "type": "number"
-                                },
-                                "maxVal": {
-                                    "type": "number"
-                                }
-                            }
                         }
                     }
                 },
