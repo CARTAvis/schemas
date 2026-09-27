@@ -795,6 +795,11 @@
                     "type": "integer",
                     "minimum": 0
                 },
+                "loadedRows": {
+                    "description": "File catalogs: how many rows of the table's query were loaded, by scrolling the table or plotting the catalog, which its plots are drawn from. Online catalogs hold all of their rows",
+                    "type": "integer",
+                    "minimum": 0
+                },
                 "columnSettings": {
                     "type": "object",
                     "additionalProperties": {
