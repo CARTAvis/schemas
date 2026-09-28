@@ -45,19 +45,8 @@
                     "minimum": 1
                 },
                 "isFittingEnabled": {
+                    "description": "Plot widgets: whether a linear fit is drawn. The fit is recomputed from the rows the plot shows",
                     "type": "boolean"
-                },
-                "fittingRange": {
-                    "type": "object",
-                    "required": ["minVal", "maxVal"],
-                    "properties": {
-                        "minVal": {
-                            "type": "number"
-                        },
-                        "maxVal": {
-                            "type": "number"
-                        }
-                    }
                 }
             }
         },
