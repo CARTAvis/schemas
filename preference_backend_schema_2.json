@@ -83,6 +83,10 @@
             "minimum": 0,
             "default": 1024
         },
+        "zarr_histogram_method": {
+            "type": "string",
+            "default": "exact"
+        },
         "top_level_folder": {
             "type": "string",
             "minLength": 1,
