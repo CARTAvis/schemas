@@ -1084,6 +1084,11 @@
             "description": "ID of the currently active file",
             "type": "integer"
         },
+        "selectedColorBlending": {
+            "description": "The color-blended image in front, when it is one, by the imageListIndex its entry in colorBlendingImages carries. selectedFile then names the image it is blended onto",
+            "type": "integer",
+            "minimum": 0
+        },
         "catalogWidgets": {
             "description": "What each catalog table and plot widget shows, keyed by the widget's own stable ID",
             "type": "object",
