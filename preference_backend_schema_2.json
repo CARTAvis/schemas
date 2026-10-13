@@ -72,16 +72,16 @@
         },
         "zarr_file_io_threads": {
             "type": "integer",
-            "default": 2
+            "default": 0
         },
         "zarr_data_copy_threads": {
             "type": "integer",
-            "default": -1
+            "default": 0
         },
         "zarr_cache_size": {
             "type": "integer",
             "minimum": 0,
-            "default": 1024
+            "default": 1
         },
         "top_level_folder": {
             "type": "string",
