@@ -501,7 +501,7 @@
                     "$ref": "#/definitions/references"
                 },
                 "center": {
-                    "description": "The centre coordinates of the viewport",
+                    "description": "The center coordinates of the viewport",
                     "$ref": "#/definitions/point-2d"
                 },
                 "zoomLevel": {
@@ -937,7 +937,7 @@
                             "enum": ["simbad", "vizier"]
                         },
                         "center": {
-                            "description": "The query centre in degrees",
+                            "description": "The query center in degrees",
                             "$ref": "#/definitions/point-2d"
                         },
                         "system": {
