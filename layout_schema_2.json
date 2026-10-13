@@ -53,7 +53,102 @@
                 },
                 "id": {
                     "type": "string",
-                    "enum": ["floating-settings", "layer-list", "log", "animator", "region-list", "image-view", "stats", "spectral-line-query", "cursor-info", "catalog-overlay", "catalog-plot"]
+                    "enum": ["floating-settings", "layer-list", "log", "animator", "region-list", "image-view", "stats", "spectral-line-query", "cursor-info"]
+                },
+                "width": {
+                    "$ref": "#/definitions/percentage-value"
+                },
+                "height": {
+                    "$ref": "#/definitions/percentage-value"
+                }
+            }
+        },
+        "catalog-overlay": {
+            "type": "object",
+            "description": "Catalog overlay widgets",
+            "required": ["type", "id"],
+            "properties": {
+                "type": {
+                    "const": "component"
+                },
+                "id": {
+                    "const": "catalog-overlay"
+                },
+                "widgetSettings": {
+                    "type": "object",
+                    "description": "What belongs to the widget rather than to the catalog it shows. catalogFileId is retained for legacy layouts.",
+                    "properties": {
+                        "widgetId": {
+                            "description": "Identifies this widget across the sessions a workspace spans",
+                            "type": "string",
+                            "minLength": 1
+                        },
+                        "catalogFileId": {
+                            "type": "integer",
+                            "minimum": 1
+                        },
+                        "tableSeparatorPosition": {
+                            "type": "string"
+                        },
+                        "headerTableColumnWidths": {
+                            "description": "Widths of the header table's columns, in the fixed order the table lists them",
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            }
+                        },
+                        "settingsTabId": {
+                            "description": "The settings section this widget was left on, for whichever catalog it shows. A workspace keeps the section of each catalog in its catalogWidgets instead",
+                            "type": "integer",
+                            "minimum": 0
+                        }
+                    }
+                },
+                "width": {
+                    "$ref": "#/definitions/percentage-value"
+                },
+                "height": {
+                    "$ref": "#/definitions/percentage-value"
+                }
+            }
+        },
+        "catalog-plot": {
+            "type": "object",
+            "description": "Catalog plot widgets",
+            "required": ["type", "id"],
+            "properties": {
+                "type": {
+                    "const": "component"
+                },
+                "id": {
+                    "const": "catalog-plot"
+                },
+                "widgetSettings": {
+                    "type": "object",
+                    "description": "What survives any catalog. The catalog a plot shows and what it is drawn from are kept by a workspace, in its catalogWidgets",
+                    "properties": {
+                        "widgetId": {
+                            "description": "Identifies this plot across the sessions a workspace spans",
+                            "type": "string",
+                            "minLength": 1
+                        },
+                        "plotType": {
+                            "type": "string",
+                            "enum": ["Image overlay", "Histogram", "2D scatter"]
+                        },
+                        "dragMode": {
+                            "anyOf": [
+                                {"type": "boolean", "const": false},
+                                {"type": "string", "enum": ["zoom", "pan", "select", "lasso", "orbit", "turntable"]}
+                            ]
+                        },
+                        "scatterBorder": {
+                            "$ref": "#/definitions/catalog-scatter-border"
+                        },
+                        "histogramBorder": {
+                            "$ref": "#/definitions/catalog-histogram-border"
+                        }
+                    }
                 },
                 "width": {
                     "$ref": "#/definitions/percentage-value"
@@ -337,6 +432,24 @@
                 }
             }
         },
+        "catalog-scatter-border": {
+            "type": "object",
+            "required": ["xMin", "xMax", "yMin", "yMax"],
+            "properties": {
+                "xMin": {"type": "number"},
+                "xMax": {"type": "number"},
+                "yMin": {"type": "number"},
+                "yMax": {"type": "number"}
+            }
+        },
+        "catalog-histogram-border": {
+            "type": "object",
+            "required": ["xMin", "xMax"],
+            "properties": {
+                "xMin": {"type": "number"},
+                "xMax": {"type": "number"}
+            }
+        },
         "carta-widget": {
             "description": "A CARTA widget",
             "oneOf": [
@@ -357,6 +470,12 @@
                 },
                 {
                     "$ref": "#/definitions/stokes"
+                },
+                {
+                    "$ref": "#/definitions/catalog-overlay"
+                },
+                {
+                    "$ref": "#/definitions/catalog-plot"
                 }
             ]
         },
