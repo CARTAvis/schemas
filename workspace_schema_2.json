@@ -789,6 +789,21 @@
                     "type": "integer",
                     "minimum": 0
                 },
+                "scrollPosition": {
+                    "description": "Where the table was scrolled to, in pixels from its top left",
+                    "type": "object",
+                    "required": ["left", "top"],
+                    "properties": {
+                        "left": {
+                            "type": "number",
+                            "minimum": 0
+                        },
+                        "top": {
+                            "type": "number",
+                            "minimum": 0
+                        }
+                    }
+                },
                 "columnSettings": {
                     "type": "object",
                     "additionalProperties": {
