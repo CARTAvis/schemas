@@ -70,15 +70,15 @@
             "type": "integer",
             "default": -1
         },
-        "zarr_file_io_threads": {
+        "zarr_io": {
             "type": "integer",
             "default": 0
         },
-        "zarr_data_copy_threads": {
+        "zarr_decode": {
             "type": "integer",
             "default": 0
         },
-        "zarr_cache_size": {
+        "zarr_cache": {
             "type": "integer",
             "minimum": 0,
             "default": 1
