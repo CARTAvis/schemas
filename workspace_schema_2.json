@@ -47,6 +47,10 @@
                 "isFittingEnabled": {
                     "description": "Plot widgets: whether a linear fit is drawn. The fit is recomputed from the rows the plot shows",
                     "type": "boolean"
+                },
+                "cursor": {
+                    "description": "Plot widgets: the values the cursor last read off the plot, as a scatter point or a histogram bin's center and count",
+                    "$ref": "#/definitions/point-2d"
                 }
             }
         },
