@@ -198,12 +198,6 @@
                         "maxYVal": {
                             "type": "number"
                         },
-                        "xAxisRestFrameEnabled": {
-                            "type": "boolean"
-                        },
-                        "restFrameRedshift": {
-                            "type": "number"
-                        },
                         "restFrameShiftMode": {
                             "type": "string",
                             "enum": ["redshift", "radial-velocity"]
@@ -211,9 +205,6 @@
                         "restFrameVelocityConvention": {
                             "type": "string",
                             "enum": ["radio", "optical", "relativistic"]
-                        },
-                        "yAxisRestFrameEnabled": {
-                            "type": "boolean"
                         }
                     }
                 },

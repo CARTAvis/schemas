@@ -13,7 +13,7 @@
             "properties": {
                 "type": {
                     "description": "The kind of widget",
-                    "enum": ["spatial-profiler", "histogram", "stats", "stokes"]
+                    "enum": ["spatial-profiler", "spectral-profiler", "histogram", "stats", "stokes"]
                 },
                 "imageId": {
                     "description": "Workspace ID of the image the widget shows, when it is not the active one",
@@ -45,6 +45,57 @@
                 "coordinate": {
                     "description": "Histogram and statistics widgets: the Stokes they are taken in",
                     "type": "string"
+                },
+                "profileCategory": {
+                    "description": "Spectral profiler widgets: what several profiles shown together differ in",
+                    "enum": ["None", "Image", "Region", "Statistic", "Polarization"]
+                },
+                "imageIds": {
+                    "description": "Spectral profiler widgets: the images whose profiles are shown together, by workspace image ID",
+                    "type": "array",
+                    "items": {"type": "integer", "minimum": 1}
+                },
+                "regionIds": {
+                    "description": "Spectral profiler widgets: the regions whose profiles are shown, by the IDs they were saved with",
+                    "type": "array",
+                    "items": {"type": "integer"}
+                },
+                "statsTypes": {
+                    "description": "Spectral profiler widgets: the statistics whose profiles are shown",
+                    "type": "array",
+                    "items": {"type": "integer"}
+                },
+                "coordinates": {
+                    "description": "Spectral profiler widgets: the Stokes whose profiles are shown",
+                    "type": "array",
+                    "items": {"type": "string"}
+                },
+                "profileColors": {
+                    "description": "Spectral profiler widgets: the colour of each profile shown together, by what it is the profile of",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": ["key", "color"],
+                        "additionalProperties": false,
+                        "properties": {
+                            "key": {"type": ["integer", "string"]},
+                            "color": {"type": "string"}
+                        }
+                    }
+                },
+                "intensityUnit": {
+                    "description": "Spectral profiler widgets: the unit profiles of several images are shown in together",
+                    "type": "string"
+                },
+                "restFrameRedshift": {
+                    "description": "Spectral profiler widgets: the source's redshift",
+                    "type": "number"
+                },
+                "xAxisRestFrameEnabled": {
+                    "type": "boolean"
+                },
+                "yAxisRestFrameEnabled": {
+                    "type": "boolean"
                 }
             }
         },
