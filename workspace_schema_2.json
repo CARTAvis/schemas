@@ -191,6 +191,9 @@
                 "colormapEnabled": {
                     "type": "boolean"
                 },
+                "colormapInverted": {
+                    "type": "boolean"
+                },
                 "colormap": {
                     "type": "string"
                 },
@@ -225,9 +228,6 @@
                 "fractionalIntensity": {
                     "type": "boolean"
                 },
-                "pixelAveragingEnabled": {
-                    "type": "boolean"
-                },
                 "pixelAveraging": {
                     "type": "number"
                 },
@@ -246,6 +246,11 @@
                 "uError": {
                     "type": "number"
                 },
+                "thresholdOption": {
+                    "description": "The polarization the threshold is applied to: total intensity (I, 1) or linearly polarized intensity (Plinear, 14).",
+                    "type": "integer",
+                    "enum": [1, 14]
+                },
                 "visible": {
                     "type": "boolean"
                 },
@@ -253,6 +258,9 @@
                     "type": "number"
                 },
                 "colormapEnabled": {
+                    "type": "boolean"
+                },
+                "colormapInverted": {
                     "type": "boolean"
                 },
                 "color": {
