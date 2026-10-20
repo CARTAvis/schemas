@@ -186,18 +186,6 @@
                         "plotType": {
                             "$ref": "#/definitions/plot-type"
                         },
-                        "minXVal": {
-                            "type": "number"
-                        },
-                        "maxXVal": {
-                            "type": "number"
-                        },
-                        "minYVal": {
-                            "type": "number"
-                        },
-                        "maxYVal": {
-                            "type": "number"
-                        },
                         "restFrameShiftMode": {
                             "type": "string",
                             "enum": ["redshift", "radial-velocity"]
@@ -254,18 +242,6 @@
                         },
                         "plotType": {
                             "$ref": "#/definitions/plot-type"
-                        },
-                        "minXVal": {
-                            "type": "number"
-                        },
-                        "maxXVal": {
-                            "type": "number"
-                        },
-                        "minYVal": {
-                            "type": "number"
-                        },
-                        "maxYVal": {
-                            "type": "number"
                         }
                     }
                 },
@@ -319,18 +295,6 @@
                         },
                         "plotType": {
                             "$ref": "#/definitions/plot-type"
-                        },
-                        "minXVal": {
-                            "type": "number"
-                        },
-                        "maxXVal": {
-                            "type": "number"
-                        },
-                        "minYVal": {
-                            "type": "number"
-                        },
-                        "maxYVal": {
-                            "type": "number"
                         }
                     }
                 },
@@ -377,18 +341,6 @@
                         },
                         "plotType": {
                             "$ref": "#/definitions/plot-type"
-                        },
-                        "minXVal": {
-                            "type": "number"
-                        },
-                        "maxXVal": {
-                            "type": "number"
-                        },
-                        "minYVal": {
-                            "type": "number"
-                        },
-                        "maxYVal": {
-                            "type": "number"
                         }
                     }
                 },

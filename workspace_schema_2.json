@@ -13,7 +13,7 @@
             "properties": {
                 "type": {
                     "description": "The kind of widget",
-                    "enum": ["spatial-profiler", "spectral-profiler", "histogram", "stats", "stokes"]
+                    "enum": ["render-config", "spatial-profiler", "spectral-profiler", "histogram", "stats", "stokes"]
                 },
                 "imageId": {
                     "description": "Workspace ID of the image the widget shows, when it is not the active one",
@@ -96,6 +96,52 @@
                 },
                 "yAxisRestFrameEnabled": {
                     "type": "boolean"
+                },
+                "minX": {
+                    "description": "Line plot widgets: the range the plot was zoomed to, in the units it was shown in",
+                    "type": "number"
+                },
+                "maxX": {
+                    "type": "number"
+                },
+                "minY": {
+                    "type": "number"
+                },
+                "maxY": {
+                    "type": "number"
+                },
+                "pixelBounds": {
+                    "description": "Histogram widgets: the pixel values the histogram is computed between, when they are not the image's own",
+                    "type": "object",
+                    "required": ["min", "max"],
+                    "additionalProperties": false,
+                    "properties": {
+                        "min": {"type": "number"},
+                        "max": {"type": "number"}
+                    }
+                },
+                "ranges": {
+                    "description": "Stokes analysis widgets: the bounds its plots were zoomed to",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "sharedMinX": {"type": "number"},
+                        "sharedMaxX": {"type": "number"},
+                        "quMinY": {"type": "number"},
+                        "quMaxY": {"type": "number"},
+                        "polIntensityMinY": {"type": "number"},
+                        "polIntensityMaxY": {"type": "number"},
+                        "polAngleMinY": {"type": "number"},
+                        "polAngleMaxY": {"type": "number"},
+                        "quScatterMinX": {"type": "number"},
+                        "quScatterMaxX": {"type": "number"},
+                        "quScatterMinY": {"type": "number"},
+                        "quScatterMaxY": {"type": "number"},
+                        "quScatterEqualXmin": {"type": "number"},
+                        "quScatterEqualXmax": {"type": "number"},
+                        "quScatterEqualYmin": {"type": "number"},
+                        "quScatterEqualYmax": {"type": "number"}
+                    }
                 }
             }
         },
