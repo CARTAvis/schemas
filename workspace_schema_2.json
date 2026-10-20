@@ -5,6 +5,49 @@
     "$id": "https://cartavis.org/schemas/workspace_schema_2.json",
     "type": "object",
     "definitions": {
+        "plot-widget-config": {
+            "description": "What one profile, analysis or statistics widget shows: which image and region, and what it shows of them",
+            "type": "object",
+            "required": ["type"],
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "description": "The kind of widget",
+                    "enum": ["spatial-profiler", "histogram", "stats", "stokes"]
+                },
+                "imageId": {
+                    "description": "Workspace ID of the image the widget shows, when it is not the active one",
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "regions": {
+                    "description": "The region the widget shows of an image, by the ID the region was saved with. An entry with no image is for the active image",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": ["regionId"],
+                        "additionalProperties": false,
+                        "properties": {
+                            "imageId": {
+                                "type": "integer",
+                                "minimum": 1
+                            },
+                            "regionId": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                },
+                "stokes": {
+                    "description": "Spatial profiler widgets: the Stokes the profile is taken in, when it is not the image's current one",
+                    "type": "string"
+                },
+                "coordinate": {
+                    "description": "Histogram and statistics widgets: the Stokes they are taken in",
+                    "type": "string"
+                }
+            }
+        },
         "catalog-widget-config": {
             "description": "What one catalog table or plot widget shows. A table widget records its catalog and settings sections; a plot widget records its catalog and what it is drawn from",
             "type": "object",
@@ -1124,6 +1167,13 @@
             "type": "object",
             "additionalProperties": {
                 "$ref": "#/definitions/catalog-widget-config"
+            }
+        },
+        "plotWidgets": {
+            "description": "What each profile, analysis and statistics widget shows, keyed by the widget's own stable ID",
+            "type": "object",
+            "additionalProperties": {
+                "$ref": "#/definitions/plot-widget-config"
             }
         },
         "layout": {
