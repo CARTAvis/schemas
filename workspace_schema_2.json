@@ -490,6 +490,12 @@
                 },
                 "annotationStyles": {
                     "$ref": "#/definitions/annotation-style"
+                },
+                "lineRegionSampleWidth": {
+                    "description": "Line and polyline regions: how many pixels wide a spatial profile along the region samples",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 20
                 }
             }
         },
@@ -526,6 +532,22 @@
                     "description": "The selected polarization",
                     "type": "integer",
                     "minimum": 0
+                },
+                "spectralCoordinate": {
+                    "description": "The spectral coordinate the spectral axis is shown in, as the spectral settings name it",
+                    "type": "string"
+                },
+                "spectralCoordinateSecondary": {
+                    "description": "The secondary spectral coordinate, as the spectral settings name it",
+                    "type": "string"
+                },
+                "spectralSystem": {
+                    "description": "The spectral reference frame the spectral axis is shown in",
+                    "type": "string"
+                },
+                "intensityUnit": {
+                    "description": "The unit a spectral profile of the image shows its intensity in",
+                    "type": "string"
                 },
                 "renderConfig": {
                     "$ref": "#/definitions/render-config"
