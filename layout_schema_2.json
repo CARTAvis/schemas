@@ -38,11 +38,6 @@
             "type": "string",
             "enum": ["x", "Ix", "Qx", "Ux", "Vx", "y", "Iy", "Qy", "Uy", "Vy"]
         },
-        "spectral-coord": {
-            "description": "Spectral coordinate",
-            "type": "string",
-            "enum": ["z", "Iz", "Qz", "Uz", "Vz"]
-        },
         "basic-widget": {
             "type": "object",
             "description": "Widgets that have no associated settings",
@@ -53,7 +48,7 @@
                 },
                 "id": {
                     "type": "string",
-                    "enum": ["floating-settings", "layer-list", "log", "animator", "region-list", "image-view", "stats", "spectral-line-query", "cursor-info"]
+                    "enum": ["floating-settings", "layer-list", "log", "region-list", "image-view", "stats", "spectral-line-query", "cursor-info"]
                 },
                 "width": {
                     "$ref": "#/definitions/percentage-value"
@@ -172,9 +167,6 @@
                 "widgetSettings": {
                     "type": "object",
                     "properties": {
-                        "coordinate": {
-                            "$ref": "#/definitions/spectral-coord"
-                        },
                         "primaryLineColor": {
                             "type": "string"
                         },
@@ -201,6 +193,23 @@
                         },
                         "maxYVal": {
                             "type": "number"
+                        },
+                        "xAxisRestFrameEnabled": {
+                            "type": "boolean"
+                        },
+                        "restFrameRedshift": {
+                            "type": "number"
+                        },
+                        "restFrameShiftMode": {
+                            "type": "string",
+                            "enum": ["redshift", "radial-velocity"]
+                        },
+                        "restFrameVelocityConvention": {
+                            "type": "string",
+                            "enum": ["radio", "optical", "relativistic"]
+                        },
+                        "yAxisRestFrameEnabled": {
+                            "type": "boolean"
                         }
                     }
                 },
@@ -356,6 +365,9 @@
                         "logScaleY": {
                             "type": "boolean"
                         },
+                        "meanRmsVisible": {
+                            "type": "boolean"
+                        },
                         "plotType": {
                             "$ref": "#/definitions/plot-type"
                         },
@@ -450,6 +462,65 @@
                 "xMax": {"type": "number"}
             }
         },
+        "animator": {
+            "type": "object",
+            "description": "Animator widgets",
+            "required": ["type", "id"],
+            "properties": {
+                "type": {
+                    "const": "component"
+                },
+                "id": {
+                    "const": "animator"
+                },
+                "widgetSettings": {
+                    "type": "object",
+                    "properties": {
+                        "timeLabelFormat": {
+                            "type": "string",
+                            "enum": ["auto", "iso", "mjd", "jd", "relative"]
+                        },
+                        "timeZoneMode": {
+                            "type": "string",
+                            "enum": ["utc", "local", "iana"]
+                        },
+                        "ianaTimeZone": {
+                            "type": ["string", "null"]
+                        },
+                        "timeScale": {
+                            "type": "string",
+                            "enum": ["UTC", "TAI", "TT", "TCG"]
+                        },
+                        "isoTimePrecision": {
+                            "type": "string",
+                            "enum": ["auto", "year", "month", "day", "hour", "minute", "second", "millisecond", "microsecond"]
+                        },
+                        "numericTimePrecision": {
+                            "type": ["integer", "null"],
+                            "minimum": 0,
+                            "maximum": 9
+                        },
+                        "relativeTimeReference": {
+                            "type": "string",
+                            "enum": ["first", "image", "custom"]
+                        },
+                        "relativeReferenceMjdUtc": {
+                            "type": ["number", "null"]
+                        },
+                        "relativeTimeUnit": {
+                            "type": "string",
+                            "enum": ["auto", "second", "minute", "hour", "day", "year"]
+                        }
+                    }
+                },
+                "width": {
+                    "$ref": "#/definitions/percentage-value"
+                },
+                "height": {
+                    "$ref": "#/definitions/percentage-value"
+                }
+            }
+        },
         "carta-widget": {
             "description": "A CARTA widget",
             "oneOf": [
@@ -467,6 +538,9 @@
                 },
                 {
                     "$ref": "#/definitions/histogram"
+                },
+                {
+                    "$ref": "#/definitions/animator"
                 },
                 {
                     "$ref": "#/definitions/stokes"
