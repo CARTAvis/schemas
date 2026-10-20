@@ -38,6 +38,62 @@
             "type": "string",
             "enum": ["x", "Ix", "Qx", "Ux", "Vx", "y", "Iy", "Qy", "Uy", "Vy"]
         },
+        "smoothing": {
+            "description": "How a profile is smoothed and the smoothed profile drawn",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "enum": ["None", "Hanning", "Boxcar", "Gaussian", "Decimation", "Binning", "Savitzky-Golay"]
+                },
+                "lineColor": {
+                    "type": "string"
+                },
+                "lineType": {
+                    "$ref": "#/definitions/plot-type"
+                },
+                "lineWidth": {
+                    "$ref": "#/definitions/line-width"
+                },
+                "pointRadius": {
+                    "$ref": "#/definitions/point-size"
+                },
+                "isOverlayOn": {
+                    "type": "boolean"
+                },
+                "boxcarSize": {
+                    "type": "number"
+                },
+                "gaussianSigma": {
+                    "type": "number"
+                },
+                "hanningSize": {
+                    "type": "number"
+                },
+                "decimationWidth": {
+                    "type": "number"
+                },
+                "binWidth": {
+                    "type": "number"
+                },
+                "savitzkyGolaySize": {
+                    "type": "number"
+                },
+                "savitzkyGolayOrder": {
+                    "type": "number"
+                },
+                "selectedLine": {
+                    "description": "The line whose smoothed colour is being edited",
+                    "type": "string"
+                },
+                "lineColors": {
+                    "description": "The smoothed colour of each line, by the line's name",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
         "basic-widget": {
             "type": "object",
             "description": "Widgets that have no associated settings",
@@ -167,6 +223,20 @@
                 "widgetSettings": {
                     "type": "object",
                     "properties": {
+                        "markerTextVisible": {
+                            "type": "boolean"
+                        },
+                        "secondaryAxisCursorInfoVisible": {
+                            "type": "boolean"
+                        },
+                        "settingsTabId": {
+                            "description": "The settings section the widget was left on",
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "smoothing": {
+                            "$ref": "#/definitions/smoothing"
+                        },
                         "widgetId": {
                             "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
                             "type": "string"
@@ -218,6 +288,17 @@
                 "widgetSettings": {
                     "type": "object",
                     "properties": {
+                        "markerTextVisible": {
+                            "type": "boolean"
+                        },
+                        "settingsTabId": {
+                            "description": "The settings section the widget was left on",
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "smoothing": {
+                            "$ref": "#/definitions/smoothing"
+                        },
                         "widgetId": {
                             "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
                             "type": "string"
@@ -320,6 +401,19 @@
                 "widgetSettings": {
                     "type": "object",
                     "properties": {
+                        "settingsTabId": {
+                            "description": "The settings section the widget was left on",
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "autoBins": {
+                            "type": "boolean"
+                        },
+                        "numBins": {
+                            "description": "The number of bins, when they are not chosen automatically",
+                            "type": "integer",
+                            "minimum": 1
+                        },
                         "widgetId": {
                             "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
                             "type": "string"
@@ -366,6 +460,23 @@
                 "widgetSettings": {
                     "type": "object",
                     "properties": {
+                        "settingsTabId": {
+                            "description": "The settings section the widget was left on",
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "smoothing": {
+                            "$ref": "#/definitions/smoothing"
+                        },
+                        "invertedColorMap": {
+                            "type": "boolean"
+                        },
+                        "fractionalPolVisible": {
+                            "type": "boolean"
+                        },
+                        "referenceAxesVisible": {
+                            "type": "boolean"
+                        },
                         "widgetId": {
                             "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
                             "type": "string"
