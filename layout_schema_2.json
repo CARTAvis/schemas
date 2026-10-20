@@ -48,7 +48,7 @@
                 },
                 "id": {
                     "type": "string",
-                    "enum": ["floating-settings", "layer-list", "log", "region-list", "image-view", "stats", "spectral-line-query", "cursor-info"]
+                    "enum": ["floating-settings", "layer-list", "log", "region-list", "image-view", "spectral-line-query", "cursor-info"]
                 },
                 "width": {
                     "$ref": "#/definitions/percentage-value"
@@ -167,6 +167,10 @@
                 "widgetSettings": {
                     "type": "object",
                     "properties": {
+                        "widgetId": {
+                            "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
+                            "type": "string"
+                        },
                         "primaryLineColor": {
                             "type": "string"
                         },
@@ -235,6 +239,10 @@
                 "widgetSettings": {
                     "type": "object",
                     "properties": {
+                        "widgetId": {
+                            "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
+                            "type": "string"
+                        },
                         "coordinate": {
                             "$ref": "#/definitions/spatial-coord"
                         },
@@ -296,6 +304,10 @@
                 "widgetSettings": {
                     "type": "object",
                     "properties": {
+                        "widgetId": {
+                            "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
+                            "type": "string"
+                        },
                         "primaryLineColor": {
                             "type": "string"
                         },
@@ -353,6 +365,10 @@
                 "widgetSettings": {
                     "type": "object",
                     "properties": {
+                        "widgetId": {
+                            "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
+                            "type": "string"
+                        },
                         "primaryLineColor": {
                             "type": "string"
                         },
@@ -407,6 +423,10 @@
                 "widgetSettings": {
                     "type": "object",
                     "properties": {
+                        "widgetId": {
+                            "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
+                            "type": "string"
+                        },
                         "primaryLineColor": {
                             "type": "string"
                         },
@@ -460,6 +480,34 @@
             "properties": {
                 "xMin": {"type": "number"},
                 "xMax": {"type": "number"}
+            }
+        },
+        "stats": {
+            "type": "object",
+            "description": "Statistics widgets",
+            "required": ["type", "id"],
+            "properties": {
+                "type": {
+                    "const": "component"
+                },
+                "id": {
+                    "const": "stats"
+                },
+                "widgetSettings": {
+                    "type": "object",
+                    "properties": {
+                        "widgetId": {
+                            "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
+                            "type": "string"
+                        }
+                    }
+                },
+                "width": {
+                    "$ref": "#/definitions/percentage-value"
+                },
+                "height": {
+                    "$ref": "#/definitions/percentage-value"
+                }
             }
         },
         "animator": {
@@ -541,6 +589,9 @@
                 },
                 {
                     "$ref": "#/definitions/animator"
+                },
+                {
+                    "$ref": "#/definitions/stats"
                 },
                 {
                     "$ref": "#/definitions/stokes"
