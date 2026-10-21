@@ -79,7 +79,7 @@
             "default": 0
         },
         "zarr_cache": {
-            "type": "integer",
+            "type": "number",
             "minimum": 0,
             "default": 1
         },
