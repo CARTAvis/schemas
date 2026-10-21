@@ -47,4 +47,4 @@ echo "Validating objects..."
 ajv -s ../preferences_schema_2.json -d "data/preferences/*.json"  | grep -v ' valid$'
 ajv -s ../layout_schema_2.json -d "data/layouts/*.json"  | grep -v ' valid$'
 ajv -s ../snippet_schema_1.json -d "data/snippets/*.json"  | grep -v ' valid$'
-ajv -s ../workspace_schema_1.json -d "data/workspaces/*.json"  | grep -v ' valid$'
+ajv -s ../workspace_schema_2.json -d "data/workspaces/*.json"  | grep -v ' valid$'
