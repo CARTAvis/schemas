@@ -104,7 +104,7 @@
                 },
                 "id": {
                     "type": "string",
-                    "enum": ["floating-settings", "layer-list", "log", "region-list", "image-view", "spectral-line-query", "cursor-info"]
+                    "enum": ["floating-settings", "layer-list", "log", "region-list", "spectral-line-query", "cursor-info"]
                 },
                 "width": {
                     "$ref": "#/definitions/percentage-value"
@@ -536,6 +536,49 @@
                 "xMax": {"type": "number"}
             }
         },
+        "image-view": {
+            "type": "object",
+            "description": "The image view widget",
+            "required": ["type", "id"],
+            "properties": {
+                "type": {
+                    "const": "component"
+                },
+                "id": {
+                    "const": "image-view"
+                },
+                "widgetSettings": {
+                    "type": "object",
+                    "description": "The multi-panel grid, which suits any images; which image sits in which panel is kept by the workspace",
+                    "properties": {
+                        "multiPanelEnabled": {
+                            "type": "boolean"
+                        },
+                        "panelMode": {
+                            "description": "How the grid is sized when multi-panel is enabled",
+                            "type": "string",
+                            "enum": ["dynamic", "fixed"]
+                        },
+                        "panelColumns": {
+                            "description": "The maximum number of columns in dynamic mode, the exact number in fixed mode",
+                            "type": "integer",
+                            "minimum": 1
+                        },
+                        "panelRows": {
+                            "description": "The maximum number of rows in dynamic mode, the exact number in fixed mode",
+                            "type": "integer",
+                            "minimum": 1
+                        }
+                    }
+                },
+                "width": {
+                    "$ref": "#/definitions/percentage-value"
+                },
+                "height": {
+                    "$ref": "#/definitions/percentage-value"
+                }
+            }
+        },
         "stats": {
             "type": "object",
             "description": "Statistics widgets",
@@ -643,6 +686,9 @@
                 },
                 {
                     "$ref": "#/definitions/animator"
+                },
+                {
+                    "$ref": "#/definitions/image-view"
                 },
                 {
                     "$ref": "#/definitions/stats"
