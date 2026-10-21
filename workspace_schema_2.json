@@ -636,6 +636,11 @@
                     "type": "integer",
                     "minimum": 1,
                     "maximum": 20
+                },
+                "opacity": {
+                    "description": "How opaque the region is drawn: 1 shown, 0.5 semi-transparent, 0 hidden; left out when shown",
+                    "type": "number",
+                    "enum": [0, 0.5, 1]
                 }
             }
         },
@@ -688,6 +693,46 @@
                 "intensityUnit": {
                     "description": "The unit a spectral profile of the image shows its intensity in",
                     "type": "string"
+                },
+                "restFrequency": {
+                    "description": "The rest frequency the spectral axis is converted with, when it is not the one in the header",
+                    "type": "object",
+                    "required": ["value", "unit"],
+                    "properties": {
+                        "value": {"type": "number", "exclusiveMinimum": 0},
+                        "unit": {"type": "string", "enum": ["GHz", "MHz", "kHz", "Hz"]}
+                    }
+                },
+                "restFrame": {
+                    "description": "The rest frame the spectral axis of an image that supports one is shown in",
+                    "type": "object",
+                    "properties": {
+                        "enabled": {"type": "boolean"},
+                        "redshift": {"type": "number", "exclusiveMinimum": -1},
+                        "shiftMode": {"type": "string", "enum": ["redshift", "radial-velocity"]},
+                        "velocityConvention": {"type": "string", "enum": ["radio", "optical", "relativistic"]}
+                    }
+                },
+                "beam": {
+                    "description": "How the beam is drawn over an image that has one",
+                    "type": "object",
+                    "properties": {
+                        "visible": {"type": "boolean"},
+                        "color": {"type": "string"},
+                        "type": {"type": "string", "enum": ["open", "solid"]},
+                        "width": {"type": "number", "exclusiveMinimum": 0},
+                        "shiftX": {"type": "number"},
+                        "shiftY": {"type": "number"}
+                    }
+                },
+                "offsetCoordinates": {
+                    "description": "Offset coordinates, when shown on an image not matched to another: their centre in image pixels, and whether it is the origin (0) or the pole (1)",
+                    "type": "object",
+                    "required": ["center"],
+                    "properties": {
+                        "center": {"$ref": "#/definitions/point-2d"},
+                        "skyRefIs": {"type": "integer", "enum": [0, 1]}
+                    }
                 },
                 "renderConfig": {
                     "$ref": "#/definitions/render-config"
