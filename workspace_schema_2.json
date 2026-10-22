@@ -759,6 +759,238 @@
                 }
             }
         },
+        "generated-file": {
+            "description": "An image a request made: shown as a file is, but made again rather than opened, so it has no source",
+            "type": "object",
+            "required": ["id"],
+            "properties": {
+                "id": {
+                    "description": "ID of the file",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "name": {
+                    "description": "The name the image had when it was saved, for naming it to the user",
+                    "type": "string"
+                },
+                "moment": {
+                    "description": "For a moment image, which of the request's moments it is, as a CARTA.Moment value",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "references": {
+                    "$ref": "#/definitions/file/properties/references"
+                },
+                "center": {
+                    "$ref": "#/definitions/file/properties/center"
+                },
+                "zoomLevel": {
+                    "$ref": "#/definitions/file/properties/zoomLevel"
+                },
+                "channel": {
+                    "$ref": "#/definitions/file/properties/channel"
+                },
+                "stokes": {
+                    "$ref": "#/definitions/file/properties/stokes"
+                },
+                "spectralCoordinate": {
+                    "$ref": "#/definitions/file/properties/spectralCoordinate"
+                },
+                "spectralCoordinateSecondary": {
+                    "$ref": "#/definitions/file/properties/spectralCoordinateSecondary"
+                },
+                "spectralSystem": {
+                    "$ref": "#/definitions/file/properties/spectralSystem"
+                },
+                "intensityUnit": {
+                    "$ref": "#/definitions/file/properties/intensityUnit"
+                },
+                "restFrequency": {
+                    "$ref": "#/definitions/file/properties/restFrequency"
+                },
+                "restFrame": {
+                    "$ref": "#/definitions/file/properties/restFrame"
+                },
+                "beam": {
+                    "$ref": "#/definitions/file/properties/beam"
+                },
+                "offsetCoordinates": {
+                    "$ref": "#/definitions/file/properties/offsetCoordinates"
+                },
+                "renderConfig": {
+                    "$ref": "#/definitions/file/properties/renderConfig"
+                },
+                "contourConfig": {
+                    "$ref": "#/definitions/file/properties/contourConfig"
+                },
+                "vectorOverlayConfig": {
+                    "$ref": "#/definitions/file/properties/vectorOverlayConfig"
+                },
+                "regionsSet": {
+                    "$ref": "#/definitions/file/properties/regionsSet"
+                }
+            }
+        },
+        "generation-request": {
+            "description": "How generated images were made, naming images and regions by the IDs the workspace knows them by",
+            "type": "object",
+            "required": ["type"],
+            "oneOf": [
+                {
+                    "required": ["type", "sourceImageId", "regionId", "moments", "channelRange", "mask", "pixelRange"],
+                    "properties": {
+                        "type": {
+                            "const": "moment"
+                        },
+                        "sourceImageId": {
+                            "description": "The image the moments are taken of",
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "regionId": {
+                            "description": "The region they are taken over, by the ID it was saved with; the whole image when it is not a region of its own",
+                            "type": "integer"
+                        },
+                        "moments": {
+                            "description": "The moments made, as CARTA.Moment values",
+                            "type": "array",
+                            "minItems": 1,
+                            "items": {
+                                "type": "integer",
+                                "minimum": 0
+                            }
+                        },
+                        "channelRange": {
+                            "description": "The channels the moments are taken over, as channel indices",
+                            "type": "object",
+                            "required": ["min", "max"],
+                            "properties": {
+                                "min": {
+                                    "type": "integer",
+                                    "minimum": 0
+                                },
+                                "max": {
+                                    "type": "integer",
+                                    "minimum": 0
+                                }
+                            }
+                        },
+                        "mask": {
+                            "description": "How the pixel range masks the cube, as a CARTA.MomentMask value",
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "pixelRange": {
+                            "type": "object",
+                            "required": ["min", "max"],
+                            "properties": {
+                                "min": {
+                                    "type": "number"
+                                },
+                                "max": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "required": ["type", "sourceImageId", "regionId", "width", "reverse"],
+                    "properties": {
+                        "type": {
+                            "const": "pv"
+                        },
+                        "sourceImageId": {
+                            "description": "The image the cut is made through",
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "regionId": {
+                            "description": "The line or polyline region the cut follows, by the ID it was saved with",
+                            "type": "integer"
+                        },
+                        "width": {
+                            "description": "How many pixels wide the cut is averaged over",
+                            "type": "integer",
+                            "minimum": 1
+                        },
+                        "channelRange": {
+                            "description": "The channels the PV image covers, as channel indices; all of them when left out",
+                            "type": "object",
+                            "required": ["min", "max"],
+                            "properties": {
+                                "min": {
+                                    "type": "integer",
+                                    "minimum": 0
+                                },
+                                "max": {
+                                    "type": "integer",
+                                    "minimum": 0
+                                }
+                            }
+                        },
+                        "reverse": {
+                            "description": "Whether the position axis is drawn vertically",
+                            "type": "boolean"
+                        }
+                    }
+                },
+                {
+                    "required": ["type", "survey", "width", "height", "fov", "coordsys", "projection", "rotationAngle"],
+                    "properties": {
+                        "type": {
+                            "const": "hips"
+                        },
+                        "survey": {
+                            "type": "string"
+                        },
+                        "width": {
+                            "type": "number"
+                        },
+                        "height": {
+                            "type": "number"
+                        },
+                        "object": {
+                            "description": "The object the image is centred on, or else its centre",
+                            "type": "string"
+                        },
+                        "center": {
+                            "$ref": "#/definitions/point-2d"
+                        },
+                        "fov": {
+                            "description": "The field of view, in degrees",
+                            "type": "number"
+                        },
+                        "coordsys": {
+                            "type": "string"
+                        },
+                        "projection": {
+                            "type": "string"
+                        },
+                        "rotationAngle": {
+                            "description": "The rotation angle, in degrees",
+                            "type": "number"
+                        }
+                    }
+                }
+            ]
+        },
+        "generated-images": {
+            "description": "One request that made images, recorded once however many it made, and the images it made that the session still showed",
+            "type": "object",
+            "required": ["request", "images"],
+            "properties": {
+                "request": {
+                    "$ref": "#/definitions/generation-request"
+                },
+                "images": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/generated-file"
+                    }
+                }
+            }
+        },
         "color-blending": {
             "type": "object",
             "properties": {
@@ -1290,6 +1522,13 @@
             "type": "array",
             "items": {
                 "$ref": "#/definitions/color-blending"
+            }
+        },
+        "generatedImages": {
+            "description": "The moment, PV and HiPS images, by the requests that made them, in an order each can be made again in: a request can be made of an image an earlier one made",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/generated-images"
             }
         },
         "references": {
