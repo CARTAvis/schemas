@@ -78,6 +78,11 @@
             "type": "integer",
             "default": 0
         },
+        "zarr_histogram_method": {
+            "type": "string",
+            "enum": ["exact", "binned"],
+            "default": "exact"
+        },
         "zarr_cache": {
             "type": "number",
             "minimum": 0,
