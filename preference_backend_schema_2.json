@@ -70,6 +70,18 @@
             "type": "integer",
             "default": -1
         },
+        "zarr_io": {
+            "type": "integer",
+            "default": 0
+        },
+        "zarr_decode": {
+            "type": "integer",
+            "default": 0
+        },
+        "zarr_cache": {
+            "type": "number",
+            "default": 1
+        },
         "top_level_folder": {
             "type": "string",
             "minLength": 1,
