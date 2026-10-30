@@ -80,7 +80,6 @@
         },
         "zarr_cache": {
             "type": "number",
-            "minimum": 0,
             "default": 1
         },
         "top_level_folder": {
