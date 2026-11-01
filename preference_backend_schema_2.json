@@ -113,6 +113,26 @@
             "type": "string",
             "minLength": 1,
             "default": ""
+        },
+        "sia_services": {
+            "description": "Curated SIA 2.0 services offered to clients, as Name|query-url entries",
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            ]
+        },
+        "remote_file_max_size_mb": {
+            "description": "Maximum size in MB of a client-requested remote file (probed before fetching); 0 disables the check",
+            "type": "integer",
+            "minimum": 0,
+            "default": 4096
         }
     }
 }
