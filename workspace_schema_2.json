@@ -97,6 +97,98 @@
                 "yAxisRestFrameEnabled": {
                     "type": "boolean"
                 },
+                "fitting": {
+                    "description": "Spectral profiler widgets: the fitting function, the continuum and the initial guesses. The fit results are not saved",
+                    "type": "object",
+                    "required": ["function", "continuum", "yIntercept", "slope", "yInterceptLocked", "slopeLocked", "components", "autoDetectWithContinuum", "autoDetectWithFitting", "residualVisible", "xUnit", "yUnit"],
+                    "additionalProperties": false,
+                    "properties": {
+                        "function": {
+                            "description": "The fitting function: 0 is Gaussian and 1 is Lorentzian",
+                            "enum": [0, 1]
+                        },
+                        "continuum": {
+                            "description": "The order of the continuum: -1 is none, 0 is constant and 1 is linear",
+                            "enum": [-1, 0, 1]
+                        },
+                        "yIntercept": {"type": "number"},
+                        "slope": {"type": "number"},
+                        "yInterceptLocked": {"type": "boolean"},
+                        "slopeLocked": {"type": "boolean"},
+                        "components": {
+                            "description": "The initial guesses of each component",
+                            "type": "array",
+                            "minItems": 1,
+                            "items": {
+                                "type": "object",
+                                "required": ["center", "amp", "fwhm", "centerLocked", "ampLocked", "fwhmLocked"],
+                                "additionalProperties": false,
+                                "properties": {
+                                    "center": {"type": "number"},
+                                    "amp": {"type": "number"},
+                                    "fwhm": {"type": "number"},
+                                    "centerLocked": {"type": "boolean"},
+                                    "ampLocked": {"type": "boolean"},
+                                    "fwhmLocked": {"type": "boolean"}
+                                }
+                            }
+                        },
+                        "autoDetectWithContinuum": {"type": "boolean"},
+                        "autoDetectWithFitting": {"type": "boolean"},
+                        "residualVisible": {"type": "boolean"},
+                        "xUnit": {
+                            "description": "The spectral coordinate the guesses are in, such as \"Frequency (GHz), LSRK, rest frame\"",
+                            "type": "string"
+                        },
+                        "yUnit": {
+                            "description": "The unit of the y axis the guesses are in, such as \"Jy/beam\"",
+                            "type": "string"
+                        }
+                    }
+                },
+                "moments": {
+                    "description": "Spectral profiler widgets: the moment generator settings",
+                    "type": "object",
+                    "required": ["moments", "regionId", "mask"],
+                    "additionalProperties": false,
+                    "properties": {
+                        "moments": {
+                            "description": "The selected moments, as CARTA.Moment values",
+                            "type": "array",
+                            "items": {"type": "integer", "minimum": 0}
+                        },
+                        "regionId": {
+                            "description": "The region the moments are made from, by the ID it was saved with; -1 is the whole image and -3 the active region",
+                            "type": "integer"
+                        },
+                        "channelRange": {
+                            "description": "The spectral range, in the units of channelUnit; left out when it is the whole spectral axis",
+                            "type": "array",
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {"type": "number"}
+                        },
+                        "channelUnit": {
+                            "description": "The spectral coordinate of channelRange, such as \"Frequency (GHz), LSRK\"",
+                            "type": "string"
+                        },
+                        "mask": {
+                            "description": "The mask, as a CARTA.MomentMask value: 0 is none, 1 keeps and 2 leaves out the pixels in maskRange",
+                            "enum": [0, 1, 2]
+                        },
+                        "maskRange": {
+                            "description": "The range of pixel values the mask uses, in the units of maskUnit; left out when it is 0 to 1",
+                            "type": "array",
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {"type": "number"}
+                        },
+                        "maskUnit": {
+                            "description": "The unit of maskRange, such as \"Jy/beam\"",
+                            "type": "string"
+                        }
+                    }
+                },
                 "minX": {
                     "description": "Line plot widgets: the range the plot was zoomed to, in the units it was shown in",
                     "type": "number"
