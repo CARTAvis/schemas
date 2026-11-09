@@ -817,6 +817,10 @@
                         "shiftY": {"type": "number"}
                     }
                 },
+                "titleCustomText": {
+                    "description": "The custom title of the image in the WCS overlay, left out when it is the file name",
+                    "type": "string"
+                },
                 "offsetCoordinates": {
                     "description": "Offset coordinates, when shown on an image not matched to another: their centre in image pixels, and whether it is the origin (0) or the pole (1)",
                     "type": "object",
@@ -905,6 +909,9 @@
                 },
                 "beam": {
                     "$ref": "#/definitions/file/properties/beam"
+                },
+                "titleCustomText": {
+                    "$ref": "#/definitions/file/properties/titleCustomText"
                 },
                 "offsetCoordinates": {
                     "$ref": "#/definitions/file/properties/offsetCoordinates"
@@ -1100,6 +1107,10 @@
                     "items": {
                         "type": "number"
                     }
+                },
+                "titleCustomText": {
+                    "description": "The custom title of the color-blended image, left out when it is the default title",
+                    "type": "string"
                 }
             }
         },
@@ -1647,6 +1658,26 @@
             "type": "object",
             "additionalProperties": {
                 "$ref": "#/definitions/plot-widget-config"
+            }
+        },
+        "wcsOverlay": {
+            "description": "The custom texts of the WCS overlay that are the same for every image, and the switches that show the custom texts. The layout keeps how the overlay looks",
+            "type": "object",
+            "properties": {
+                "labels": {
+                    "type": "object",
+                    "properties": {
+                        "hasCustomText": {"type": "boolean"},
+                        "customLabelX": {"type": "string"},
+                        "customLabelY": {"type": "string"}
+                    }
+                },
+                "title": {
+                    "type": "object",
+                    "properties": {
+                        "hasCustomText": {"type": "boolean"}
+                    }
+                }
             }
         },
         "layout": {

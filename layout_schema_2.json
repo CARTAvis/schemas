@@ -536,6 +536,108 @@
                 "xMax": {"type": "number"}
             }
         },
+        "wcs-overlay": {
+            "description": "How the WCS overlay looks. It names no image, so a layout carries it to any session. The workspace keeps the custom texts and the switches that show them",
+            "type": "object",
+            "properties": {
+                "isVisible": {"type": "boolean"},
+                "global": {
+                    "description": "The labels, the default color, the curve tolerance and the coordinate system",
+                    "type": "object",
+                    "properties": {
+                        "labelType": {"enum": ["Interior", "Exterior"]},
+                        "color": {"type": "string"},
+                        "tolerance": {"description": "The tolerance of the curves, in percent", "type": "number", "minimum": 0.1},
+                        "system": {"enum": ["AUTO", "ECLIPTIC", "FK4", "FK5", "GALACTIC", "ICRS", "CARTESIAN"]}
+                    }
+                },
+                "title": {
+                    "description": "The title. Each image keeps its custom title in the workspace",
+                    "type": "object",
+                    "properties": {
+                        "isVisible": {"type": "boolean"},
+                        "isHidden": {"description": "Whether the toolbar button hides the title, the numbers and the labels", "type": "boolean"},
+                        "font": {"type": "integer", "minimum": 0},
+                        "fontSize": {"type": "number", "minimum": 7, "maximum": 96},
+                        "hasCustomColor": {"type": "boolean"},
+                        "color": {"type": "string"}
+                    }
+                },
+                "grid": {
+                    "type": "object",
+                    "properties": {
+                        "isVisible": {"type": "boolean"},
+                        "hasCustomColor": {"type": "boolean"},
+                        "color": {"type": "string"},
+                        "width": {"type": "number", "minimum": 0.001, "maximum": 30},
+                        "hasCustomGap": {"type": "boolean"},
+                        "gapX": {"type": "number", "minimum": 0.001},
+                        "gapY": {"type": "number", "minimum": 0.001}
+                    }
+                },
+                "border": {
+                    "type": "object",
+                    "properties": {
+                        "isVisible": {"type": "boolean"},
+                        "hasCustomColor": {"type": "boolean"},
+                        "color": {"type": "string"},
+                        "width": {"type": "number", "minimum": 0.5, "maximum": 30}
+                    }
+                },
+                "axes": {
+                    "type": "object",
+                    "properties": {
+                        "isVisible": {"type": "boolean"},
+                        "hasCustomColor": {"type": "boolean"},
+                        "color": {"type": "string"},
+                        "width": {"type": "number", "minimum": 0.001, "maximum": 30}
+                    }
+                },
+                "ticks": {
+                    "type": "object",
+                    "properties": {
+                        "shouldDrawAll": {"type": "boolean"},
+                        "hasCustomDensity": {"type": "boolean"},
+                        "densityX": {"type": "number", "minimum": 0},
+                        "densityY": {"type": "number", "minimum": 0},
+                        "hasCustomColor": {"type": "boolean"},
+                        "color": {"type": "string"},
+                        "width": {"type": "number", "minimum": 0.001, "maximum": 30},
+                        "length": {"description": "The length of the minor ticks, in percent", "type": "number", "minimum": 0, "maximum": 100},
+                        "majorLength": {"description": "The length of the major ticks, in percent", "type": "number", "minimum": 0, "maximum": 100}
+                    }
+                },
+                "numbers": {
+                    "type": "object",
+                    "properties": {
+                        "isVisible": {"type": "boolean"},
+                        "isHidden": {"type": "boolean"},
+                        "font": {"type": "integer", "minimum": 0},
+                        "fontSize": {"type": "number", "minimum": 7, "maximum": 96},
+                        "hasCustomColor": {"type": "boolean"},
+                        "color": {"type": "string"},
+                        "hasCustomFormat": {"type": "boolean"},
+                        "formatX": {"enum": ["hms", "dms", "d"]},
+                        "formatY": {"enum": ["hms", "dms", "d"]},
+                        "hasCustomPrecision": {"type": "boolean"},
+                        "precision": {"type": "integer", "minimum": 0}
+                    }
+                },
+                "labels": {
+                    "description": "The axis labels. The workspace keeps the custom label texts",
+                    "type": "object",
+                    "properties": {
+                        "isVisible": {"type": "boolean"},
+                        "isHidden": {"type": "boolean"},
+                        "hasCustomColor": {"type": "boolean"},
+                        "color": {"type": "string"},
+                        "font": {"type": "integer", "minimum": 0},
+                        "fontSize": {"type": "number", "minimum": 7, "maximum": 96},
+                        "hasRaDecReference": {"type": "boolean"}
+                    }
+                }
+            }
+        },
         "image-view": {
             "type": "object",
             "description": "The image view widget",
@@ -568,6 +670,9 @@
                             "description": "The maximum number of rows in dynamic mode, the exact number in fixed mode",
                             "type": "integer",
                             "minimum": 1
+                        },
+                        "wcsOverlay": {
+                            "$ref": "#/definitions/wcs-overlay"
                         }
                     }
                 },
