@@ -821,6 +821,10 @@
                     "description": "The custom title of the image in the WCS overlay, left out when it is the file name",
                     "type": "string"
                 },
+                "colorbarLabelCustomText": {
+                    "description": "The custom label of the colorbar of the image, left out when it is the default label",
+                    "type": "string"
+                },
                 "offsetCoordinates": {
                     "description": "Offset coordinates, when shown on an image not matched to another: their centre in image pixels, and whether it is the origin (0) or the pole (1)",
                     "type": "object",
@@ -912,6 +916,9 @@
                 },
                 "titleCustomText": {
                     "$ref": "#/definitions/file/properties/titleCustomText"
+                },
+                "colorbarLabelCustomText": {
+                    "$ref": "#/definitions/file/properties/colorbarLabelCustomText"
                 },
                 "offsetCoordinates": {
                     "$ref": "#/definitions/file/properties/offsetCoordinates"
@@ -1676,6 +1683,12 @@
                     "type": "object",
                     "properties": {
                         "hasCustomText": {"type": "boolean"}
+                    }
+                },
+                "colorbar": {
+                    "type": "object",
+                    "properties": {
+                        "hasLabelCustomText": {"type": "boolean"}
                     }
                 }
             }
