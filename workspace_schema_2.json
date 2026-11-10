@@ -98,7 +98,7 @@
                     "type": "boolean"
                 },
                 "fitting": {
-                    "description": "Spectral profiler widgets: the fitting function, the continuum and the initial guesses. The fit results are not saved",
+                    "description": "Spectral profiler widgets: the fitting function, the continuum, the initial guesses and the fit result",
                     "type": "object",
                     "required": ["function", "continuum", "yIntercept", "slope", "yInterceptLocked", "slopeLocked", "components", "autoDetectWithContinuum", "autoDetectWithFitting", "residualVisible", "xUnit", "yUnit"],
                     "additionalProperties": false,
@@ -143,6 +143,41 @@
                         "yUnit": {
                             "description": "The unit of the y axis the guesses are in, such as \"Jy/beam\"",
                             "type": "string"
+                        },
+                        "result": {
+                            "description": "The fit result, in the same units as the guesses. Left out when the profile has no fit result. A value that is not finite is null. The residual is not saved",
+                            "type": "object",
+                            "required": ["yIntercept", "yInterceptError", "slope", "slopeError", "components", "log"],
+                            "additionalProperties": false,
+                            "properties": {
+                                "yIntercept": {"type": ["number", "null"]},
+                                "yInterceptError": {"type": ["number", "null"]},
+                                "slope": {"type": ["number", "null"]},
+                                "slopeError": {"type": ["number", "null"]},
+                                "components": {
+                                    "description": "The result of each component, in the order of the components of the guesses",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "required": ["center", "centerError", "amp", "ampError", "fwhm", "fwhmError", "integral", "integralError"],
+                                        "additionalProperties": false,
+                                        "properties": {
+                                            "center": {"type": ["number", "null"]},
+                                            "centerError": {"type": ["number", "null"]},
+                                            "amp": {"type": ["number", "null"]},
+                                            "ampError": {"type": ["number", "null"]},
+                                            "fwhm": {"type": ["number", "null"]},
+                                            "fwhmError": {"type": ["number", "null"]},
+                                            "integral": {"type": ["number", "null"]},
+                                            "integralError": {"type": ["number", "null"]}
+                                        }
+                                    }
+                                },
+                                "log": {
+                                    "description": "The log of the fit, as the View log button shows it",
+                                    "type": "string"
+                                }
+                            }
                         }
                     }
                 },
