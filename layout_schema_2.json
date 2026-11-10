@@ -104,7 +104,7 @@
                 },
                 "id": {
                     "type": "string",
-                    "enum": ["floating-settings", "layer-list", "log", "region-list", "spectral-line-query", "cursor-info"]
+                    "enum": ["floating-settings", "layer-list", "log", "region-list", "spectral-line-query", "cursor-info", "pv-generator", "pv-preview", "channel-map-control", "placeholder"]
                 },
                 "width": {
                     "$ref": "#/definitions/percentage-value"
