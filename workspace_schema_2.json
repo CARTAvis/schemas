@@ -869,6 +869,28 @@
                         "skyRefIs": {"type": "integer", "enum": [0, 1]}
                     }
                 },
+                "fitResult": {
+                    "description": "The result of the last image fitting of the image, as the Image Fitting dialog shows it",
+                    "type": "object",
+                    "required": ["result", "log", "ellipses"],
+                    "properties": {
+                        "result": {"type": "string"},
+                        "log": {"type": "string"},
+                        "ellipses": {
+                            "description": "The ellipse of each component, in the pixels of the image: the center, the half axes and the rotation in degrees",
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "required": ["center", "size", "rotation"],
+                                "properties": {
+                                    "center": {"$ref": "#/definitions/point-2d"},
+                                    "size": {"$ref": "#/definitions/point-2d"},
+                                    "rotation": {"type": "number"}
+                                }
+                            }
+                        }
+                    }
+                },
                 "renderConfig": {
                     "$ref": "#/definitions/render-config"
                 },
@@ -912,6 +934,13 @@
                     "description": "For a moment image, which of the request's moments it is, as a CARTA.Moment value",
                     "type": "integer",
                     "minimum": 0
+                },
+                "fittingImage": {
+                    "description": "For an image that an image fitting made, whether it is the model or the residual",
+                    "enum": ["model", "residual"]
+                },
+                "fitResult": {
+                    "$ref": "#/definitions/file/properties/fitResult"
                 },
                 "references": {
                     "$ref": "#/definitions/file/properties/references"
@@ -1111,6 +1140,62 @@
                         "rotationAngle": {
                             "description": "The rotation angle, in degrees",
                             "type": "number"
+                        }
+                    }
+                },
+                {
+                    "required": ["type", "sourceImageId", "regionId", "components", "fixedParams", "offset", "solver"],
+                    "properties": {
+                        "type": {
+                            "const": "fitting"
+                        },
+                        "sourceImageId": {
+                            "description": "The image that was fitted",
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "regionId": {
+                            "description": "The region that was fitted, by the ID it was saved with: 0 is the field of view in fov, and -1 is the whole image",
+                            "type": "integer"
+                        },
+                        "fov": {
+                            "description": "The field of view that was fitted, as a rectangle in the pixels of the image",
+                            "type": "object",
+                            "required": ["center", "size", "rotation"],
+                            "properties": {
+                                "center": {"$ref": "#/definitions/point-2d"},
+                                "size": {"$ref": "#/definitions/point-2d"},
+                                "rotation": {"type": "number"}
+                            }
+                        },
+                        "components": {
+                            "description": "The initial values of each component. A value that the backend generates is null",
+                            "type": "array",
+                            "minItems": 1,
+                            "items": {
+                                "type": "object",
+                                "required": ["center", "amp", "fwhm", "pa"],
+                                "properties": {
+                                    "center": {"type": "object", "properties": {"x": {"type": ["number", "null"]}, "y": {"type": ["number", "null"]}}},
+                                    "amp": {"type": ["number", "null"]},
+                                    "fwhm": {"type": "object", "properties": {"x": {"type": ["number", "null"]}, "y": {"type": ["number", "null"]}}},
+                                    "pa": {"type": ["number", "null"]}
+                                }
+                            }
+                        },
+                        "fixedParams": {
+                            "description": "Whether each value is fixed: six values for each component, in the order center x, center y, amplitude, FWHM x, FWHM y and P.A., and then the background offset",
+                            "type": "array",
+                            "items": {"type": "boolean"}
+                        },
+                        "offset": {
+                            "description": "The initial background offset",
+                            "type": "number"
+                        },
+                        "solver": {
+                            "description": "The solver, as a CARTA.FittingSolverType value",
+                            "type": "integer",
+                            "minimum": 0
                         }
                     }
                 }
@@ -1670,7 +1755,7 @@
             }
         },
         "generatedImages": {
-            "description": "The moment, PV and HiPS images, by the requests that made them, in an order each can be made again in: a request can be made of an image an earlier one made",
+            "description": "The moment, PV, HiPS and image fitting images, by the requests that made them, in an order each can be made again in: a request can be made of an image an earlier one made",
             "type": "array",
             "items": {
                 "$ref": "#/definitions/generated-images"
@@ -1726,6 +1811,53 @@
                         "hasLabelCustomText": {"type": "boolean"}
                     }
                 }
+            }
+        },
+        "imageFitting": {
+            "description": "The settings of the Image Fitting dialog. The initial values are in the pixels and the units of the image it fits",
+            "type": "object",
+            "required": ["regionId", "components", "autoInitialValues", "backgroundOffset", "backgroundOffsetFixed", "solver", "createModelImage", "createResidualImage"],
+            "properties": {
+                "imageId": {
+                    "description": "The image to fit, by its workspace ID; the active image when it is left out",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "regionId": {
+                    "description": "The region to fit, by the ID it was saved with: 0 is the field of view, and -1 is the whole image",
+                    "type": "integer"
+                },
+                "components": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": ["center", "amp", "fwhm", "pa", "fixed"],
+                        "properties": {
+                            "center": {"type": "object", "properties": {"x": {"type": ["number", "null"]}, "y": {"type": ["number", "null"]}}},
+                            "amp": {"type": ["number", "null"]},
+                            "fwhm": {"type": "object", "properties": {"x": {"type": ["number", "null"]}, "y": {"type": ["number", "null"]}}},
+                            "pa": {"type": ["number", "null"]},
+                            "fixed": {
+                                "description": "Whether each value is fixed, in the order center x, center y, amplitude, FWHM x, FWHM y and P.A.",
+                                "type": "array",
+                                "items": {"type": "boolean"}
+                            }
+                        }
+                    }
+                },
+                "autoInitialValues": {
+                    "description": "Whether the backend generates the initial values",
+                    "type": "boolean"
+                },
+                "backgroundOffset": {"type": "number"},
+                "backgroundOffsetFixed": {"type": "boolean"},
+                "solver": {
+                    "description": "The solver, as a CARTA.FittingSolverType value",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "createModelImage": {"type": "boolean"},
+                "createResidualImage": {"type": "boolean"}
             }
         },
         "layout": {
