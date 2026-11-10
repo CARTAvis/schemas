@@ -879,6 +879,10 @@
                 "activeItemIndex": {
                     "type": "integer",
                     "minimum": 0
+                },
+                "maximized": {
+                    "description": "Whether the stack fills the whole layout",
+                    "type": "boolean"
                 }
             }
         }
