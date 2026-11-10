@@ -689,25 +689,19 @@
                 },
                 "widgetSettings": {
                     "type": "object",
-                    "description": "The multi-panel grid, which suits any images; which image sits in which panel is kept by the workspace",
+                    "description": "The multi-panel grid, which suits any images; which image sits in which panel is kept by the workspace. The values are not checked here: the frontend replaces each value that is missing or not valid with the user default, and keeps the rest of the layout",
                     "properties": {
                         "multiPanelEnabled": {
-                            "type": "boolean"
+                            "description": "A boolean"
                         },
                         "panelMode": {
-                            "description": "How the grid is sized when multi-panel is enabled",
-                            "type": "string",
-                            "enum": ["dynamic", "fixed"]
+                            "description": "How the grid is sized when multi-panel is enabled: dynamic or fixed"
                         },
                         "panelColumns": {
-                            "description": "The maximum number of columns in dynamic mode, the exact number in fixed mode",
-                            "type": "integer",
-                            "minimum": 1
+                            "description": "The maximum number of columns in dynamic mode, the exact number in fixed mode; an integer of 1 or more"
                         },
                         "panelRows": {
-                            "description": "The maximum number of rows in dynamic mode, the exact number in fixed mode",
-                            "type": "integer",
-                            "minimum": 1
+                            "description": "The maximum number of rows in dynamic mode, the exact number in fixed mode; an integer of 1 or more"
                         },
                         "wcsOverlay": {
                             "$ref": "#/definitions/wcs-overlay"
