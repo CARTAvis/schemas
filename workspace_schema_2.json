@@ -1823,6 +1823,23 @@
             "type": "array",
             "items": {"type": "string"}
         },
+        "openWidgetSettings": {
+            "description": "The floating settings panels of widgets that were open, from the bottom one to the top one",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": ["widgetId", "widgetType", "title"],
+                "properties": {
+                    "widgetId": {"type": "string", "description": "The stable ID of the widget that the panel sets"},
+                    "widgetType": {"type": "string"},
+                    "title": {"type": "string", "description": "The title of the widget"},
+                    "x": {"type": "number"},
+                    "y": {"type": "number"},
+                    "width": {"type": "number"},
+                    "height": {"type": "number"}
+                }
+            }
+        },
         "cursor": {
             "description": "Whether the cursor was frozen, and where, in the pixels of the image in front",
             "type": "object",
