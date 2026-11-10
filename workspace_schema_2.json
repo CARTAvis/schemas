@@ -869,6 +869,10 @@
                         "skyRefIs": {"type": "integer", "enum": [0, 1]}
                     }
                 },
+                "imageListIndex": {
+                    "description": "The place of the image in the image list. The places count the images that the workspace does not save, so only their order matters",
+                    "type": "integer"
+                },
                 "fitResult": {
                     "description": "The result of the last image fitting of the image, as the Image Fitting dialog shows it",
                     "type": "object",
@@ -941,6 +945,9 @@
                 },
                 "fitResult": {
                     "$ref": "#/definitions/file/properties/fitResult"
+                },
+                "imageListIndex": {
+                    "$ref": "#/definitions/file/properties/imageListIndex"
                 },
                 "references": {
                     "$ref": "#/definitions/file/properties/references"
@@ -1763,6 +1770,10 @@
         },
         "references": {
             "$ref": "#/definitions/references"
+        },
+        "spectralMatchingType": {
+            "description": "The spectral coordinate that spectrally matched images are matched by, such as VRAD",
+            "type": "string"
         },
         "selectedFile": {
             "description": "ID of the currently active file",
