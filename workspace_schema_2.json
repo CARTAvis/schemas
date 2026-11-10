@@ -13,7 +13,7 @@
             "properties": {
                 "type": {
                     "description": "The kind of widget",
-                    "enum": ["render-config", "spatial-profiler", "spectral-profiler", "histogram", "stats", "stokes"]
+                    "enum": ["render-config", "spatial-profiler", "spectral-profiler", "histogram", "stats", "stokes", "spectral-line-query", "pv-generator"]
                 },
                 "imageId": {
                     "description": "Workspace ID of the image the widget shows, when it is not the active one",
@@ -178,7 +178,9 @@
                                     "type": "string"
                                 }
                             }
-                        }
+                        },
+                        "selectedComponent": {"description": "The component whose guesses the settings show, counted from 0", "type": "integer", "minimum": 0},
+                        "autoDetectedComponents": {"description": "How many components auto detect found, when the settings show its message", "type": "integer", "minimum": 0}
                     }
                 },
                 "moments": {
@@ -221,7 +223,8 @@
                         "maskUnit": {
                             "description": "The unit of maskRange, such as \"Jy/beam\"",
                             "type": "string"
-                        }
+                        },
+                        "keep": {"description": "Whether new moment images keep the ones made before them", "type": "boolean"}
                     }
                 },
                 "minX": {
@@ -269,7 +272,29 @@
                         "quScatterEqualYmin": {"type": "number"},
                         "quScatterEqualYmax": {"type": "number"}
                     }
-                }
+                },
+                "spectralLines": {
+                    "description": "Spectral profiler widgets: the lines that a spectral line query plotted, at the frequencies they were plotted at, in MHz",
+                    "type": "array",
+                    "items": {"type": "object", "required": ["species", "value", "qn"], "properties": {"species": {"type": "string"}, "value": {"type": "number"}, "qn": {"type": "string"}}}
+                },
+                "rangeType": {"description": "Spectral line query widgets: how the range is given", "enum": ["Range", "Center"]},
+                "range": {"description": "Spectral line query widgets: the range, from and to, in unit", "type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number"}},
+                "rangeByCenter": {"description": "Spectral line query widgets: the center and the width on each side of it, in unit", "type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number"}},
+                "unit": {"description": "Spectral line query widgets: the unit of the range", "enum": ["GHz", "MHz", "cm", "mm"]},
+                "intensityLimitEnabled": {"type": "boolean"},
+                "intensityLimit": {"type": "number"},
+                "redshiftType": {"enum": ["Velocity (km/s)", "Redshift"]},
+                "redshift": {"type": "number"},
+                "spectralProfilerId": {"description": "Spectral line query widgets: the spectral profiler that the lines are plotted on, by its widget ID", "type": "string"},
+                "width": {"description": "PV generator widgets: how many pixels wide the cut is averaged over", "type": "integer", "minimum": 1},
+                "reverse": {"type": "boolean"},
+                "keep": {"type": "boolean"},
+                "xyRebin": {"type": "integer", "minimum": 1},
+                "zRebin": {"type": "integer", "minimum": 1},
+                "channelRange": {"description": "PV generator widgets: the spectral range, in channelUnit", "type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number"}},
+                "channelUnit": {"type": "string"},
+                "previewRegionId": {"description": "PV generator widgets: the region that the preview shows, by the ID it was saved with; -1 is the whole image", "type": "integer"}
             }
         },
         "catalog-widget-config": {
@@ -915,9 +940,11 @@
                             "items": {
                                 "$ref": "#/definitions/region"
                             }
-                        }
+                        },
+                        "selectedRegions": {"description": "The regions that were selected together, by their saved IDs", "type": "array", "items": {"type": "integer"}}
                     }
-                }
+                },
+                "animationChannelRange": {"description": "The channels that the animator plays, as channel indices", "type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "integer", "minimum": 0}}
             }
         },
         "generated-file": {
@@ -1245,7 +1272,10 @@
                 "titleCustomText": {
                     "description": "The custom title of the color-blended image, left out when it is the default title",
                     "type": "string"
-                }
+                },
+                "rasterVisible": {"type": "boolean"},
+                "contourVisible": {"type": "boolean"},
+                "vectorOverlayVisible": {"type": "boolean"}
             }
         },
         "stokes-file": {
@@ -1592,7 +1622,8 @@
                 },
                 "orientationAxis": {
                     "$ref": "#/definitions/catalog-orientation-axis"
-                }
+                },
+                "sizeAxisTab": {"description": "The size tab of the catalog settings, when it is the minor axis of an ellipse", "const": "minor"}
             }
         },
         "catalog-source": {
@@ -1770,6 +1801,48 @@
         },
         "references": {
             "$ref": "#/definitions/references"
+        },
+        "animator": {
+            "description": "The settings of the animator",
+            "type": "object",
+            "properties": {
+                "frameRate": {"type": "integer", "minimum": 1},
+                "step": {"type": "integer", "minimum": 1},
+                "playMode": {"description": "0 is forward, 1 is backward, 2 is bouncing and 3 is blink", "type": "integer"},
+                "mode": {"description": "What the animator steps through: 0 is the channels, 1 the Stokes, 2 the images and 3 a time series", "type": "integer"}
+            }
+        },
+        "contourDataSource": {
+            "description": "The image that the Contour dialog shows, when the dialog does not follow the active image",
+            "type": "object",
+            "required": ["imageId"],
+            "properties": {"imageId": {"type": "integer"}}
+        },
+        "openDialogs": {
+            "description": "The analysis dialogs that were open, from the bottom one to the top one",
+            "type": "array",
+            "items": {"type": "string"}
+        },
+        "cursor": {
+            "description": "Whether the cursor was frozen, and where, in the pixels of the image in front",
+            "type": "object",
+            "required": ["frozen"],
+            "properties": {"frozen": {"type": "boolean"}, "position": {"$ref": "#/definitions/point-2d"}}
+        },
+        "onlineCatalogQuery": {
+            "description": "The fields of the online catalog query dialog",
+            "type": "object",
+            "properties": {
+                "database": {"type": "string"},
+                "center": {"type": "object", "properties": {"x": {"type": "string"}, "y": {"type": "string"}}},
+                "coordinateSystem": {"type": "string"},
+                "coordinateFormat": {"type": "string"},
+                "radius": {"type": "number"},
+                "radiusUnits": {"type": "string"},
+                "maxObjects": {"type": "integer", "minimum": 1},
+                "objectName": {"type": "string"},
+                "vizierKeywords": {"type": "string"}
+            }
         },
         "spectralMatchingType": {
             "description": "The spectral coordinate that spectrally matched images are matched by, such as VRAD",
