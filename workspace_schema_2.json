@@ -1846,6 +1846,14 @@
             "required": ["frozen"],
             "properties": {"frozen": {"type": "boolean"}, "position": {"$ref": "#/definitions/point-2d"}}
         },
+        "catalogMirrors": {
+            "description": "The mirror that the online catalog queries of the workspace use, by database. A restore uses the mirror when it is available, and otherwise the mirror that the session uses",
+            "type": "object",
+            "properties": {
+                "SIMBAD": {"type": "string"},
+                "VizieR": {"type": "string"}
+            }
+        },
         "onlineCatalogQuery": {
             "description": "The fields of the online catalog query dialog",
             "type": "object",
