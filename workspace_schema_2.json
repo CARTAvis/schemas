@@ -1986,6 +1986,26 @@
                 }
             }
         },
+        "imageView": {
+            "description": "The size of the image view when the workspace was saved: the area of one image panel that images are drawn in, without the padding around the axes, in CSS pixels, and the device pixel ratio of the screen. A restore scales the zoom of each image by how the size changed, so that the same area of each image shows",
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["width", "height", "pixelRatio"],
+            "properties": {
+                "width": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                },
+                "height": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                },
+                "pixelRatio": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                }
+            }
+        },
         "thumbnail": {
             "description": "A data URL containing a base64-encoded JPEG",
             "type": "string"
