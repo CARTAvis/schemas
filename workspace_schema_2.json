@@ -1987,22 +1987,51 @@
             }
         },
         "imageView": {
-            "description": "The size of the image view when the workspace was saved: the area of one image panel that images are drawn in, without the padding around the axes, in CSS pixels, and the device pixel ratio of the screen. A restore scales the zoom of each image by how the size changed, so that the same area of each image shows",
+            "description": "The size of the image view when the workspace was saved, in CSS pixels. A restore scales the zoom of each image by how width and height changed, so that the same area of each image shows. The Open Workspace dialog shows the saved browser window, so that a user can change the window to match. A script can give the browser or the image view the same size before it opens the workspace, and can match the device pixel ratio to get images of the same resolution",
             "type": "object",
             "additionalProperties": false,
-            "required": ["width", "height", "pixelRatio"],
+            "required": ["width", "height", "devicePixelRatio"],
             "properties": {
                 "width": {
+                    "description": "The width of the area of one image panel that images are drawn in, without the padding around the axes. In channel map mode it is the area of one channel",
                     "type": "number",
                     "exclusiveMinimum": 0
                 },
                 "height": {
+                    "description": "The height of that area",
                     "type": "number",
                     "exclusiveMinimum": 0
                 },
-                "pixelRatio": {
+                "devicePixelRatio": {
+                    "description": "The device pixel ratio of the screen",
                     "type": "number",
                     "exclusiveMinimum": 0
+                },
+                "fullWidth": {
+                    "description": "The width of the whole image view, with the padding and all panels",
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                },
+                "fullHeight": {
+                    "description": "The height of the whole image view, with the padding and all panels",
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                },
+                "viewport": {
+                    "description": "The size of the browser viewport",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["width", "height"],
+                    "properties": {
+                        "width": {
+                            "type": "number",
+                            "exclusiveMinimum": 0
+                        },
+                        "height": {
+                            "type": "number",
+                            "exclusiveMinimum": 0
+                        }
+                    }
                 }
             }
         },
