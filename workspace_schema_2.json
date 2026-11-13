@@ -3255,7 +3255,21 @@
             }
         },
         "layout": {
-            "$ref": "#/definitions/layout"
+            "description": "The arrangement the workspace was saved in, in the form a saved layout takes. Only the type of each part is checked here, so that a layout value that is not valid does not stop the rest of the workspace from loading. The frontend checks the layout by the layout definition before it applies it",
+            "type": "object",
+            "required": ["docked"],
+            "properties": {
+                "layoutVersion": {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "docked": {
+                    "type": "object"
+                },
+                "floating": {
+                    "type": "array"
+                }
+            }
         },
         "imageView": {
             "description": "The size of the image view when the workspace was saved, in CSS pixels. A restore scales the zoom of each image by how width and height changed, so that the same area of each image shows. The Open Workspace dialog shows the saved browser window, so that a user can change the window to match. A script can give the browser or the image view the same size before it opens the workspace, and can match the device pixel ratio to get images of the same resolution",
