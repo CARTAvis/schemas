@@ -1846,7 +1846,7 @@
                 },
                 "id": {
                     "type": "string",
-                    "enum": ["floating-settings", "layer-list", "log", "region-list", "spectral-line-query", "cursor-info", "pv-generator", "pv-preview", "channel-map-control", "placeholder"]
+                    "enum": ["floating-settings", "layer-list", "log", "region-list", "cursor-info", "pv-preview", "channel-map-control", "placeholder"]
                 },
                 "width": {
                     "$ref": "#/definitions/layout-percentage-value"
@@ -2784,6 +2784,62 @@
                 }
             }
         },
+        "layout-pv-generator": {
+            "type": "object",
+            "description": "PV generator widgets",
+            "required": ["type", "id"],
+            "properties": {
+                "type": {
+                    "const": "component"
+                },
+                "id": {
+                    "const": "pv-generator"
+                },
+                "widgetSettings": {
+                    "type": "object",
+                    "properties": {
+                        "widgetId": {
+                            "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
+                            "type": "string"
+                        }
+                    }
+                },
+                "width": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                },
+                "height": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                }
+            }
+        },
+        "layout-spectral-line-query": {
+            "type": "object",
+            "description": "Spectral line query widgets",
+            "required": ["type", "id"],
+            "properties": {
+                "type": {
+                    "const": "component"
+                },
+                "id": {
+                    "const": "spectral-line-query"
+                },
+                "widgetSettings": {
+                    "type": "object",
+                    "properties": {
+                        "widgetId": {
+                            "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
+                            "type": "string"
+                        }
+                    }
+                },
+                "width": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                },
+                "height": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                }
+            }
+        },
         "layout-animator": {
             "type": "object",
             "description": "Animator widgets",
@@ -2869,6 +2925,12 @@
                 },
                 {
                     "$ref": "#/definitions/layout-stats"
+                },
+                {
+                    "$ref": "#/definitions/layout-pv-generator"
+                },
+                {
+                    "$ref": "#/definitions/layout-spectral-line-query"
                 },
                 {
                     "$ref": "#/definitions/layout-stokes"
