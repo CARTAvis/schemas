@@ -1746,6 +1746,1229 @@
                     "$ref": "#/definitions/catalog-selection"
                 }
             }
+        },
+        "layout-percentage-value": {
+            "description": "Describes a percentage value from 0 to 100",
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+        },
+        "layout-plot-type": {
+            "description": "Describes a plot type",
+            "enum": ["Steps", "Lines", "Points"]
+        },
+        "layout-line-width": {
+            "description": "Describes a plot line width",
+            "type": "number",
+            "minimum": 0.5,
+            "maximum": 10.0
+        },
+        "layout-point-size": {
+            "description": "Describes a plot point size",
+            "type": "number",
+            "minimum": 0.5,
+            "maximum": 10.0
+        },
+        "layout-opacity": {
+            "description": "Describes an opacity value between zero and one",
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+        },
+        "layout-spatial-coord": {
+            "description": "Spatial coordinate",
+            "type": "string",
+            "enum": ["x", "Ix", "Qx", "Ux", "Vx", "y", "Iy", "Qy", "Uy", "Vy"]
+        },
+        "layout-smoothing": {
+            "description": "How a profile is smoothed and the smoothed profile drawn",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "enum": ["None", "Hanning", "Boxcar", "Gaussian", "Decimation", "Binning", "Savitzky-Golay"]
+                },
+                "lineColor": {
+                    "type": "string"
+                },
+                "lineType": {
+                    "$ref": "#/definitions/layout-plot-type"
+                },
+                "lineWidth": {
+                    "$ref": "#/definitions/layout-line-width"
+                },
+                "pointRadius": {
+                    "$ref": "#/definitions/layout-point-size"
+                },
+                "isOverlayOn": {
+                    "type": "boolean"
+                },
+                "boxcarSize": {
+                    "type": "number"
+                },
+                "gaussianSigma": {
+                    "type": "number"
+                },
+                "hanningSize": {
+                    "type": "number"
+                },
+                "decimationWidth": {
+                    "type": "number"
+                },
+                "binWidth": {
+                    "type": "number"
+                },
+                "savitzkyGolaySize": {
+                    "type": "number"
+                },
+                "savitzkyGolayOrder": {
+                    "type": "number"
+                },
+                "selectedLine": {
+                    "description": "The line whose smoothed colour is being edited",
+                    "type": "string"
+                },
+                "lineColors": {
+                    "description": "The smoothed colour of each line, by the line's name",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "layout-basic-widget": {
+            "type": "object",
+            "description": "Widgets that have no associated settings",
+            "required": ["type", "id"],
+            "properties": {
+                "type": {
+                    "const": "component"
+                },
+                "id": {
+                    "type": "string",
+                    "enum": ["floating-settings", "layer-list", "log", "region-list", "spectral-line-query", "cursor-info", "pv-generator", "pv-preview", "channel-map-control", "placeholder"]
+                },
+                "width": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                },
+                "height": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                }
+            }
+        },
+        "layout-catalog-overlay": {
+            "type": "object",
+            "description": "Catalog overlay widgets",
+            "required": ["type", "id"],
+            "properties": {
+                "type": {
+                    "const": "component"
+                },
+                "id": {
+                    "const": "catalog-overlay"
+                },
+                "widgetSettings": {
+                    "type": "object",
+                    "description": "What belongs to the widget rather than to the catalog it shows. catalogFileId is retained for legacy layouts.",
+                    "properties": {
+                        "widgetId": {
+                            "description": "Identifies this widget across the sessions a workspace spans",
+                            "type": "string",
+                            "minLength": 1
+                        },
+                        "catalogFileId": {
+                            "type": "integer",
+                            "minimum": 1
+                        },
+                        "tableSeparatorPosition": {
+                            "type": "string"
+                        },
+                        "headerTableColumnWidths": {
+                            "description": "Widths of the header table's columns, in the fixed order the table lists them",
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            }
+                        },
+                        "settingsTabId": {
+                            "description": "The settings section this widget was left on, for whichever catalog it shows. A workspace keeps the section of each catalog in its catalogWidgets instead",
+                            "type": "integer",
+                            "minimum": 0
+                        }
+                    }
+                },
+                "width": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                },
+                "height": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                }
+            }
+        },
+        "layout-catalog-plot": {
+            "type": "object",
+            "description": "Catalog plot widgets",
+            "required": ["type", "id"],
+            "properties": {
+                "type": {
+                    "const": "component"
+                },
+                "id": {
+                    "const": "catalog-plot"
+                },
+                "widgetSettings": {
+                    "type": "object",
+                    "description": "What survives any catalog. The catalog a plot shows and what it is drawn from are kept by a workspace, in its catalogWidgets",
+                    "properties": {
+                        "widgetId": {
+                            "description": "Identifies this plot across the sessions a workspace spans",
+                            "type": "string",
+                            "minLength": 1
+                        },
+                        "plotType": {
+                            "type": "string",
+                            "enum": ["Image overlay", "Histogram", "2D scatter"]
+                        },
+                        "dragMode": {
+                            "anyOf": [
+                                {
+                                    "type": "boolean",
+                                    "const": false
+                                },
+                                {
+                                    "type": "string",
+                                    "enum": ["zoom", "pan", "select", "lasso", "orbit", "turntable"]
+                                }
+                            ]
+                        },
+                        "scatterBorder": {
+                            "$ref": "#/definitions/layout-catalog-scatter-border"
+                        },
+                        "histogramBorder": {
+                            "$ref": "#/definitions/layout-catalog-histogram-border"
+                        }
+                    }
+                },
+                "width": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                },
+                "height": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                }
+            }
+        },
+        "layout-spectral-profiler": {
+            "type": "object",
+            "description": "Spectral profiler widgets",
+            "required": ["type", "id"],
+            "properties": {
+                "type": {
+                    "const": "component"
+                },
+                "id": {
+                    "const": "spectral-profiler"
+                },
+                "widgetSettings": {
+                    "type": "object",
+                    "properties": {
+                        "markerTextVisible": {
+                            "type": "boolean"
+                        },
+                        "secondaryAxisCursorInfoVisible": {
+                            "type": "boolean"
+                        },
+                        "settingsTabId": {
+                            "description": "The settings section the widget was left on",
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "smoothing": {
+                            "$ref": "#/definitions/layout-smoothing"
+                        },
+                        "widgetId": {
+                            "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
+                            "type": "string"
+                        },
+                        "primaryLineColor": {
+                            "type": "string"
+                        },
+                        "lineWidth": {
+                            "$ref": "#/definitions/layout-line-width"
+                        },
+                        "linePlotPointSize": {
+                            "$ref": "#/definitions/layout-point-size"
+                        },
+                        "meanRmsVisible": {
+                            "type": "boolean"
+                        },
+                        "plotType": {
+                            "$ref": "#/definitions/layout-plot-type"
+                        },
+                        "restFrameShiftMode": {
+                            "type": "string",
+                            "enum": ["redshift", "radial-velocity"]
+                        },
+                        "restFrameVelocityConvention": {
+                            "type": "string",
+                            "enum": ["radio", "optical", "relativistic"]
+                        },
+                        "coordinate": {
+                            "$ref": "#/definitions/layout-spectral-coord"
+                        },
+                        "minXVal": {
+                            "type": "number"
+                        },
+                        "maxXVal": {
+                            "type": "number"
+                        },
+                        "minYVal": {
+                            "type": "number"
+                        },
+                        "maxYVal": {
+                            "type": "number"
+                        },
+                        "xAxisRestFrameEnabled": {
+                            "type": "boolean"
+                        },
+                        "restFrameRedshift": {
+                            "type": "number"
+                        },
+                        "yAxisRestFrameEnabled": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "width": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                },
+                "height": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                }
+            }
+        },
+        "layout-spatial-profiler": {
+            "type": "object",
+            "description": "Spatial profiler widgets",
+            "required": ["type", "id"],
+            "properties": {
+                "type": {
+                    "const": "component"
+                },
+                "id": {
+                    "const": "spatial-profiler"
+                },
+                "widgetSettings": {
+                    "type": "object",
+                    "properties": {
+                        "markerTextVisible": {
+                            "type": "boolean"
+                        },
+                        "settingsTabId": {
+                            "description": "The settings section the widget was left on",
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "smoothing": {
+                            "$ref": "#/definitions/layout-smoothing"
+                        },
+                        "widgetId": {
+                            "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
+                            "type": "string"
+                        },
+                        "coordinate": {
+                            "$ref": "#/definitions/layout-spatial-coord"
+                        },
+                        "primaryLineColor": {
+                            "type": "string"
+                        },
+                        "lineWidth": {
+                            "$ref": "#/definitions/layout-line-width"
+                        },
+                        "linePlotPointSize": {
+                            "$ref": "#/definitions/layout-point-size"
+                        },
+                        "wcsAxisVisible": {
+                            "type": "boolean"
+                        },
+                        "meanRmsVisible": {
+                            "type": "boolean"
+                        },
+                        "plotType": {
+                            "$ref": "#/definitions/layout-plot-type"
+                        },
+                        "minXVal": {
+                            "type": "number"
+                        },
+                        "maxXVal": {
+                            "type": "number"
+                        },
+                        "minYVal": {
+                            "type": "number"
+                        },
+                        "maxYVal": {
+                            "type": "number"
+                        }
+                    }
+                },
+                "coord": {
+                    "description": "Legacy V1 entry (replaced by widgetSettings.coordinate",
+                    "$ref": "#/definitions/layout-spatial-coord"
+                },
+                "width": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                },
+                "height": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                }
+            }
+        },
+        "layout-render-config": {
+            "type": "object",
+            "description": "Render config widgets",
+            "required": ["type", "id"],
+            "properties": {
+                "type": {
+                    "const": "component"
+                },
+                "id": {
+                    "const": "render-config"
+                },
+                "widgetSettings": {
+                    "type": "object",
+                    "properties": {
+                        "widgetId": {
+                            "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
+                            "type": "string"
+                        },
+                        "primaryLineColor": {
+                            "type": "string"
+                        },
+                        "lineWidth": {
+                            "$ref": "#/definitions/layout-line-width"
+                        },
+                        "linePlotPointSize": {
+                            "$ref": "#/definitions/layout-point-size"
+                        },
+                        "logScaleY": {
+                            "type": "boolean"
+                        },
+                        "markerTextVisible": {
+                            "type": "boolean"
+                        },
+                        "meanRmsVisible": {
+                            "type": "boolean"
+                        },
+                        "plotType": {
+                            "$ref": "#/definitions/layout-plot-type"
+                        },
+                        "minXVal": {
+                            "type": "number"
+                        },
+                        "maxXVal": {
+                            "type": "number"
+                        },
+                        "minYVal": {
+                            "type": "number"
+                        },
+                        "maxYVal": {
+                            "type": "number"
+                        }
+                    }
+                },
+                "width": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                },
+                "height": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                }
+            }
+        },
+        "layout-histogram": {
+            "type": "object",
+            "description": "Histogram widgets",
+            "required": ["type", "id"],
+            "properties": {
+                "type": {
+                    "const": "component"
+                },
+                "id": {
+                    "const": "histogram"
+                },
+                "widgetSettings": {
+                    "type": "object",
+                    "properties": {
+                        "settingsTabId": {
+                            "description": "The settings section the widget was left on",
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "autoBins": {
+                            "type": "boolean"
+                        },
+                        "numBins": {
+                            "description": "The number of bins, when they are not chosen automatically",
+                            "type": "integer",
+                            "minimum": 1
+                        },
+                        "widgetId": {
+                            "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
+                            "type": "string"
+                        },
+                        "primaryLineColor": {
+                            "type": "string"
+                        },
+                        "lineWidth": {
+                            "$ref": "#/definitions/layout-line-width"
+                        },
+                        "linePlotPointSize": {
+                            "$ref": "#/definitions/layout-point-size"
+                        },
+                        "logScaleY": {
+                            "type": "boolean"
+                        },
+                        "meanRmsVisible": {
+                            "type": "boolean"
+                        },
+                        "plotType": {
+                            "$ref": "#/definitions/layout-plot-type"
+                        },
+                        "minXVal": {
+                            "type": "number"
+                        },
+                        "maxXVal": {
+                            "type": "number"
+                        },
+                        "minYVal": {
+                            "type": "number"
+                        },
+                        "maxYVal": {
+                            "type": "number"
+                        }
+                    }
+                },
+                "width": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                },
+                "height": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                }
+            }
+        },
+        "layout-stokes": {
+            "type": "object",
+            "description": "Stokes analysis widgets",
+            "required": ["type", "id"],
+            "properties": {
+                "type": {
+                    "const": "component"
+                },
+                "id": {
+                    "const": "stokes"
+                },
+                "widgetSettings": {
+                    "type": "object",
+                    "properties": {
+                        "settingsTabId": {
+                            "description": "The settings section the widget was left on",
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "smoothing": {
+                            "$ref": "#/definitions/layout-smoothing"
+                        },
+                        "invertedColorMap": {
+                            "type": "boolean"
+                        },
+                        "fractionalPolVisible": {
+                            "type": "boolean"
+                        },
+                        "referenceAxesVisible": {
+                            "type": "boolean"
+                        },
+                        "widgetId": {
+                            "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
+                            "type": "string"
+                        },
+                        "primaryLineColor": {
+                            "type": "string"
+                        },
+                        "secondaryLineColor": {
+                            "type": "string"
+                        },
+                        "lineWidth": {
+                            "$ref": "#/definitions/layout-line-width"
+                        },
+                        "linePlotPointSize": {
+                            "$ref": "#/definitions/layout-point-size"
+                        },
+                        "plotType": {
+                            "$ref": "#/definitions/layout-plot-type"
+                        },
+                        "colorMap": {
+                            "type": "string"
+                        },
+                        "scatterPlotPointSize": {
+                            "$ref": "#/definitions/layout-point-size"
+                        },
+                        "pointTransparency": {
+                            "$ref": "#/definitions/layout-opacity"
+                        },
+                        "equalAxes": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "width": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                },
+                "height": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                }
+            }
+        },
+        "layout-catalog-scatter-border": {
+            "type": "object",
+            "required": ["xMin", "xMax", "yMin", "yMax"],
+            "properties": {
+                "xMin": {
+                    "type": "number"
+                },
+                "xMax": {
+                    "type": "number"
+                },
+                "yMin": {
+                    "type": "number"
+                },
+                "yMax": {
+                    "type": "number"
+                }
+            }
+        },
+        "layout-catalog-histogram-border": {
+            "type": "object",
+            "required": ["xMin", "xMax"],
+            "properties": {
+                "xMin": {
+                    "type": "number"
+                },
+                "xMax": {
+                    "type": "number"
+                }
+            }
+        },
+        "layout-wcs-overlay": {
+            "description": "How the WCS overlay looks. It names no image, so a layout carries it to any session. The workspace keeps the custom texts and the switches that show them",
+            "type": "object",
+            "properties": {
+                "isVisible": {
+                    "type": "boolean"
+                },
+                "global": {
+                    "description": "The labels, the default color, the curve tolerance and the coordinate system",
+                    "type": "object",
+                    "properties": {
+                        "labelType": {
+                            "enum": ["Interior", "Exterior"]
+                        },
+                        "color": {
+                            "type": "string"
+                        },
+                        "tolerance": {
+                            "description": "The tolerance of the curves, in percent",
+                            "type": "number",
+                            "minimum": 0.1
+                        },
+                        "system": {
+                            "enum": ["AUTO", "ECLIPTIC", "FK4", "FK5", "GALACTIC", "ICRS", "CARTESIAN"]
+                        }
+                    }
+                },
+                "title": {
+                    "description": "The title. Each image keeps its custom title in the workspace",
+                    "type": "object",
+                    "properties": {
+                        "isVisible": {
+                            "type": "boolean"
+                        },
+                        "isHidden": {
+                            "description": "Whether the toolbar button hides the title, the numbers and the labels",
+                            "type": "boolean"
+                        },
+                        "font": {
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "fontSize": {
+                            "type": "number",
+                            "minimum": 7,
+                            "maximum": 96
+                        },
+                        "hasCustomColor": {
+                            "type": "boolean"
+                        },
+                        "color": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "grid": {
+                    "type": "object",
+                    "properties": {
+                        "isVisible": {
+                            "type": "boolean"
+                        },
+                        "hasCustomColor": {
+                            "type": "boolean"
+                        },
+                        "color": {
+                            "type": "string"
+                        },
+                        "width": {
+                            "type": "number",
+                            "minimum": 0.001,
+                            "maximum": 30
+                        },
+                        "hasCustomGap": {
+                            "type": "boolean"
+                        },
+                        "gapX": {
+                            "type": "number",
+                            "minimum": 0.001
+                        },
+                        "gapY": {
+                            "type": "number",
+                            "minimum": 0.001
+                        }
+                    }
+                },
+                "border": {
+                    "type": "object",
+                    "properties": {
+                        "isVisible": {
+                            "type": "boolean"
+                        },
+                        "hasCustomColor": {
+                            "type": "boolean"
+                        },
+                        "color": {
+                            "type": "string"
+                        },
+                        "width": {
+                            "type": "number",
+                            "minimum": 0.5,
+                            "maximum": 30
+                        }
+                    }
+                },
+                "axes": {
+                    "type": "object",
+                    "properties": {
+                        "isVisible": {
+                            "type": "boolean"
+                        },
+                        "hasCustomColor": {
+                            "type": "boolean"
+                        },
+                        "color": {
+                            "type": "string"
+                        },
+                        "width": {
+                            "type": "number",
+                            "minimum": 0.001,
+                            "maximum": 30
+                        }
+                    }
+                },
+                "ticks": {
+                    "type": "object",
+                    "properties": {
+                        "shouldDrawAll": {
+                            "type": "boolean"
+                        },
+                        "hasCustomDensity": {
+                            "type": "boolean"
+                        },
+                        "densityX": {
+                            "type": "number",
+                            "minimum": 0
+                        },
+                        "densityY": {
+                            "type": "number",
+                            "minimum": 0
+                        },
+                        "hasCustomColor": {
+                            "type": "boolean"
+                        },
+                        "color": {
+                            "type": "string"
+                        },
+                        "width": {
+                            "type": "number",
+                            "minimum": 0.001,
+                            "maximum": 30
+                        },
+                        "length": {
+                            "description": "The length of the minor ticks, in percent",
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 100
+                        },
+                        "majorLength": {
+                            "description": "The length of the major ticks, in percent",
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 100
+                        }
+                    }
+                },
+                "numbers": {
+                    "type": "object",
+                    "properties": {
+                        "isVisible": {
+                            "type": "boolean"
+                        },
+                        "isHidden": {
+                            "type": "boolean"
+                        },
+                        "font": {
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "fontSize": {
+                            "type": "number",
+                            "minimum": 7,
+                            "maximum": 96
+                        },
+                        "hasCustomColor": {
+                            "type": "boolean"
+                        },
+                        "color": {
+                            "type": "string"
+                        },
+                        "hasCustomFormat": {
+                            "type": "boolean"
+                        },
+                        "formatX": {
+                            "enum": ["hms", "dms", "d"]
+                        },
+                        "formatY": {
+                            "enum": ["hms", "dms", "d"]
+                        },
+                        "hasCustomPrecision": {
+                            "type": "boolean"
+                        },
+                        "precision": {
+                            "type": "integer",
+                            "minimum": 0
+                        }
+                    }
+                },
+                "labels": {
+                    "description": "The axis labels. The workspace keeps the custom label texts",
+                    "type": "object",
+                    "properties": {
+                        "isVisible": {
+                            "type": "boolean"
+                        },
+                        "isHidden": {
+                            "type": "boolean"
+                        },
+                        "hasCustomColor": {
+                            "type": "boolean"
+                        },
+                        "color": {
+                            "type": "string"
+                        },
+                        "font": {
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "fontSize": {
+                            "type": "number",
+                            "minimum": 7,
+                            "maximum": 96
+                        },
+                        "hasRaDecReference": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "colorbar": {
+                    "description": "The colorbar. Each image keeps its custom colorbar label in the workspace",
+                    "type": "object",
+                    "properties": {
+                        "isVisible": {
+                            "type": "boolean"
+                        },
+                        "isInteractive": {
+                            "type": "boolean"
+                        },
+                        "width": {
+                            "type": "number",
+                            "minimum": 1,
+                            "maximum": 100
+                        },
+                        "offset": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 100
+                        },
+                        "position": {
+                            "enum": ["right", "top", "bottom"]
+                        },
+                        "hasCustomColor": {
+                            "type": "boolean"
+                        },
+                        "color": {
+                            "type": "string"
+                        },
+                        "isBorderVisible": {
+                            "type": "boolean"
+                        },
+                        "borderWidth": {
+                            "type": "number",
+                            "minimum": 0.5,
+                            "maximum": 30
+                        },
+                        "hasBorderCustomColor": {
+                            "type": "boolean"
+                        },
+                        "borderColor": {
+                            "type": "string"
+                        },
+                        "isTickVisible": {
+                            "type": "boolean"
+                        },
+                        "tickDensity": {
+                            "type": "number",
+                            "minimum": 0.2,
+                            "maximum": 20
+                        },
+                        "tickLen": {
+                            "type": "number",
+                            "minimum": 0.5
+                        },
+                        "tickWidth": {
+                            "type": "number",
+                            "minimum": 0.5,
+                            "maximum": 30
+                        },
+                        "hasTickCustomColor": {
+                            "type": "boolean"
+                        },
+                        "tickColor": {
+                            "type": "string"
+                        },
+                        "isNumberVisible": {
+                            "type": "boolean"
+                        },
+                        "numberRotation": {
+                            "enum": [-90, 0, 90]
+                        },
+                        "numberFont": {
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "numberFontSize": {
+                            "type": "number",
+                            "minimum": 7,
+                            "maximum": 96
+                        },
+                        "hasNumberCustomPrecision": {
+                            "type": "boolean"
+                        },
+                        "numberPrecision": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 15
+                        },
+                        "hasNumberCustomColor": {
+                            "type": "boolean"
+                        },
+                        "numberColor": {
+                            "type": "string"
+                        },
+                        "isLabelVisible": {
+                            "type": "boolean"
+                        },
+                        "labelRotation": {
+                            "enum": [-90, 90]
+                        },
+                        "labelFont": {
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "labelFontSize": {
+                            "type": "number",
+                            "minimum": 7,
+                            "maximum": 96
+                        },
+                        "hasLabelCustomColor": {
+                            "type": "boolean"
+                        },
+                        "labelColor": {
+                            "type": "string"
+                        },
+                        "isGradientVisible": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            }
+        },
+        "layout-image-view": {
+            "type": "object",
+            "description": "The image view widget",
+            "required": ["type", "id"],
+            "properties": {
+                "type": {
+                    "const": "component"
+                },
+                "id": {
+                    "const": "image-view"
+                },
+                "widgetSettings": {
+                    "type": "object",
+                    "description": "The multi-panel grid, which suits any images; which image sits in which panel is kept by the workspace. The values are not checked here: the frontend replaces each value that is missing or not valid with the user default, and keeps the rest of the layout",
+                    "properties": {
+                        "multiPanelEnabled": {
+                            "description": "A boolean"
+                        },
+                        "panelMode": {
+                            "description": "How the grid is sized when multi-panel is enabled: dynamic or fixed"
+                        },
+                        "panelColumns": {
+                            "description": "The maximum number of columns in dynamic mode, the exact number in fixed mode; an integer of 1 or more"
+                        },
+                        "panelRows": {
+                            "description": "The maximum number of rows in dynamic mode, the exact number in fixed mode; an integer of 1 or more"
+                        },
+                        "wcsOverlay": {
+                            "$ref": "#/definitions/layout-wcs-overlay"
+                        }
+                    }
+                },
+                "width": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                },
+                "height": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                }
+            }
+        },
+        "layout-stats": {
+            "type": "object",
+            "description": "Statistics widgets",
+            "required": ["type", "id"],
+            "properties": {
+                "type": {
+                    "const": "component"
+                },
+                "id": {
+                    "const": "stats"
+                },
+                "widgetSettings": {
+                    "type": "object",
+                    "properties": {
+                        "widgetId": {
+                            "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
+                            "type": "string"
+                        }
+                    }
+                },
+                "width": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                },
+                "height": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                }
+            }
+        },
+        "layout-animator": {
+            "type": "object",
+            "description": "Animator widgets",
+            "required": ["type", "id"],
+            "properties": {
+                "type": {
+                    "const": "component"
+                },
+                "id": {
+                    "const": "animator"
+                },
+                "widgetSettings": {
+                    "type": "object",
+                    "properties": {
+                        "timeLabelFormat": {
+                            "type": "string",
+                            "enum": ["auto", "iso", "mjd", "jd", "relative"]
+                        },
+                        "timeZoneMode": {
+                            "type": "string",
+                            "enum": ["utc", "local", "iana"]
+                        },
+                        "ianaTimeZone": {
+                            "type": ["string", "null"]
+                        },
+                        "timeScale": {
+                            "type": "string",
+                            "enum": ["UTC", "TAI", "TT", "TCG"]
+                        },
+                        "isoTimePrecision": {
+                            "type": "string",
+                            "enum": ["auto", "year", "month", "day", "hour", "minute", "second", "millisecond", "microsecond"]
+                        },
+                        "numericTimePrecision": {
+                            "type": ["integer", "null"],
+                            "minimum": 0,
+                            "maximum": 9
+                        },
+                        "relativeTimeReference": {
+                            "type": "string",
+                            "enum": ["first", "image", "custom"]
+                        },
+                        "relativeReferenceMjdUtc": {
+                            "type": ["number", "null"]
+                        },
+                        "relativeTimeUnit": {
+                            "type": "string",
+                            "enum": ["auto", "second", "minute", "hour", "day", "year"]
+                        }
+                    }
+                },
+                "width": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                },
+                "height": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                }
+            }
+        },
+        "layout-carta-widget": {
+            "description": "A CARTA widget",
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/layout-basic-widget"
+                },
+                {
+                    "$ref": "#/definitions/layout-spectral-profiler"
+                },
+                {
+                    "$ref": "#/definitions/layout-spatial-profiler"
+                },
+                {
+                    "$ref": "#/definitions/layout-render-config"
+                },
+                {
+                    "$ref": "#/definitions/layout-histogram"
+                },
+                {
+                    "$ref": "#/definitions/layout-animator"
+                },
+                {
+                    "$ref": "#/definitions/layout-image-view"
+                },
+                {
+                    "$ref": "#/definitions/layout-stats"
+                },
+                {
+                    "$ref": "#/definitions/layout-stokes"
+                },
+                {
+                    "$ref": "#/definitions/layout-catalog-overlay"
+                },
+                {
+                    "$ref": "#/definitions/layout-catalog-plot"
+                }
+            ]
+        },
+        "layout-gl-container": {
+            "description": "A GoldenLayout container",
+            "type": "object",
+            "required": ["type", "content"],
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "enum": ["row", "column", "stack"]
+                },
+                "content": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/definitions/layout-gl-container"
+                            },
+                            {
+                                "$ref": "#/definitions/layout-carta-widget"
+                            }
+                        ]
+                    }
+                },
+                "width": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                },
+                "height": {
+                    "$ref": "#/definitions/layout-percentage-value"
+                },
+                "activeItemIndex": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "maximized": {
+                    "description": "Whether the stack fills the whole layout",
+                    "type": "boolean"
+                }
+            }
+        },
+        "layout-spectral-coord": {
+            "description": "Spectral coordinate",
+            "type": "string",
+            "enum": ["z", "Iz", "Qz", "Uz", "Vz"]
+        },
+        "layout": {
+            "description": "The arrangement the workspace was saved in. It takes the form of a saved layout, and also keeps what only a workspace needs: the own ID of each widget, the widget settings that a saved layout leaves out, a maximized stack, floating widgets at the left or top edge, and the PV, channel map and placeholder widgets",
+            "type": "object",
+            "required": ["layoutVersion", "docked", "floating"],
+            "properties": {
+                "layoutVersion": {
+                    "description": "The version of the layout contained",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2
+                },
+                "docked": {
+                    "description": "GoldenLayout widget hierarchy",
+                    "$ref": "#/definitions/layout-gl-container"
+                },
+                "floating": {
+                    "description": "List of floating widgets",
+                    "type": "array",
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/layout-carta-widget"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "defaultX": {
+                                        "type": "number"
+                                    },
+                                    "defaultY": {
+                                        "type": "number"
+                                    },
+                                    "defaultWidth": {
+                                        "type": "number"
+                                    },
+                                    "defaultHeight": {
+                                        "type": "number"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
         }
     },
     "required": ["workspaceVersion", "frontendVersion", "files"],
@@ -1970,21 +3193,7 @@
             }
         },
         "layout": {
-            "description": "The arrangement the workspace was saved in, in the form a saved layout takes",
-            "type": "object",
-            "required": ["docked"],
-            "properties": {
-                "layoutVersion": {
-                    "type": "integer",
-                    "minimum": 1
-                },
-                "docked": {
-                    "type": "object"
-                },
-                "floating": {
-                    "type": "array"
-                }
-            }
+            "$ref": "#/definitions/layout"
         },
         "imageView": {
             "description": "The size of the image view when the workspace was saved, in CSS pixels. A restore scales the zoom of each image by how width and height changed, so that the same area of each image shows. The Open Workspace dialog shows the saved browser window, so that a user can change the window to match. A script can give the browser or the image view the same size before it opens the workspace, and can match the device pixel ratio to get images of the same resolution",
