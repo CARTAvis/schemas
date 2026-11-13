@@ -1986,7 +1986,7 @@
                             "$ref": "#/definitions/layout-smoothing"
                         },
                         "widgetId": {
-                            "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
+                            "description": "The widget's own ID, which stays the same in every session that restores the workspace",
                             "type": "string"
                         },
                         "primaryLineColor": {
@@ -2072,7 +2072,7 @@
                             "$ref": "#/definitions/layout-smoothing"
                         },
                         "widgetId": {
-                            "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
+                            "description": "The widget's own ID, which stays the same in every session that restores the workspace",
                             "type": "string"
                         },
                         "coordinate": {
@@ -2137,7 +2137,7 @@
                     "type": "object",
                     "properties": {
                         "widgetId": {
-                            "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
+                            "description": "The widget's own ID, which stays the same in every session that restores the workspace",
                             "type": "string"
                         },
                         "primaryLineColor": {
@@ -2211,7 +2211,7 @@
                             "minimum": 1
                         },
                         "widgetId": {
-                            "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
+                            "description": "The widget's own ID, which stays the same in every session that restores the workspace",
                             "type": "string"
                         },
                         "primaryLineColor": {
@@ -2286,7 +2286,7 @@
                             "type": "boolean"
                         },
                         "widgetId": {
-                            "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
+                            "description": "The widget's own ID, which stays the same in every session that restores the workspace",
                             "type": "string"
                         },
                         "primaryLineColor": {
@@ -2357,7 +2357,7 @@
             }
         },
         "layout-wcs-overlay": {
-            "description": "How the WCS overlay looks. It names no image, so a layout carries it to any session. The workspace keeps the custom texts and the switches that show them",
+            "description": "How the WCS overlay looks, as the layout copy of a workspace keeps it with the image view. A saved layout does not keep it. The workspace keeps the custom texts and the switches that show them elsewhere",
             "type": "object",
             "properties": {
                 "isVisible": {
@@ -2771,7 +2771,7 @@
                     "type": "object",
                     "properties": {
                         "widgetId": {
-                            "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
+                            "description": "The widget's own ID, which stays the same in every session that restores the workspace",
                             "type": "string"
                         }
                     }
@@ -2799,7 +2799,7 @@
                     "type": "object",
                     "properties": {
                         "widgetId": {
-                            "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
+                            "description": "The widget's own ID, which stays the same in every session that restores the workspace",
                             "type": "string"
                         }
                     }
@@ -2827,7 +2827,7 @@
                     "type": "object",
                     "properties": {
                         "widgetId": {
-                            "description": "The widget's own ID, which stays the same across the sessions a layout is applied in",
+                            "description": "The widget's own ID, which stays the same in every session that restores the workspace",
                             "type": "string"
                         }
                     }
