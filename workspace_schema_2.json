@@ -3168,6 +3168,7 @@
                     "width": {"type": "number"},
                     "height": {"type": "number"},
                     "tab": {"type": "string", "description": "The name of the tab that the dialog showed, such as Styling"},
+                    "search": {"type": "string", "description": "The File Info dialog: the text of the header search. Left out when the search was closed"},
                     "widgetsBelow": {"type": "integer", "minimum": 0, "description": "How many floating widgets and settings panels were below the dialog"}
                 }
             }
