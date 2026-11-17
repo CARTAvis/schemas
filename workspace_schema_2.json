@@ -929,6 +929,14 @@
                 "vectorOverlayConfig": {
                     "$ref": "#/definitions/vector-overlay-config"
                 },
+                "unappliedContourConfig": {
+                    "description": "The contour settings of an image whose contours are off, such as a color chosen before the contours were applied. A restore applies them and keeps the contours off",
+                    "$ref": "#/definitions/contour-config"
+                },
+                "unappliedVectorOverlayConfig": {
+                    "description": "The vector overlay settings of an image whose vector overlay is off. A restore applies them and keeps the overlay off",
+                    "$ref": "#/definitions/vector-overlay-config"
+                },
                 "regionsSet": {
                     "type": "object",
                     "properties": {
@@ -3120,6 +3128,61 @@
                     "width": {"type": "number"},
                     "height": {"type": "number"},
                     "tab": {"type": "string", "description": "The name of the tab that the dialog showed, such as Styling"}
+                }
+            }
+        },
+        "dialogSettings": {
+            "description": "The settings that the Contour and Vector Overlay dialogs showed but that were not applied",
+            "type": "object",
+            "properties": {
+                "contour": {
+                    "type": "object",
+                    "required": ["imageId", "levels", "smoothingMode", "smoothingFactor"],
+                    "properties": {
+                        "imageId": {"type": "integer", "description": "The image that the dialog showed the settings of"},
+                        "levels": {"type": "array", "items": {"type": "number"}},
+                        "smoothingMode": {"type": "integer"},
+                        "smoothingFactor": {"type": "number"},
+                        "generator": {
+                            "description": "The values of the level generator that differ from the values that it starts with. Kept only when the dialog was open",
+                            "type": "object",
+                            "properties": {
+                                "generator": {"type": "string"},
+                                "numLevels": {"type": "number"},
+                                "minValue": {"type": "number"},
+                                "maxValue": {"type": "number"},
+                                "startValue": {"type": "number"},
+                                "stepValue": {"type": "number"},
+                                "refValue": {"type": "number"},
+                                "meanValue": {"type": "number"},
+                                "sigmaValue": {"type": "number"},
+                                "scaling": {"type": "integer"},
+                                "scalingAlphas": {"type": "object", "additionalProperties": {"type": "number"}},
+                                "scalingGamma": {"type": "number"},
+                                "multiplier": {"type": "number"},
+                                "lowerPercentage": {"type": "number"},
+                                "upperPercentage": {"type": "number"},
+                                "sigmaLevels": {"type": "array", "items": {"type": "number"}}
+                            }
+                        }
+                    }
+                },
+                "vectorOverlay": {
+                    "type": "object",
+                    "required": ["imageId"],
+                    "properties": {
+                        "imageId": {"type": "integer", "description": "The image that the dialog showed the settings of"},
+                        "angularSource": {"type": "integer"},
+                        "intensitySource": {"type": "integer"},
+                        "pixelAveraging": {"type": "number"},
+                        "fractionalIntensity": {"type": "boolean"},
+                        "thresholdEnabled": {"type": "boolean"},
+                        "threshold": {"type": "number"},
+                        "debiasing": {"type": "boolean"},
+                        "qError": {"type": "number"},
+                        "uError": {"type": "number"},
+                        "thresholdOption": {"type": "integer"}
+                    }
                 }
             }
         },
