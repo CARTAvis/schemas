@@ -3108,6 +3108,20 @@
             "type": "array",
             "items": {"type": "string"}
         },
+        "dialogs": {
+            "description": "Where each open analysis dialog was and the tab that it showed, by the ID of the dialog",
+            "type": "object",
+            "additionalProperties": {
+                "type": "object",
+                "properties": {
+                    "x": {"type": "number", "description": "Where the dialog was, in pixels of the browser window. Left out when it was in the middle of the window"},
+                    "y": {"type": "number"},
+                    "width": {"type": "number"},
+                    "height": {"type": "number"},
+                    "tab": {"type": "string", "description": "The name of the tab that the dialog showed, such as Styling"}
+                }
+            }
+        },
         "openWidgetSettings": {
             "description": "The floating settings panels of widgets that were open, from the bottom one to the top one",
             "type": "array",
