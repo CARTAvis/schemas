@@ -3260,6 +3260,7 @@
                 "mirrored": {"description": "Whether the cursor was shown on every panel of a multi-panel view. Left out when it was not", "type": "boolean"}
             }
         },
+        "beamSettingsImageId": {"description": "The image whose beam the Beam tab of the image view settings showed, when it was not the image in front", "type": "integer", "minimum": 1},
         "toolbar": {
             "description": "The image toolbar: whether it was expanded, the layer that the mouse worked on, and the region that a new region of the image in front got",
             "type": "object",
