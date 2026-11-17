@@ -2796,6 +2796,12 @@
                         "panelRows": {
                             "description": "The maximum number of rows in dynamic mode, the exact number in fixed mode; an integer of 1 or more"
                         },
+                        "settingsTab": {
+                            "description": "The tab of the Image View settings panel, such as Beam; left out for Pan and Zoom"
+                        },
+                        "panAndZoomCoordinate": {
+                            "description": "Whether the Pan and Zoom tab showed image or world coordinates: Image or World; left out for World"
+                        },
                         "wcsOverlay": {
                             "$ref": "#/definitions/layout-wcs-overlay"
                         }
