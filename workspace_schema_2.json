@@ -321,7 +321,21 @@
                 "channelUnit": {"type": "string"},
                 "channelRangeImageId": {"description": "PV generator widgets: the workspace ID of the image that the spectral range was chosen on, when it is not the image of the widget", "type": "integer", "minimum": 1},
                 "biasContrastOpen": {"description": "Render config widgets: whether the Bias / Contrast section is open", "type": "boolean"},
-                "previewRegionId": {"description": "PV generator widgets: the region that the preview shows, by the ID it was saved with; -1 is the whole image", "type": "integer"}
+                "previewRegionId": {"description": "PV generator widgets: the region that the preview shows, by the ID it was saved with; -1 is the whole image", "type": "integer"},
+                "preview": {
+                    "description": "PV generator widgets: the PV preview, which a restore asks the backend for again",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "renderConfig": {"$ref": "#/definitions/render-config"},
+                        "panel": {
+                            "description": "The place and the size of the PV Preview Viewer panel, in pixels",
+                            "type": "object",
+                            "required": ["x", "y", "width", "height"],
+                            "properties": {"x": {"type": "number"}, "y": {"type": "number"}, "width": {"type": "number"}, "height": {"type": "number"}}
+                        }
+                    }
+                }
             }
         },
         "catalog-widget-config": {
