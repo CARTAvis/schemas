@@ -810,6 +810,10 @@
                 "annotationStyles": {
                     "$ref": "#/definitions/annotation-style"
                 },
+                "coordinate": {
+                    "description": "Whether the Region dialog shows the region in image or world coordinates",
+                    "enum": ["Image", "World"]
+                },
                 "lineRegionSampleWidth": {
                     "description": "Line and polyline regions: how many pixels wide a spatial profile along the region samples",
                     "type": "integer",
