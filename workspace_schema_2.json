@@ -334,6 +334,22 @@
                             "type": "object",
                             "required": ["x", "y", "width", "height"],
                             "properties": {"x": {"type": "number"}, "y": {"type": "number"}, "width": {"type": "number"}, "height": {"type": "number"}}
+                        },
+                        "request": {
+                            "description": "The request that made the preview. A restore asks for the preview with it, though the widget can show other settings",
+                            "type": "object",
+                            "required": ["imageId", "regionId", "width", "reverse", "previewRegionId", "xyRebin", "zRebin"],
+                            "additionalProperties": false,
+                            "properties": {
+                                "imageId": {"description": "Workspace ID of the cube", "type": "integer", "minimum": 1},
+                                "regionId": {"description": "The line region of the cut, by the ID that the workspace saved it with", "type": "integer"},
+                                "width": {"description": "The width of the cut, in pixels", "type": "integer", "minimum": 1},
+                                "channels": {"description": "The first and the last channel. Left out for the whole spectral axis", "type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "integer", "minimum": 0}},
+                                "reverse": {"type": "boolean"},
+                                "previewRegionId": {"description": "The region that bounds the preview, by the ID that the workspace saved it with. -1 is the whole image", "type": "integer"},
+                                "xyRebin": {"type": "integer", "minimum": 1},
+                                "zRebin": {"type": "integer", "minimum": 1}
+                            }
                         }
                     }
                 }
