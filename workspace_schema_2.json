@@ -3285,6 +3285,22 @@
                 "vizierSelectedTables": {"description": "The names of the VizieR tables that are selected in the list", "type": "array", "items": {"type": "string"}}
             }
         },
+        "hipsQuery": {
+            "description": "The fields of the HiPS query form of the Online Data Query dialog. A number that is not set is left out",
+            "type": "object",
+            "properties": {
+                "survey": {"type": "string"},
+                "width": {"type": "number"},
+                "height": {"type": "number"},
+                "byObject": {"description": "Whether the form queries by an object name or by a center", "type": "boolean"},
+                "object": {"type": "string"},
+                "center": {"description": "The center, in ICRS degrees", "type": "object", "required": ["x", "y"], "properties": {"x": {"type": "number"}, "y": {"type": "number"}}},
+                "fov": {"description": "The field of view, in degrees", "type": "number"},
+                "coordinateSystem": {"type": "string"},
+                "projection": {"type": "string"},
+                "rotation": {"description": "The rotation angle, in degrees", "type": "number"}
+            }
+        },
         "spectralMatchingType": {
             "description": "The spectral coordinate that spectrally matched images are matched by, such as VRAD",
             "type": "string"
