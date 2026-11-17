@@ -287,6 +287,31 @@
                 "redshiftType": {"enum": ["Velocity (km/s)", "Redshift"]},
                 "redshift": {"type": "number"},
                 "spectralProfilerId": {"description": "Spectral line query widgets: the spectral profiler that the lines are plotted on, by its widget ID", "type": "string"},
+                "headerTableColumnWidths": {"description": "Spectral line query widgets: the widths of the columns of the table that lists the columns of the result", "type": "array", "items": {"type": "number", "exclusiveMinimum": 0}},
+                "result": {
+                    "description": "Spectral line query widgets: the result table. A restore runs the query again",
+                    "type": "object",
+                    "required": ["frequencyRange", "rowCount", "columns", "filtered", "selectedRows"],
+                    "additionalProperties": false,
+                    "properties": {
+                        "frequencyRange": {"description": "The frequency range of the query, in MHz", "type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number"}},
+                        "intensityLimit": {"description": "The lowest intensity of the query. Left out when the query had no intensity limit", "type": "number"},
+                        "rowCount": {"description": "The number of lines that the query returned", "type": "integer", "minimum": 0},
+                        "columns": {
+                            "description": "Whether each column is shown, its filter text and its width, by the column name",
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object",
+                                "required": ["display", "filter", "width"],
+                                "additionalProperties": false,
+                                "properties": {"display": {"type": "boolean"}, "filter": {"type": "string"}, "width": {"type": "number", "exclusiveMinimum": 0}}
+                            }
+                        },
+                        "filtered": {"description": "Whether the filters were applied", "type": "boolean"},
+                        "sort": {"type": "object", "required": ["columnName", "sortingType"], "additionalProperties": false, "properties": {"columnName": {"type": "string"}, "sortingType": {"type": "integer"}}},
+                        "selectedRows": {"description": "The selected lines, by their row in the result of the query", "type": "array", "items": {"type": "integer", "minimum": 0}}
+                    }
+                },
                 "width": {"description": "PV generator widgets: how many pixels wide the cut is averaged over", "type": "integer", "minimum": 1},
                 "reverse": {"type": "boolean"},
                 "keep": {"type": "boolean"},
@@ -294,6 +319,8 @@
                 "zRebin": {"type": "integer", "minimum": 1},
                 "channelRange": {"description": "PV generator widgets: the spectral range, in channelUnit", "type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number"}},
                 "channelUnit": {"type": "string"},
+                "channelRangeImageId": {"description": "PV generator widgets: the workspace ID of the image that the spectral range was chosen on, when it is not the image of the widget", "type": "integer", "minimum": 1},
+                "biasContrastOpen": {"description": "Render config widgets: whether the Bias / Contrast section is open", "type": "boolean"},
                 "previewRegionId": {"description": "PV generator widgets: the region that the preview shows, by the ID it was saved with; -1 is the whole image", "type": "integer"}
             }
         },
@@ -3104,6 +3131,15 @@
                 "playMode": {"description": "0 is forward, 1 is backward, 2 is bouncing and 3 is blink", "type": "integer"},
                 "mode": {"description": "What the animator steps through: 0 is the channels, 1 the Stokes, 2 the images and 3 a time series", "type": "integer"},
                 "numericInputType": {"description": "The setting that the animator shows beside the playback buttons: Frame rate or Step", "type": "string"}
+            }
+        },
+        "log": {
+            "description": "What the Log widget shows: the lowest level of the entries that it shows, and the tags that it hides",
+            "type": "object",
+            "required": ["level", "hiddenTags"],
+            "properties": {
+                "level": {"description": "0 is debug, 1 is info, 2 is warning, 3 is error and 4 is critical", "type": "integer"},
+                "hiddenTags": {"type": "array", "items": {"type": "string"}}
             }
         },
         "contourDataSource": {
