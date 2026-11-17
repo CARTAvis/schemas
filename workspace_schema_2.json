@@ -3428,7 +3428,9 @@
                     "minimum": 0
                 },
                 "createModelImage": {"type": "boolean"},
-                "createResidualImage": {"type": "boolean"}
+                "createResidualImage": {"type": "boolean"},
+                "selectedComponent": {"description": "The component that the dialog showed, counted from 0. Left out for the first component", "type": "integer", "minimum": 0},
+                "coordinate": {"description": "Whether the dialog showed the values in image or world coordinates. Left out for image coordinates", "enum": ["Image", "World"]}
             }
         },
         "layout": {
