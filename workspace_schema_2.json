@@ -1901,6 +1901,15 @@
                     "type": "string",
                     "enum": ["floating-settings", "layer-list", "log", "region-list", "cursor-info", "pv-preview", "channel-map-control", "placeholder"]
                 },
+                "widgetSettings": {
+                    "type": "object",
+                    "description": "Image List widgets: the tab of the settings panel (0 Matching, 1 Rest frequency), the image that the rest frequency tab showed by its index in the list of images, and the widths of the columns. The values are not checked here",
+                    "properties": {
+                        "settingsTabId": {},
+                        "restFrequencyImageIndex": {},
+                        "columnWidths": {}
+                    }
+                },
                 "width": {
                     "$ref": "#/definitions/layout-percentage-value"
                 },
