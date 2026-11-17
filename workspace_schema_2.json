@@ -3254,7 +3254,22 @@
             "description": "Whether the cursor was frozen, and where it was, in the pixels of the image in front",
             "type": "object",
             "required": ["frozen"],
-            "properties": {"frozen": {"type": "boolean"}, "position": {"$ref": "#/definitions/point-2d"}}
+            "properties": {
+                "frozen": {"type": "boolean"},
+                "position": {"$ref": "#/definitions/point-2d"},
+                "mirrored": {"description": "Whether the cursor was shown on every panel of a multi-panel view. Left out when it was not", "type": "boolean"}
+            }
+        },
+        "toolbar": {
+            "description": "The image toolbar: whether it was expanded, the layer that the mouse worked on, and the region that a new region of the image in front got",
+            "type": "object",
+            "required": ["expanded", "activeLayer"],
+            "properties": {
+                "expanded": {"type": "boolean"},
+                "activeLayer": {"type": "string", "enum": ["regionCreating", "catalog", "regionMoving"]},
+                "newRegionType": {"type": "integer"},
+                "regionMode": {"description": "0 moves regions and 1 creates them", "type": "integer", "enum": [0, 1]}
+            }
         },
         "catalogMirrors": {
             "description": "The mirror that the online catalog queries of the workspace use, by database. A restore uses the mirror when it is available, and otherwise the mirror that the session uses",
