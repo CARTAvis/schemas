@@ -3094,7 +3094,8 @@
                 "frameRate": {"type": "integer", "minimum": 1},
                 "step": {"type": "integer", "minimum": 1},
                 "playMode": {"description": "0 is forward, 1 is backward, 2 is bouncing and 3 is blink", "type": "integer"},
-                "mode": {"description": "What the animator steps through: 0 is the channels, 1 the Stokes, 2 the images and 3 a time series", "type": "integer"}
+                "mode": {"description": "What the animator steps through: 0 is the channels, 1 the Stokes, 2 the images and 3 a time series", "type": "integer"},
+                "numericInputType": {"description": "The setting that the animator shows beside the playback buttons: Frame rate or Step", "type": "string"}
             }
         },
         "contourDataSource": {
@@ -3140,7 +3141,7 @@
             }
         },
         "cursor": {
-            "description": "Whether the cursor was frozen, and where, in the pixels of the image in front",
+            "description": "Whether the cursor was frozen, and where it was, in the pixels of the image in front",
             "type": "object",
             "required": ["frozen"],
             "properties": {"frozen": {"type": "boolean"}, "position": {"$ref": "#/definitions/point-2d"}}
