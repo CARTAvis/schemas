@@ -3173,9 +3173,14 @@
             }
         },
         "dialogSettings": {
-            "description": "The settings that the Contour and Vector Overlay dialogs showed but that were not applied",
+            "description": "The settings that the Contour and Vector Overlay dialogs showed but that were not applied, and the snippet that the Snippet dialog showed",
             "type": "object",
             "properties": {
+                "snippet": {
+                    "type": "object",
+                    "required": ["name"],
+                    "properties": {"name": {"type": "string", "description": "The name of the saved snippet that the dialog showed. The code is not saved"}}
+                },
                 "contour": {
                     "type": "object",
                     "required": ["imageId", "levels", "smoothingMode", "smoothingFactor"],
