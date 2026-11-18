@@ -2808,7 +2808,7 @@
                 },
                 "widgetSettings": {
                     "type": "object",
-                    "description": "The multi-panel grid, which suits any images; which image sits in which panel is kept by the workspace. The values are not checked here: the frontend replaces each value that is missing or not valid with the user default, and keeps the rest of the layout",
+                    "description": "The multi-panel grid and the display settings of the image view, which suit any images; which image sits in which panel is kept by the workspace. The values are not checked here: the frontend replaces each value that is missing or not valid with the user default, and keeps the rest of the layout",
                     "properties": {
                         "multiPanelEnabled": {
                             "description": "A boolean"
@@ -2827,6 +2827,21 @@
                         },
                         "panAndZoomCoordinate": {
                             "description": "Whether the Pan and Zoom tab showed image or world coordinates: Image or World; left out for World"
+                        },
+                        "pixelGridVisible": {
+                            "description": "Whether the pixel grid was shown; a boolean"
+                        },
+                        "pixelGridColor": {
+                            "description": "The color of the pixel grid, as a color string such as #ffffff or auto-white"
+                        },
+                        "nanColor": {
+                            "description": "The color of NaN pixels, as a color string such as #137CBD or rgba(19, 124, 189, 0.5)"
+                        },
+                        "smoothedBiasContrast": {
+                            "description": "Whether bias and contrast were drawn with the smoothed curve; a boolean"
+                        },
+                        "cursorInfoVisible": {
+                            "description": "Where the cursor info was shown: always, activeImage, hideTiled or never"
                         },
                         "wcsOverlay": {
                             "$ref": "#/definitions/layout-wcs-overlay"
