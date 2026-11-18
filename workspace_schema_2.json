@@ -3322,7 +3322,8 @@
                     "x": {"type": "number"},
                     "y": {"type": "number"},
                     "width": {"type": "number"},
-                    "height": {"type": "number"}
+                    "height": {"type": "number"},
+                    "widgetsBelow": {"type": "integer", "minimum": 0, "description": "How many floating widgets were below the panel"}
                 }
             }
         },
