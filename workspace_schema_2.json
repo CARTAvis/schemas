@@ -1920,11 +1920,21 @@
                 },
                 "widgetSettings": {
                     "type": "object",
-                    "description": "Image List widgets: the tab of the settings panel (0 Matching, 1 Rest frequency), the image that the rest frequency tab showed by its index in the list of images, and the widths of the columns. The values are not checked here",
+                    "description": "Image List widgets: the tab of the settings panel (0 Matching, 1 Rest frequency), the image that the rest frequency tab showed by its index in the list of images, the widths of the columns, and the own ID of the widget. The values are not checked here. A docked PV Preview Viewer: the own ID of the PV generator widget whose preview it shows",
                     "properties": {
                         "settingsTabId": {},
                         "restFrequencyImageIndex": {},
-                        "columnWidths": {}
+                        "columnWidths": {},
+                        "widgetId": {
+                            "description": "Identifies this widget across the sessions a workspace spans",
+                            "type": "string",
+                            "minLength": 1
+                        },
+                        "pvGeneratorId": {
+                            "description": "The widgetId of the PV generator widget whose preview this viewer shows",
+                            "type": "string",
+                            "minLength": 1
+                        }
                     }
                 },
                 "width": {
@@ -2988,6 +2998,11 @@
                         "relativeTimeUnit": {
                             "type": "string",
                             "enum": ["auto", "second", "minute", "hour", "day", "year"]
+                        },
+                        "widgetId": {
+                            "description": "Identifies this widget across the sessions a workspace spans",
+                            "type": "string",
+                            "minLength": 1
                         }
                     }
                 },
