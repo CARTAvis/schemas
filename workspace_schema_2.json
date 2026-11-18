@@ -889,6 +889,23 @@
                     "type": "number",
                     "minimum": 0
                 },
+                "axisZoomLevel": {
+                    "description": "The zoom level of each axis of an image whose axes can be zoomed apart, such as a PV image",
+                    "type": "object",
+                    "required": ["x", "y"],
+                    "properties": {
+                        "x": {"type": "number", "minimum": 0},
+                        "y": {"type": "number", "minimum": 0}
+                    }
+                },
+                "zoomAxis": {
+                    "description": "The axis that zooming changes, for an image whose axes can be zoomed apart",
+                    "enum": ["both", "x", "y"]
+                },
+                "timeSeriesMember": {
+                    "description": "Whether the image is in the time series of the animator",
+                    "type": "boolean"
+                },
                 "channel": {
                     "description": "The selected channel",
                     "type": "integer",
@@ -1061,6 +1078,15 @@
                 },
                 "zoomLevel": {
                     "$ref": "#/definitions/file/properties/zoomLevel"
+                },
+                "axisZoomLevel": {
+                    "$ref": "#/definitions/file/properties/axisZoomLevel"
+                },
+                "zoomAxis": {
+                    "$ref": "#/definitions/file/properties/zoomAxis"
+                },
+                "timeSeriesMember": {
+                    "$ref": "#/definitions/file/properties/timeSeriesMember"
                 },
                 "channel": {
                     "$ref": "#/definitions/file/properties/channel"
