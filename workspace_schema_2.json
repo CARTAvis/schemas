@@ -329,11 +329,18 @@
                     "properties": {
                         "renderConfig": {"$ref": "#/definitions/render-config"},
                         "cubeSize": {"description": "The estimated size of the cube that the preview reads, in GB", "type": "number", "minimum": 0},
+                        "isActive": {"description": "Whether the preview was the active image. Left out when it was not", "type": "boolean"},
                         "panel": {
                             "description": "The place and the size of the PV Preview Viewer panel, in pixels",
                             "type": "object",
                             "required": ["x", "y", "width", "height"],
-                            "properties": {"x": {"type": "number"}, "y": {"type": "number"}, "width": {"type": "number"}, "height": {"type": "number"}}
+                            "properties": {
+                                "x": {"type": "number"},
+                                "y": {"type": "number"},
+                                "width": {"type": "number"},
+                                "height": {"type": "number"},
+                                "widgetsBelow": {"type": "integer", "minimum": 0, "description": "How many other floating widgets were below the panel"}
+                            }
                         },
                         "request": {
                             "description": "The request that made the preview. A restore asks for the preview with it, though the widget can show other settings",
