@@ -1357,6 +1357,10 @@
         "color-blending": {
             "type": "object",
             "properties": {
+                "name": {
+                    "description": "The name of the color-blended image in the Image List",
+                    "type": "string"
+                },
                 "imageListIndex": {
                     "type": "number"
                 },
