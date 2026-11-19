@@ -890,12 +890,12 @@
                     "minimum": 0
                 },
                 "axisZoomLevel": {
-                    "description": "The zoom level of each axis of an image whose axes can be zoomed apart, such as a PV image",
+                    "description": "The zoom level of each axis of an image whose axes can be zoomed apart, such as a PV image. A value that is not above 0 is not applied, and the zoom level of the viewport is used instead",
                     "type": "object",
                     "required": ["x", "y"],
                     "properties": {
-                        "x": {"type": "number", "minimum": 0},
-                        "y": {"type": "number", "minimum": 0}
+                        "x": {"type": "number"},
+                        "y": {"type": "number"}
                     }
                 },
                 "zoomAxis": {
