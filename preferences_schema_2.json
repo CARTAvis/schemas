@@ -43,6 +43,18 @@
         "spectralMatchingType": {
             "enum": ["VRAD", "VOPT", "FREQ", "WAVE", "AWAV", "CHANNEL"]
         },
+        "imageViewRestFrameShiftMode": {
+            "enum": ["redshift", "radial-velocity"]
+        },
+        "imageViewRestFrameVelocityConvention": {
+            "enum": ["radio", "optical", "relativistic"]
+        },
+        "spectralProfilerRestFrameShiftMode": {
+            "enum": ["redshift", "radial-velocity"]
+        },
+        "spectralProfilerRestFrameVelocityConvention": {
+            "enum": ["radio", "optical", "relativistic"]
+        },
         "transparentImageBackground": {
             "type": "boolean"
         },
@@ -52,6 +64,9 @@
         },
         "colormap": {
             "type": "string"
+        },
+        "colormapInverted": {
+            "type": "boolean"
         },
         "percentile": {
             "type": "number",
@@ -125,6 +140,9 @@
             "type": "string",
             "description": "TODO: validate color string"
         },
+        "contourColormapInverted": {
+            "type": "boolean"
+        },
         "contourColormap": {
             "type": "string"
         },
@@ -147,6 +165,9 @@
         "vectorOverlayColor": {
             "type": "string",
             "description": "TODO: validate color string"
+        },
+        "vectorOverlayColormapInverted": {
+            "type": "boolean"
         },
         "vectorOverlayColormap": {
             "type": "string"
@@ -224,6 +245,9 @@
         },
         "regionCreationMode": {
             "enum": ["center", "corner"]
+        },
+        "regionPasteOffsetUnit": {
+            "enum": ["auto", "screenPx", "imagePx"]
         },
         "regionSize": {
             "type": "number",
@@ -321,6 +345,13 @@
             "type": "integer",
             "minimum": 0
         },
+        "statistics": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+                "enum": [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 19, 20, 21, 22, 23, "NumBeams", "BeamArea", "BeamAreaPixels"]
+            }
+        },
         "telemetryUuid": {
             "type": "string"
         },
@@ -404,6 +435,21 @@
         },
         "catalogTableSeparatorPosition": {
             "type": "string"
+        },
+        "catalogAutoSelectImageOverlayColumns": {
+            "type": "boolean"
+        },
+        "catalogQuerySimbadEnabledMirrors": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "catalogQueryVizierEnabledMirrors": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
         },
         "checkNewRelease": {
             "type": "boolean"
