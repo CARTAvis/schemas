@@ -1143,6 +1143,26 @@
                 }
             }
         },
+        "generation-region-shape": {
+            "description": "The shape that a region had when an image was made over it, in the pixels of the image. A restore makes the image over this shape when the region was changed or deleted after the image was made",
+            "type": "object",
+            "required": ["regionType", "controlPoints", "rotation"],
+            "additionalProperties": false,
+            "properties": {
+                "regionType": {
+                    "description": "The kind of region, as a CARTA.RegionType value",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "controlPoints": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/point-2d"}
+                },
+                "rotation": {
+                    "type": "number"
+                }
+            }
+        },
         "generation-request": {
             "description": "How generated images were made, naming images and regions by the IDs the workspace knows them by",
             "type": "object",
@@ -1153,6 +1173,9 @@
                     "properties": {
                         "type": {
                             "const": "moment"
+                        },
+                        "regionShape": {
+                            "$ref": "#/definitions/generation-region-shape"
                         },
                         "sourceImageId": {
                             "description": "The image the moments are taken of",
@@ -1211,6 +1234,9 @@
                     "properties": {
                         "type": {
                             "const": "pv"
+                        },
+                        "regionShape": {
+                            "$ref": "#/definitions/generation-region-shape"
                         },
                         "sourceImageId": {
                             "description": "The image the cut is made through",
@@ -1290,6 +1316,9 @@
                     "properties": {
                         "type": {
                             "const": "fitting"
+                        },
+                        "regionShape": {
+                            "$ref": "#/definitions/generation-region-shape"
                         },
                         "sourceImageId": {
                             "description": "The image that was fitted",
