@@ -278,6 +278,11 @@
                     "type": "array",
                     "items": {"type": "object", "required": ["species", "value", "qn"], "properties": {"species": {"type": "string"}, "value": {"type": "number"}, "qn": {"type": "string"}}}
                 },
+                "infoHeight": {
+                    "description": "Spectral profiler widgets: the height of the area below the plot that shows the values at the cursor, in pixels",
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                },
                 "rangeType": {"description": "Spectral line query widgets: how the range is given", "enum": ["Range", "Center"]},
                 "range": {"description": "Spectral line query widgets: the range, from and to, in unit", "type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number"}},
                 "rangeByCenter": {"description": "Spectral line query widgets: the center and the width on each side of it, in unit", "type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number"}},
