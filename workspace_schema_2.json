@@ -1164,7 +1164,7 @@
                 "imageId": {
                     "description": "The image that the region belonged to, by its workspace ID",
                     "type": "integer",
-                    "minimum": 1
+                    "minimum": 0
                 }
             }
         },
