@@ -1144,7 +1144,7 @@
             }
         },
         "generation-region-shape": {
-            "description": "The shape that a region had when an image was made over it, in the pixels of the image. A restore makes the image over this shape when the region was changed or deleted after the image was made",
+            "description": "The shape that a region had when an image was made over it, in the pixels of the image that the region belongs to: the image that the source image is matched to, when it is matched. A restore makes the image over this shape when the region was changed or deleted after the image was made",
             "type": "object",
             "required": ["regionType", "controlPoints", "rotation"],
             "additionalProperties": false,
