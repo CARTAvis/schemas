@@ -335,6 +335,19 @@
                         "renderConfig": {"$ref": "#/definitions/render-config"},
                         "cubeSize": {"description": "The estimated size of the cube that the preview reads, in GB", "type": "number", "minimum": 0},
                         "isActive": {"description": "Whether the preview was the active image. Left out when it was not", "type": "boolean"},
+                        "view": {
+                            "description": "The zoom and the center of the preview, and the size of the area that it was drawn in. A restore scales the zoom by how that size changed, as for an image",
+                            "type": "object",
+                            "required": ["center", "zoomLevel", "viewSize"],
+                            "additionalProperties": false,
+                            "properties": {
+                                "center": {"$ref": "#/definitions/file/properties/center"},
+                                "zoomLevel": {"$ref": "#/definitions/file/properties/zoomLevel"},
+                                "axisZoomLevel": {"$ref": "#/definitions/file/properties/axisZoomLevel"},
+                                "zoomAxis": {"$ref": "#/definitions/file/properties/zoomAxis"},
+                                "viewSize": {"$ref": "#/properties/imageView"}
+                            }
+                        },
                         "panel": {
                             "description": "The place and the size of the PV Preview Viewer panel, in pixels",
                             "type": "object",
@@ -413,6 +426,23 @@
                 "cursor": {
                     "description": "Plot widgets: the values the cursor last read off the plot, as a scatter point or a histogram bin's center and count",
                     "$ref": "#/definitions/point-2d"
+                },
+                "otherPlots": {
+                    "description": "Plot widgets: the plot that the tab keeps for each other catalog it has shown, keyed by the workspace's ID for that catalog. The tab shows such a plot again when the user picks that catalog",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "xColumnName": {"$ref": "#/definitions/catalog-widget-config/properties/xColumnName"},
+                            "yColumnName": {"$ref": "#/definitions/catalog-widget-config/properties/yColumnName"},
+                            "statisticColumnName": {"$ref": "#/definitions/catalog-widget-config/properties/statisticColumnName"},
+                            "isLogScaleY": {"$ref": "#/definitions/catalog-widget-config/properties/isLogScaleY"},
+                            "nBinX": {"$ref": "#/definitions/catalog-widget-config/properties/nBinX"},
+                            "isFittingEnabled": {"$ref": "#/definitions/catalog-widget-config/properties/isFittingEnabled"},
+                            "cursor": {"$ref": "#/definitions/catalog-widget-config/properties/cursor"}
+                        }
+                    }
                 }
             }
         },
@@ -777,6 +807,12 @@
                 },
                 "auxiliaryTextVisible": {
                     "type": "boolean"
+                },
+                "decimals": {
+                    "description": "The number of decimal places of the lengths",
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 6
                 },
                 "textOffset": {
                     "$ref": "#/definitions/point-2d"
