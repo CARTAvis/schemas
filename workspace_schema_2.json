@@ -345,7 +345,17 @@
                                 "zoomLevel": {"$ref": "#/definitions/file/properties/zoomLevel"},
                                 "axisZoomLevel": {"$ref": "#/definitions/file/properties/axisZoomLevel"},
                                 "zoomAxis": {"$ref": "#/definitions/file/properties/zoomAxis"},
-                                "viewSize": {"$ref": "#/properties/imageView"}
+                                "viewSize": {
+                                    "description": "The size of the area of the PV Preview Viewer that the preview was drawn in, in CSS pixels, and the device pixel ratio",
+                                    "type": "object",
+                                    "required": ["width", "height", "devicePixelRatio"],
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "width": {"type": "number", "exclusiveMinimum": 0},
+                                        "height": {"type": "number", "exclusiveMinimum": 0},
+                                        "devicePixelRatio": {"type": "number", "exclusiveMinimum": 0}
+                                    }
+                                }
                             }
                         },
                         "panel": {
