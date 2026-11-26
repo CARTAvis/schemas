@@ -392,6 +392,10 @@
             "minimum": 0.1,
             "description": "PV preview cube size limit, in GB."
         },
+        "statistics": {
+            "description": "Selected statistics for the Statistics widget and Spectral Profiler. The frontend ignores entries it does not recognize.",
+            "type": "array"
+        },
         "logEventList": {
             "type": "array",
             "items": {
