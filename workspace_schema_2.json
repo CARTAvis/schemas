@@ -1184,8 +1184,17 @@
                 "vectorOverlayConfig": {
                     "$ref": "#/definitions/file/properties/vectorOverlayConfig"
                 },
+                "unappliedContourConfig": {
+                    "$ref": "#/definitions/file/properties/unappliedContourConfig"
+                },
+                "unappliedVectorOverlayConfig": {
+                    "$ref": "#/definitions/file/properties/unappliedVectorOverlayConfig"
+                },
                 "regionsSet": {
                     "$ref": "#/definitions/file/properties/regionsSet"
+                },
+                "animationChannelRange": {
+                    "$ref": "#/definitions/file/properties/animationChannelRange"
                 }
             }
         },
