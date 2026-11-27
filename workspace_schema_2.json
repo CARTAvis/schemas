@@ -2960,40 +2960,13 @@
                 },
                 "widgetSettings": {
                     "type": "object",
-                    "description": "The multi-panel grid and the display settings of the image view, which suit any images; which image sits in which panel is kept by the workspace. The values are not checked here: the frontend replaces each value that is missing or not valid with the user default, and keeps the rest of the layout",
+                    "description": "The settings of the image view that suit any images. The multi-panel grid and the display settings, such as the NaN color, are in preferences. The values are not checked here: the frontend replaces each value that is missing or not valid with the default, and keeps the rest of the layout",
                     "properties": {
-                        "multiPanelEnabled": {
-                            "description": "A boolean"
-                        },
-                        "panelMode": {
-                            "description": "How the grid is sized when multi-panel is enabled: dynamic or fixed"
-                        },
-                        "panelColumns": {
-                            "description": "The maximum number of columns in dynamic mode, the exact number in fixed mode; an integer of 1 or more"
-                        },
-                        "panelRows": {
-                            "description": "The maximum number of rows in dynamic mode, the exact number in fixed mode; an integer of 1 or more"
-                        },
                         "settingsTab": {
                             "description": "The tab of the Image View settings panel, such as Beam; left out for Pan and Zoom"
                         },
                         "panAndZoomCoordinate": {
                             "description": "Whether the Pan and Zoom tab showed image or world coordinates: Image or World; left out for World"
-                        },
-                        "pixelGridVisible": {
-                            "description": "Whether the pixel grid was shown; a boolean"
-                        },
-                        "pixelGridColor": {
-                            "description": "The color of the pixel grid, as a color string such as #ffffff or auto-white"
-                        },
-                        "nanColor": {
-                            "description": "The color of NaN pixels, as a color string such as #137CBD or rgba(19, 124, 189, 0.5)"
-                        },
-                        "smoothedBiasContrast": {
-                            "description": "Whether bias and contrast were drawn with the smoothed curve; a boolean"
-                        },
-                        "cursorInfoVisible": {
-                            "description": "Where the cursor info was shown: always, activeImage, hideTiled or never"
                         },
                         "wcsOverlay": {
                             "$ref": "#/definitions/layout-wcs-overlay"
@@ -3541,6 +3514,10 @@
         "spectralMatchingType": {
             "description": "The spectral coordinate that spectrally matched images are matched by, such as VRAD",
             "type": "string"
+        },
+        "preferences": {
+            "description": "The preferences that change what the user makes next, such as the style of a new region or the render settings of a new image, by the key of the preferences file, such as regionColor. A restore applies them for the session only, and the stored preferences of the user do not change. The values are not checked here: the frontend leaves out a key that it does not apply and a value that the preference does not accept",
+            "type": "object"
         },
         "selectedFile": {
             "description": "ID of the currently active file",
