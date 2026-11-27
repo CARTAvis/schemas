@@ -1040,6 +1040,10 @@
                     "description": "The place of the image in the image list. The places count the images that the workspace does not save, so only their order matters",
                     "type": "integer"
                 },
+                "aipsBeamSupport": {
+                    "description": "Whether the backend opened the image with AIPS beam support. A restore opens the image with it",
+                    "type": "boolean"
+                },
                 "fitResult": {
                     "description": "The result of the last image fitting of the image, as the Image Fitting dialog shows it",
                     "type": "object",
