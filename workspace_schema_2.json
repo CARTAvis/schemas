@@ -1023,12 +1023,16 @@
                     "type": "string"
                 },
                 "offsetCoordinates": {
-                    "description": "Offset coordinates, when shown on an image not matched to another: their centre in image pixels, and whether it is the origin (0) or the pole (1)",
+                    "description": "Offset coordinates of an image not matched to another, once they were turned on: their centre in image pixels, whether it is the origin (0) or the pole (1), and whether they are shown",
                     "type": "object",
                     "required": ["center"],
                     "properties": {
                         "center": {"$ref": "#/definitions/point-2d"},
-                        "skyRefIs": {"type": "integer", "enum": [0, 1]}
+                        "skyRefIs": {"type": "integer", "enum": [0, 1]},
+                        "shown": {
+                            "description": "Whether the image is shown with offset coordinates. A workspace that leaves it out shows them",
+                            "type": "boolean"
+                        }
                     }
                 },
                 "imageListIndex": {
