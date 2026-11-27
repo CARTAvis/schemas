@@ -1082,6 +1082,8 @@
                 "regionsSet": {
                     "type": "object",
                     "properties": {
+                        "newRegionType": {"description": "The type of a new region that the image toolbar creates for the image", "type": "integer"},
+                        "regionMode": {"description": "0 moves regions and 1 creates them", "type": "integer", "enum": [0, 1]},
                         "selectedRegion": {
                             "type": "integer"
                         },
