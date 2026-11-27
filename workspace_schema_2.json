@@ -293,6 +293,7 @@
                 "redshift": {"type": "number"},
                 "spectralProfilerId": {"description": "Spectral line query widgets: the spectral profiler that the lines are plotted on, by its widget ID", "type": "string"},
                 "headerTableColumnWidths": {"description": "Spectral line query widgets: the widths of the columns of the table that lists the columns of the result", "type": "array", "items": {"type": "number", "exclusiveMinimum": 0}},
+                "resultTableHeight": {"description": "Spectral line query widgets: the height of the result table, in percent of the area below the query settings", "type": "number", "exclusiveMinimum": 0, "maximum": 100},
                 "result": {
                     "description": "Spectral line query widgets: the result table. A restore runs the query again",
                     "type": "object",
@@ -3380,6 +3381,7 @@
                     "height": {"type": "number"},
                     "tab": {"type": "string", "description": "The name of the tab that the dialog showed, such as Styling"},
                     "search": {"type": "string", "description": "The File Info dialog: the text of the header search. Left out when the search was closed"},
+                    "settingsHeight": {"type": "number", "exclusiveMinimum": 0, "maximum": 100, "description": "The Image Fitting dialog: the height of the fitting settings, in percent of the area below the data source"},
                     "widgetsBelow": {"type": "integer", "minimum": 0, "description": "How many floating widgets and settings panels were below the dialog"}
                 }
             }
