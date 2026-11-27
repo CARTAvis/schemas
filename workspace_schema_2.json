@@ -1024,7 +1024,7 @@
                     "type": "string"
                 },
                 "offsetCoordinates": {
-                    "description": "Offset coordinates of an image not matched to another, once they were turned on: their centre in image pixels, whether it is the origin (0) or the pole (1), and whether they are shown",
+                    "description": "Offset coordinates of an image not matched to another, once the image has an offset centre: their centre in image pixels, whether it is the origin (0) or the pole (1), and whether they are shown",
                     "type": "object",
                     "required": ["center"],
                     "properties": {
@@ -3387,7 +3387,7 @@
                     "height": {"type": "number"},
                     "tab": {"type": "string", "description": "The name of the tab that the dialog showed, such as Styling"},
                     "search": {"type": "string", "description": "The File Info dialog: the text of the header search. Left out when the search was closed"},
-                    "settingsHeight": {"type": "number", "exclusiveMinimum": 0, "maximum": 100, "description": "The Image Fitting dialog: the height of the fitting settings, in percent of the area below the data source"},
+                    "settingsHeight": {"type": "number", "minimum": 0, "maximum": 100, "description": "The Image Fitting dialog: the height of the fitting settings, in percent of the area below the data source"},
                     "widgetsBelow": {"type": "integer", "minimum": 0, "description": "How many floating widgets and settings panels were below the dialog"}
                 }
             }
